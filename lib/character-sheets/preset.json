@@ -1,0 +1,59 @@
+[
+  {
+    "id": "preset-knife",
+    "name": "Knife",
+    "kind": "weapon",
+    "count": "1",
+    "desc": "A short blade.",
+    "weapon": {
+      "type": "melee",
+      "range": "1",
+      "rof": "20",
+      "mode": "0",
+      "weight": "0.3",
+      "concealability": "0"
+    }
+  },
+  {
+    "id": "preset-bandage",
+    "name": "Bandage",
+    "kind": "generic",
+    "count": "3",
+    "desc": ""
+  },
+  {
+    "id": "preset-545-ps",
+    "name": "5.45x39mm 7N6 PS",
+    "kind": "ammo",
+    "count": "30",
+    "desc": "",
+    "ammo": {
+      "caliber": "5.45x39",
+      "damage": "ball",
+      "penetration": "30"
+    }
+  },
+  {
+    "id": "preset-ak-mag",
+    "name": "AK-74 6L20 30rnd",
+    "kind": "magazine",
+    "count": "1",
+    "desc": "Bakelite magazine.",
+    "magazine": {
+      "caliber": "5.45x39",
+      "containsMax": "30"
+    }
+  },
+  {
+    "id": "preset-plate",
+    "name": "Level 3 plate",
+    "kind": "armor",
+    "count": "1",
+    "desc": "",
+    "armor": {
+      "material": "ceramic",
+      "layer": "0",
+      "protection": { "torso": "45" }
+    }
+  }
+]

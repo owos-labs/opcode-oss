@@ -1,0 +1,39 @@
+{
+  "name": "opcode-alley",
+  "base": {
+    "objects": {
+      "cover-low": {
+        "name": "Sandbags",
+        "ar": 45,
+        "ssp": 30,
+        "max_ssp": 30,
+        "blocks_vision": false,
+        "start": [4.75, -0.5],
+        "rotation": 0,
+        "size_m": { "w": 0.5, "h": 1 }
+      },
+      "wall-mid": {
+        "name": "Wall",
+        "ar": 40,
+        "ssp": 25,
+        "max_ssp": 25,
+        "blocks_vision": true,
+        "start": [7.5, -2],
+        "rotation": 0,
+        "size_m": { "w": 0.5, "h": 4 }
+      }
+    },
+    "emplacements": {
+      "bags": {
+        "emplacement": "half_body",
+        "distance_to_enter": 1
+      }
+    }
+  },
+  "runtime": {
+    "actors": {
+      "npc-1": { "x": 0, "y": 0, "team": "hostile" },
+      "hostile-1": { "x": 6, "y": 0, "team": "hostile" }
+    }
+  }
+}

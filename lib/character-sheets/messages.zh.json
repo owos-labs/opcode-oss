@@ -1,0 +1,285 @@
+{
+  "characterSheets": {
+    "skillNames": {
+      "perception": "专注 / 洞察",
+      "survival": "生存",
+      "knowledge": "知识",
+      "medical": "医疗",
+      "calm": "沉着",
+      "social": "社交",
+      "charm": "煽动",
+      "disguise": "伪装",
+      "camoflauge": "潜藏",
+      "operate": "器用",
+      "library": "图书馆",
+      "recon": "侦察",
+      "manufacture": "制造",
+      "marksmanship": "射击",
+      "athelete": "运动",
+      "acrobat": "特技",
+      "consitution": "强韧",
+      "martial": "武术",
+      "projectile": "弓道",
+      "swim": "游泳 / 非常规环境移动",
+      "melee": "搏击",
+      "push": "拉举"
+    },
+    "skillDescriptions": {
+      "perception": "角色的洞察能力——去进行 SLLS（停下，观察，聆听，闻嗅）的熟练度，被动觉察和角色的专注能力。其有多容易在不受外界影响时集中精神。",
+      "survival": "角色在任何环境下的总体生存技巧和角色进行长线追踪（如动物，猎物）的能力。这包含了从城市环境下生存到荒野环境下生存的求生实际技巧。",
+      "knowledge": "角色对特定知识的掌握程度。这在某种意义上反映了角色的整体学历，和语言列表偏好。特殊地，工程学（说明白点，爆破，受力分析和结构科学，如何用硝化甘油把包括你在内的所有人都炸上天）一般也被包含在这里。",
+      "medical": "角色对医疗和快速救治的掌握程度，和进行战地快速医疗的能力。",
+      "calm": "角色在内部压力下的沉着能力——通常来说，是心理或精神因素的，或主要导致的并发症是生理或精神因素的。有时候你大的要死，人在九霄云外（当然，或者你正在被一剂巴比妥类，苯胺氮卓类弄得很想把所有东西统统交代出来——或者，更多的情况，你只是喝高了）——这时候使用这个技能，但是以防万一，如果你的情况是正在被一剂神经毒素或者类似的，更致命的玩意折磨——更坏的是它看样子蛮急性而且短时间不太能代谢......你应该骰个强韧豁免然后祈祷你能过或者把头放在你的双腿中间，然后对你的屁股唱吻别。",
+      "social": "进行长线的说服或者社交的能力，晓之以理，动之以情，或者只是说服你和你面前的一个（或者一群人）具有一样的目标，且应该把枪口指向同样的方向，而不是随地大小 Mexican Standoff 或者通过子弹毁坏市容。",
+      "charm": "使用人格（或者外表）魅力使听者（或看者）放下防备，或者通过短时间的，通常是针对大众的，调动气氛的能力。如果你真的想魅惑一条龙......祝你点了足够高的 LUK 属性，我怀疑你会需要它的。这个技能也被用来进行恐吓或者威慑一个对象。",
+      "disguise": "角色对把握特定环境内特定人群下其外观不出戏程度的技巧总和。这可能是一次很短的，in and out 的宴会（魅力），也可能是一次长达数年的 deep cover（毅力）但是没人知道，毕竟你才是那个交际花......",
+      "camoflauge": "伪装和隐蔽过程中「不在那里」和「不被发现」行为的熟练度。针对「不被发现」，使用毅力，针对「不在那里」的完美地点，一般来说使用生存检定或者潜藏+智力。潜行也使用这个技能。",
+      "operate": "使用载具，工业和专业工具的能力。这包含了一系列工控设备，电子设备，专业机械，飞行器，车辆，和电脑。绝大多数其专精都需要受训。",
+      "library": "目标信息长线调查的熟练度，和检索数据库或大量信息的熟练度。从时序数据库到国家图书馆，某个倒霉蛋法师的法师塔，某个死灵法师的墓穴，搜索引擎，或者是一系列或者纸质或者数字化的闭源或者开源情报。",
+      "recon": "进行特定目标的寻找，归纳和搜索的能力。这包含了从踩点（物理），进行情报向侦察，进行总结，和给你的上司写一份侦察报告——针对一系列常见侦察系统和战场情报系统的使用，以及在三个测距法术之间进行三角定位。",
+      "manufacture": "制造，设计，或者进行特定项目和原型内容开发操作的熟练度。Cheerout to 〇LCPCB......*",
+      "marksmanship": "使用非曲射远程动能射弹或直接高能能量武器，和任何类似的冷兵器的能力（说人话：枪）和熟练度。",
+      "athelete": "进行奔跑，投掷，和跳跃的能力。你也可以使用这个技能攀爬。在上个版本里，攀爬和运动技能是分开的......我负责临时起意。",
+      "acrobat": "角色的手眼协调能力，进行开锁和扒包的能力，进行微操作时能控制其身体的掌握，进行特技（如平衡，特殊跳跃和抓取）的熟练度。这包含进行一系列精细（但不一定非要技术相关，比如焊板子——但是如果你想想现在绝大多数情况下所有人都在用热风焊台......如果你的故事在千禧年前展开，那你可能需要这个技能）。",
+      "consitution": "角色的体质强度的体现，其身体能在收到多少伤害之前不昏迷或者死掉，抵抗不良状态——包括闪光弹，恶劣环境带来的影响或者其它来自外部的，非由角色本身源发的不良状态。",
+      "martial": "包含流派或使用任何专业武器的武术。你需要具有至少一个流派来选择武术，毕竟叶问也师出有名。",
+      "projectile": "使用曲射射弹武器的能力和熟练度——这通常包含一系列低磅数十字弩，反曲弓，猎弓，弓箭，弹弓，投矛，和类似的武器。我们今天就先不报菜名了......把那些留给你们自己的扩展。",
+      "swim": "角色进行游泳和闭气的能力，避免失温的习惯，和在水下导航的综合能力。同样的技巧一般来说也被应用在真空和类似的低重力到无重力以及复杂重力环境中。",
+      "melee": "角色使用双手和临时武器进行战斗的能力。",
+      "push": "角色进行拉取，抬举，手动移除障碍物和进行对物件物理交互的能力。"
+    },
+    "specializationPresets": {
+      "perception": {
+        "observation": "观察",
+        "listening": "聆听",
+        "smell": "气味",
+        "lowLightPerception": "低光洞察",
+        "composure": "冷静",
+        "recallMemory": "回忆 / 记忆",
+        "meditation": "冥想"
+      },
+      "survival": {
+        "urbanSurvival": "城市生存",
+        "wildernessSurvival": "野外生存",
+        "humanTracking": "人类追踪",
+        "animalTracking": "动物追踪"
+      },
+      "knowledge": {
+        "physics": "物理学",
+        "chemistry": "化学",
+        "engineering": "工程学",
+        "languages": "语言",
+        "occultism": "神秘学",
+        "magic": "魔法"
+      },
+      "medical": {
+        "firstAid": "急救",
+        "longTermAid": "长线医疗",
+        "diagnosis": "诊断"
+      },
+      "social": {
+        "negotiation": "谈判",
+        "persuasion": "说服",
+        "specificTargetPersuasion": "说服：特定对象类别",
+        "leadership": "领导力"
+      },
+      "charm": {
+        "oppositeGenderSocialising": "异性社交",
+        "sameGenderSocialising": "同性社交",
+        "speaking": "演讲",
+        "instigation": "煽动",
+        "performance": "表演",
+        "dance": "舞蹈"
+      },
+      "disguise": {
+        "specificEnvironments": "特定的环境"
+      },
+      "camoflauge": {
+        "concealment": "潜藏",
+        "camouflage": "伪装"
+      },
+      "operate": {
+        "computers": "电脑",
+        "industrialMachinery": "工业机械",
+        "heavyVehicles": "重型载具",
+        "tacticalDriving": "战术驾驶",
+        "rotaryWingAircraft": "旋翼飞行器",
+        "fixedWingAircraft": "固定翼飞行器",
+        "specializedVehicles": "特殊载具"
+      },
+      "library": {
+        "databases": "数据库",
+        "libraries": "图书馆"
+      },
+      "recon": {
+        "reconnaissance": "侦察",
+        "readingPeople": "察言观色",
+        "intelligenceGathering": "情报收集",
+        "search": "搜索",
+        "intelligenceAnalysis": "情报汇总",
+        "cartography": "制图"
+      },
+      "manufacture": {
+        "kineticWeapons": "动能武器",
+        "equipment": "装备",
+        "props": "道具",
+        "industrialDesign": "工业设计",
+        "productDesign": "产品设计",
+        "ergonomics": "人机工学"
+      },
+      "marksmanship": {
+        "assaultRifles": "自动步枪",
+        "submachineGuns": "冲锋枪",
+        "pistols": "手枪",
+        "carbines": "卡宾",
+        "boltActionRifles": "栓动步枪"
+      },
+      "athelete": {
+        "running": "奔跑",
+        "throwing": "投掷",
+        "jumping": "跳跃",
+        "marathonRunning": "马拉松",
+        "longDistanceCrossCountry": "长距越野",
+        "climbing": "攀爬"
+      },
+      "acrobat": {
+        "theft": "偷窃",
+        "lockpicking": "开锁",
+        "crafting": "制作",
+        "jewellery": "珠宝匠",
+        "art": "艺术创作",
+        "sculpture": "雕塑"
+      },
+      "consitution": {
+        "fortitude": "强韧"
+      },
+      "projectile": {
+        "crossbows": "十字弩",
+        "recurveBows": "反曲弓",
+        "huntingBows": "猎弓",
+        "bowsAndArrows": "弓箭",
+        "slingshots": "弹弓",
+        "throwingSpears": "投矛"
+      },
+      "swim": {
+        "swimming": "游泳",
+        "diving": "潜水",
+        "spaceNavigation": "宇宙空间导航"
+      },
+      "push": {
+        "pulling": "拉举",
+        "lifting": "抬升",
+        "dragging": "拖曳"
+      }
+    },
+    "skillGroups": {
+      "general": {
+        "title": "通用",
+        "hint": "专注 / 洞察、生存、知识与沉着类技能。"
+      },
+      "social": {
+        "title": "社交",
+        "hint": "说服、伪装与人际互动类技能。"
+      },
+      "technical": {
+        "title": "技术",
+        "hint": "器用、调查与制造类技能。"
+      },
+      "combat": {
+        "title": "战斗",
+        "hint": "射击、武术与近战类技能。"
+      },
+      "physical": {
+        "title": "体能",
+        "hint": "运动、强韧与纯体能类技能。"
+      },
+      "custom": {
+        "title": "自定义",
+        "hint": "房规或玩家自定义技能。"
+      }
+    },
+    "skills": {
+      "trained": "已受训",
+      "hint": "设置技能值，然后展开技能以添加专精。",
+      "empty": "添加技能后，在其下挂载专精。",
+      "attributes": "关联属性",
+      "specialization": "专精",
+      "addSpecialization": "添加专精",
+      "addCustomSpecialization": "添加自定义专精",
+      "presets": "预设专精",
+      "removeSpecialization": "移除专精",
+      "removeBranch": "移除技能及其全部专精？",
+      "title": "技能",
+      "about": "规则正文",
+      "budgetTitle": "技能点预算",
+      "budgetMode": "预算模式",
+      "budgetModeCap": "最高属性 ×5",
+      "budgetModeSum": "属性总和 ×1.5+5",
+      "budgetFromCap": "技能点 = 六项属性中的最高值 ×5。当前：{stat} {value} → {points} 点。",
+      "budgetFromAttributes": "技能点 = 属性总和 ×1.5 + 5（向下取整）。当前：{total} → {points} 点。",
+      "budgetRemaining": "剩余技能点",
+      "specializationGuide": "你可以使用 1 点技能点购买 1 点专精。进行有专精的检定时，除了获得额外的专精加值，你还在这一检定上获得额外的每有 2 点专精 1 点额外加值。专精也可以被用于关联领域，如你在试图维护一把步枪时，你可以将步枪专精加在你的巧手检定上。",
+      "specializationRollBonus": "检定加值 {bonus}",
+      "add": "添加技能",
+      "name": "名称",
+      "value": "数值",
+      "remove": "移除技能"
+    },
+    "health": {
+      "mode": "生命值规则",
+      "simple": "整体",
+      "normal": "分部位",
+      "max": "上限",
+      "current": "当前",
+      "totalMax": "总上限",
+      "totalCurrent": "总当前",
+      "head": "头部",
+      "torso": "躯干",
+      "hand_primary": "主手",
+      "hand_secondary": "副手",
+      "leg_left": "左腿",
+      "leg_right": "右腿",
+      "simpleHint": "单一生命值；1/4 上限起晕眩豁免，归零死亡豁免；自然 10 为爆头（×2）。",
+      "normalHint": "分部位受击点数，含摧毁/分离、晕眩计量与死亡豁免。"
+    },
+    "saves": {
+      "stun": "晕眩豁免",
+      "death": "死亡豁免"
+    },
+    "stats": {
+      "ref": "反射",
+      "int": "智力",
+      "wil": "毅力",
+      "chr": "魅力",
+      "bod": "体质",
+      "luk": "幸运",
+      "mov": "移动速度",
+      "sensA": "听觉",
+      "sensV": "视觉",
+      "sensS": "感知",
+      "weight": "负重（千克）",
+      "hp": "生命值"
+    },
+    "statDescriptions": {
+      "ref": "这一指标衡量角色的身体反应速度和手眼协调程度。其被在主动性（先攻）计算时应用。除此之外，它也是绝大多数攻击骰的检定属性。其衍生包括移动速度，跳跃距离，并且通过主动性影响每轮最高可达成结果的实际动作数量。",
+      "int": "这一指标衡量角色的推理速度。其被用作绝大多数复杂脑力活动和一些生存相关属性检定的关键指标。",
+      "wil": "这一指标衡量角色在压力下的反应能力（和其在肾上腺素激增时有多能稳住扳机）。其被在主动性和一系列豁免被应用。其被用作进行感知豁免。",
+      "chr": "角色能调用其人格魅力的程度。在 Opcode 中，我们决定将角色的外貌和其人格魅力解耦（但是通常来说，一个貌美如花的角色不太会有过低的魅力属性）。其被用在一系列社交检定中。",
+      "bod": "角色的身体强壮程度。这关乎角色在受到伤害时的恢复能力，使用近战武器和部分远程武器时的伤害，和伤害减免。通常具有更高 BOD 属性的角色看起来更为强壮。其衍生出一系列附加属性，并关乎死亡豁免。",
+      "luk": "这是一个功能性属性。其被用作幸运豁免，并可以被用作进行关键检定重掷骰的资源。每个角色拥有一个幸运槽，其上限等于建卡时的上限。该资源在故事的每章节完成时被更新。进行幸运豁免时，你应使用调整后的幸运值（如你的角色拥有 7 幸运，但已在上一次检定中使用了 一点幸运并进行重骰，你在这次的幸运豁免中只能受到 +6 加值）。"
+    },
+    "units": {
+      "meters": " m"
+    },
+    "points": {
+      "attributePointsUsed": "已用属性点",
+      "skillPointsUsed": "已用技能点"
+    },
+    "sections": {
+      "attributes": "属性",
+      "attributesHint": "设置六项核心属性。移动与感官将在下方计算。",
+      "preview": "角色卡预览",
+      "previewHint": "本页数值的实时概览。"
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "id": "44444444-4444-4444-8444-444444444444",
+  "created_at": "2026-01-01T00:00:00.000Z",
+  "updated_at": "2026-01-01T00:00:00.000Z",
+  "created_by": "11111111-1111-4111-8111-111111111111",
+  "character_id": "22222222-2222-4222-8222-222222222222",
+  "name": "Charac", // character name
+  "rule_book": "Opcode", // default opcode
+  "version": "1", // This is bullshit, does not serve anything right now
+  "stats": {
+    // stats json content
+    "stats": {
+      "ref": { "base": 10, "mod": 0 },
+      "int": { "base": 10, "mod": 0 },
+      "wil": { "base": 10, "mod": 0 },
+      "chr": { "base": 10, "mod": 0 },
+      "bod": { "base": 10, "mod": 0 },
+      "luk": { "base": 10, "mod": 0 },
+      "extra": {} // since we don't have any extensions, but users should be allowed to edit this freely
+    },
+    "derivated": {
+      "mov": { "base": 27, "mod": 0 }, // bod+ref+2, ref includes status.stats.ref.mod
+      "sens": {
+        "a": { "base": 35, "mod": 0 }, // ref+wil*2
+        "v": { "base": 115, "mod": 0 }, // ref+wil*10
+        "s": { "base": 27, "mod": 0 } // ref+wil+2
+      },
+      "weight": { "base": 10 }, // 20+10*BOD, KG
+      "health": {
+        // calculated health per body part
+        "mode": "normal",
+        "mul": 1, // applied after allocating max health across body parts
+        "max": 60, // source total; normal body-part shares add up to 100%
+        "normal": {
+          "head": { "base": 6, "mod": 0 }, // max * 0.10
+          "torso": { "base": 18, "mod": 0 }, // max * 0.30
+          "hand_primary": { "base": 6, "mod": 0 }, // max * 0.10
+          "hand_secondary": { "base": 12, "mod": 0 }, // max * 0.20
+          "leg_left": { "base": 9, "mod": 0 }, // max * 0.15
+          "leg_right": { "base": 9, "mod": 0 } // max * 0.15
+        },
+        "simple": { "base": 60, "mod": 0 } // simple mode uses the complete max
+      }
+    },
+    "skills": {
+      // base skill
+      "base": {
+        "perception": {
+          // example, skill with specialization.
+          "stat": ["wil"],
+          "base": 10,
+          "mod": 0,
+          "trained": false,
+          "specialization": { "observation": { "base": 10, "mod": 0 } }
+        },
+        "survival": { "stat": ["wil"], "base": 10, "mod": 0 }, // user can use either skill to make check, should any one be appropriate.
+   
+        "knowledge": { "stat": ["int"], "base": 10, "mod": 0 },
+        "medical": { "stat": ["wil", "int"], "base": 10, "mod": 0 },
+        "calm": { "stat": ["wil", "bod"], "base": 10, "mod": 0 },
+        "social": { "stat": ["chr", "int"], "base": 10, "mod": 0 },
+        "charm": { "stat": ["chr", "wil", "bod"], "base": 10, "mod": 0 },
+        "disguise": { "stat": ["chr", "wil"], "base": 10, "mod": 0 },
+        "camoflauge": { "stat": ["wil", "int"], "base": 10, "mod": 0 },
+        "operate": { "stat": ["int"], "base": 10, "mod": 0 },
+        "library": { "stat": ["wil", "int"], "base": 10, "mod": 0 },
+        "recon": { "stat": ["int"], "base": 10, "mod": 0 },
+        "manufacture": { "stat": ["int"], "base": 10, "mod": 0 },
+        "marksmanship": { "stat": ["ref"], "base": 10, "mod": 0 },
+        "athelete": { "stat": ["ref"], "base": 10, "mod": 0 },
+        "acrobat": { "stat": ["ref"], "base": 10, "mod": 0 },
+        "consitution": { "stat": ["bod"], "base": 10, "mod": 0 },
+        "martial": { "stat": ["ref", "bod"], "base": 10, "mod": 0 },
+        "projectile": { "stat": ["ref"], "base": 10, "mod": 0 },
+        "swim": { "stat": ["ref", "bod"], "base": 10, "mod": 0 },
+        "melee": { "stat": ["bod"], "base": 10, "mod": 0 },
+        "push": { "stat": ["bod"], "base": 10, "mod": 0 }
+      },
+      "extra": {}
+    },
+    "rules": { "extensions": {}, "optionals": {} }
+  },
+  "status": {
+    // status json content
+    "stats": { "ref": { "mod": 5 }, "extra": {} }, // temporary mod, the user should not be able to modify this in editor, only the application in runtime.
+    "derivated": { "sens": { "s": { "mod": 10 } } }, // derivated stat block, same goes as above, this is the derivated status block.
+    "health": { // derivated live health status
+      "mode": "normal",
+      "normal": {
+        "head": { "base": 6, "mod": 0 },
+        "torso": { "base": 18, "mod": 0 },
+        "hand_primary": { "base": 6, "mod": 0 },
+        "hand_secondary": { "base": 12, "mod": 0 },
+        "leg_left": { "base": 9, "mod": 0 },
+        "leg_right": { "base": 9, "mod": 0 }
+      }
+    },
+    "armor": { // calculated armor status according to item entry.
+      "normal": {
+        "head": 12,
+        "torso": 12,
+        "hand_primary": 12,
+        "hand_secondary": 8,
+        "leg_left": 8,
+        "leg_right": 8
+      }
+    },
+    "skills": { "base": { "charm": { "mod": 10 } }, "extra": {} }, // skill modifiers, this goes the same, can only be modified in run time.
+    "containers": { // item groupings; inventory entries stay in inventory and are referenced by uuid
+      "70000000-0000-4000-8000-000000000001": {
+        "name": "backpack",
+        "weight": {
+          "base": 1.5, // Base weight for container
+          "allows": 5 // Extra carrying weight granted by the container
+        },
+        "items": [
+          "50000000-0000-4000-8000-000000000007", // bandage
+          "50000000-0000-4000-8000-000000000003" // loose 5.45x39
+        ]
+      }
+    },
+    "inventory": [
+      {
+        "id": "50000000-0000-4000-8000-000000000001",
+        "name": "knife",
+        "type": "weapon",
+        "skill": {
+          "martial": { "mul": 1, "specialization": { "blade": { "mul": 2 } } }, // mul: skill can be applied to attack of this weapon and specialization, mul is a multiplier for skill bonus performance. normally all specialization works as double.
+          "melee": { "mul": 1 } // a weapon can be used with multiple skills.
+        },
+        "count": 1,
+        "desc": "a short blade", // description to be rendered.
+        "weapon": { // the status block of the weapon.
+          "type": "melee", // one of melee, ranged
+          "range": 1, // attack range in meter
+          "damage": {}, // rd api payload format of damage e.g. 2d6+1
+          "rof": 20, // rof definition in attacks per minute
+          "mode": 0 // fire mode, consult the comment below for the actual description.
+        }
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000002",
+        "name": "aek-971",
+        "type": "weapon",
+        "count": 1,
+        "desc": "aek-971 (kord 6p67) is a firearm manufactured by ZiD, chambered in 5.45x39mm",
+        "weapon": {
+          "type": "ranged",
+          "skill": {
+            "marksmanship": {
+              "mul": 1,
+              "specialization": { "rifle": { "mul": 2 } }
+            }
+          },
+          "range": 400, // range stat of the weapon, per the actual rule book.
+          "caliber": "5.45x39", // caliber, is used to match on ammo
+          "accuracy": 1, // default modifier from the base weapon frame, can be either positive or negative
+          "concealability": 3, // 0:E / 1:G / 2:C / 3:P / 4:N
+          "rof": 900, // rof definition in rounds fired per minute
+          "mode": 3, // 0: manual, 1: semi, 2: auto, 4: burst; supports semi and auto as bitwise data
+          "reliability": 1, // 0: very reliable, 1: normal, 2: unreliable
+          "weight": 3.3, // weight in kg
+          "modifications": {
+            "receiver": {
+              "60000000-0000-4000-8000-000000000001": {
+                "name": "AEK-971 Modernized HG",
+                "effects": { // this is a list of the attachment's effect
+                  "1": {
+                    "enable_slot": "attachment", // enables the slot
+                    "count": 3, // Since the thing comes with 3 picatinny rail
+                    "max": 5 // does not provide count further if the base weapon already have more than max slots
+                  },
+                  "2": { "enable_slot": "sight", "count": 1, "max": 1 }, // grants a sight but does not stack.
+                  "3": { "enable_slot": "underbarrel", "count": 1, "max": 1 }, // grants a under barrel slot that can be used to mount UBGL, which is another weapon instance but is not provided here.
+                  "4": {
+                    "mod": {
+                      "target": "weight",
+                      "value": {
+                        "flat": 0 // since it comes with the weapon after 2014, does not count towards the base weapon status.
+                        // does not have applied_on since it is always applied to the base model
+                      }
+                    }
+                  }
+                },
+                "description": "The modernized handguard for AEK-971 obr. 2014 (A-545) in accompany of Ratnik program."
+              }
+            },
+            "attachment": {
+              "60000000-0000-4000-8000-000000000002": {
+                "name": "Perst-4",
+                "effects": {
+                  "1": {
+                    "mod": {
+                      "target": "diff", // one of diff (to-hit bonus), range, caliber, accuracy, concealability, weight, all applied on run time base weapon.
+                      "value": {
+                        "flat": -1,
+                        "applied_on": {
+                          "range_target": { "min": 0, "max": 1 } // target range % of the range stat when the attachment functions, this one applies the bonus starts from point blank to 1.0x weapon range.
+                        }
+                      }
+                    }
+                  },
+                  "2": {
+                    "mod": { "target": "weight", "value": { "flat": 0.1 } }
+                  }
+                },
+                "description": "Laser / IR illuminator module designed by Zenit, can be mounted on picatinny rails."
+              },
+              "60000000-0000-4000-8000-000000000003": {
+                "name": "Klesh-2P",
+                "effects": {
+                  "1": {
+                    "mod": {
+                      "target": "diff",
+                      "value": {
+                        "level": -1, // Reduces a level of to-hit difficulty, e.g. 25->15, 15->10.
+                        "applied_on": {
+                          "text": "low light or environments with no light source" // This is a field decided by gm and / or is toggable, does not have actual gameplay features.
+                        }
+                      }
+                    }
+                  },
+                  "2": {
+                    "mod": { "target": "weight", "value": { "flat": 0.1 } }
+                  }
+                },
+                "description": "VIS flash light with laser module that can be mounted on picatinny rails, manufactured by Zenit."
+              }
+            },
+            "muzzle": {
+              "60000000-0000-4000-8000-000000000004": {
+                "name": "6Ch54 Suppressor", // Albeit this is a suppressor, the information symmetry is resolved in runtime, so does not have anything beyond flat stat bonus in system.
+                "effects": {
+                  "1": {
+                    "mod": {
+                      "target": "accuracy", // one of diff (to-hit bonus), range, caliber, accuracy, concealability, weight.
+                      "value": { "flat": 1 }
+                    }
+                  },
+                  "2": {
+                    "mod": {
+                      "target": "concealability",
+                      "value": {
+                        "level": -1,
+                        "applied_on": {
+                          "concealability": { "max": 4 } // Does not apply when concealability is above 4
+                        }
+                      }
+                    }
+                  },
+                  "3": {
+                    "mod": { "target": "weight", "value": { "flat": 0.5 } }
+                  }
+                },
+                "description": "6Ch54 Suppressor for AEK-971, manufactured by ZiD."
+              }
+            },
+            "underbarrel": { // This is the underbarrel (grip).
+              "60000000-0000-4000-8000-000000000005": {
+                "name": "RK-3",
+                "effects": {
+                  "1": {
+                    "mod": { "target": "accuracy", "value": { "flat": 1 } }
+                  },
+                  "2": {
+                    "mod": {
+                      "target": "concealability",
+                      "value": {
+                        "level": -1,
+                        "applied_on": {
+                          "concealability": { "max": 4 } // Does not apply when concealability is above 4, otherwise offers 1 reduction in concealabilityh level.
+                        }
+                      }
+                    }
+                  },
+                  "3": {
+                    "mod": { "target": "weight", "value": { "flat": 0.2 } }
+                  }
+                },
+                "description": "RK-3 foregrip for picatinny rail, manufactured by Zenit."
+              }
+            },
+            "magazine": "50000000-0000-4000-8000-000000000013", // Current loaded magazine
+            "sight": {
+              "60000000-0000-4000-8000-000000000006": {
+                "name": "Razor 1-10x24", // LPVO, in theory it should not have short range penalties, but for the sake of gaming we are leaving it here.
+                "effects": {
+                  "0": {
+                    "mod": {
+                      "target": "accuracy", // one of diff (to-hit bonus), range, caliber, accuracy, concealability, weight
+                      "value": {
+                        "flat": 5,
+                        "applied_on": {
+                          "range_target": { "min": 1, "max": 2 } // applied from 1-2 max range for long range combat
+                        }
+                      }
+                    }
+                  },
+                  "1": {
+                    "mod": {
+                      "target": "accuracy", // one of diff (to-hit bonus), range, caliber, accuracy, concealability, weight
+                      "value": {
+                        "flat": 3,
+                        "applied_on": {
+                          "range_target": { "min": 0.5, "max": 1 } // mid range
+                        }
+                      }
+                    }
+                  },
+                  "2": {
+                    "mod": {
+                      "target": "accuracy", // one of diff (to-hit bonus), range, caliber, accuracy, concealability, weight
+                      "value": {
+                        "flat": -3,
+                        "applied_on": {
+                          "range_target": { "min": 0, "max": 0.5 } // short range comes with penalties
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000003",
+        "name": "5.45x39mm 7n39 ppbs gs", // A couple bunch of loose ammo.
+        "type": "ammo", // Item type
+        "count": 20, // 
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "ball": {
+            "damage": {} // rd payload
+          }, // rd payload
+          "penetration": 55
+        },
+        "desc": ""
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000013",
+        "name": "5.45x39mm AK-74 6L20 30rnd Magazine",
+        "type": "magazine", // Item type
+        "count": 1, // Always 1, since each magazine takes one inventory slot.
+        "magazine": {
+          "caliber": "5.45x39",
+          "ammo": {
+            "kinds": { // Only accounts for loaded types instead of all types in caliber available.
+                "0": "50000000-0000-4000-8000-000000000004", // PS
+                "1": "50000000-0000-4000-8000-000000000003" // PPBS GS
+            },
+            "contains_max": 30, // up to 30 rounds 
+            "loaded": "111001001000011000110011011111" // Loaded ammo types, each attack with the weapon pops n round of ammo from the stack.
+          }
+        },
+        "desc": "Bakelite magazine for AK-74 platform weapons."
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000004",
+        "name": "5.45x39mm 7n6 ps gs",
+        "type": "ammo",
+        "count": 30,
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "ball": {
+            "damage": {} // rd payload
+          }, // rd payload
+          "penetration": 30
+        },
+        "desc": ""
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000005",
+        "name": "12x70 7mm buckshot",
+        "type": "ammo",
+        "count": 5,
+        "ammo": {
+          "caliber": "12x70",
+          "damage": "buck", // Buckshots comes with different rule than normal rounds, flechette / slug is calculated as ball.
+          "buck": {
+            "projectile_count": 5,
+            "damage": {} // rd payload
+          },
+          "penetration": 10
+        },
+        "desc": ""
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000006",
+        "name": "M67 Frag",
+        "type": "throwable", // Throwable uses a separated skill to operate.
+        "count": 5,
+        "ammo": {
+          "damage": "explosive",
+          "explosive": {
+            "0": {
+              "type": "frag",
+              "damage": {}, // rd payload
+              "lethal": 2, // lethal range, in meter
+              "wound": 3, // wound range, extends from the edge of lethal range, in meter. in this example, m67 comes with a total of 5m radius of damage.
+              "persistance": 0, // effect persistance time, in this case it is instantanous.
+              "fuse": 5 // meter, fuse distance
+            }
+          },
+          "penetration": 0
+        },
+        "desc": "M67 Fragmentation Grenade issued by NATO forces."
+      },
+      {
+        "id": "50000000-0000-4000-8000-000000000007",
+        "name": "bandage",
+        "count": 3,
+        "desc": ""
+      },
+      {
+        "id": "60000000-0000-4000-8000-000000000007",
+        "name": "Generic Level 3 plate",
+        "type": "armor",
+        "count": 1,
+        "armor": {
+          "material": "ceramic",
+          "layer": 0, // Layered armor for layer-specific armor calculation
+          "protection": {
+            "normal": { "torso": 45, "hand_primary": 45, "hand_secondary": 45 }
+          }
+        },
+        "desc": ""
+      }
+    ]
+  }
+}

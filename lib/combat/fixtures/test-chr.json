@@ -1,0 +1,553 @@
+{
+  "id": "3960544f-61c7-433d-a71d-f209ebe8d8d7",
+  "name": "test chr",
+  "created_at": "2026-09-19T00:59:45.069Z",
+  "updated_at": "2026-09-27T13:55:14.543Z",
+  "created_by": "local",
+  "character_id": null,
+  "rule_book": "Opcode",
+  "version": "1",
+  "mode": "career",
+  "group": "",
+  "info": {
+    "base": {
+      "handle": "",
+      "sex": "",
+      "desc": "",
+      "appearance": ""
+    },
+    "images": {}
+  },
+  "stats": {
+    "stats": {
+      "extra": {},
+      "ref": {
+        "base": 5,
+        "mod": 0
+      },
+      "int": {
+        "base": 5,
+        "mod": 0
+      },
+      "wil": {
+        "base": 5,
+        "mod": 0
+      },
+      "chr": {
+        "base": 5,
+        "mod": 0
+      },
+      "bod": {
+        "base": 5,
+        "mod": 0
+      },
+      "luk": {
+        "base": 5,
+        "mod": 0
+      }
+    },
+    "derivated": {
+      "mov": {
+        "base": 12,
+        "mod": 0
+      },
+      "weight": {
+        "base": 70
+      },
+      "sens": {
+        "a": {
+          "base": 15,
+          "mod": 0
+        },
+        "v": {
+          "base": 55,
+          "mod": 0
+        },
+        "s": {
+          "base": 12,
+          "mod": 0
+        }
+      },
+      "health": {
+        "mode": "simple",
+        "mul": 1,
+        "max": 19,
+        "simple": {
+          "base": 19,
+          "mod": 0
+        }
+      }
+    },
+    "skills": {
+      "base": {
+        "perception": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "wil"
+          ],
+          "specialization": {
+            "Low-Light Perception": {
+              "base": 0,
+              "mod": 0
+            },
+            "Composure": {
+              "base": 0,
+              "mod": 0
+            },
+            "Recall / Memory": {
+              "base": 0,
+              "mod": 0
+            }
+          }
+        },
+        "survival": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "wil"
+          ]
+        },
+        "knowledge": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "int"
+          ]
+        },
+        "medical": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "wil"
+          ]
+        },
+        "calm": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "wil",
+            "bod"
+          ]
+        },
+        "social": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "chr",
+            "int"
+          ]
+        },
+        "charm": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "chr",
+            "wil",
+            "bod"
+          ]
+        },
+        "disguise": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "chr",
+            "wil"
+          ]
+        },
+        "camoflauge": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "int",
+            "wil",
+            "ref"
+          ]
+        },
+        "operate": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref",
+            "int"
+          ]
+        },
+        "library": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "int",
+            "wil"
+          ]
+        },
+        "recon": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "int"
+          ]
+        },
+        "manufacture": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "int"
+          ]
+        },
+        "marksmanship": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref"
+          ]
+        },
+        "athelete": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref"
+          ]
+        },
+        "acrobat": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref"
+          ]
+        },
+        "consitution": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "bod",
+            "wil"
+          ]
+        },
+        "martial": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref",
+            "bod"
+          ]
+        },
+        "projectile": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref"
+          ]
+        },
+        "swim": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "ref",
+            "bod"
+          ]
+        },
+        "melee": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "bod"
+          ]
+        },
+        "push": {
+          "base": 0,
+          "mod": 0,
+          "trained": false,
+          "stat": [
+            "bod"
+          ]
+        }
+      },
+      "extra": {}
+    },
+    "rules": {
+      "extensions": {},
+      "optionals": {
+        "skill_point_mode": "cap"
+      }
+    }
+  },
+  "status": {
+    "stats": {
+      "extra": {}
+    },
+    "health": {
+      "mode": "simple",
+      "simple": {
+        "base": 19,
+        "mod": 0
+      }
+    },
+    "skills": {
+      "base": {},
+      "extra": {}
+    },
+    "containers": {},
+    "inventory": [
+      {
+        "presetId": "opcode-ranged-ar-m4-14-5",
+        "presetCategory": "ranged",
+        "presetData": {
+          "id": "opcode-ranged-ar-m4-14-5",
+          "name": "AR(M4) 14.5\"",
+          "type": "weapon",
+          "count": 1,
+          "desc": "采用 14.5 英寸枪管和皮卡汀尼导轨护木的 AR 平台步枪。其包含一个聚合物护木，使用一体式提把瞄具。",
+          "weapon": {
+            "type": "ranged",
+            "caliber": "5.56×45",
+            "accuracy": 0,
+            "reliability": 1,
+            "rof": 900,
+            "mode": 3,
+            "range": 350,
+            "concealability": 4,
+            "weight": 3.3,
+            "damage": {},
+            "modifications": {
+              "attachment": {
+                "70000000-0000-4000-8000-000000000099": {
+                  "name": "Default loadout",
+                  "description": "14.5\" 枪管，+0 精度",
+                  "effects": {}
+                }
+              }
+            }
+          }
+        },
+        "id": "cce49cb8-8d79-437b-98c7-9bebfda8305b",
+        "name": "AR(M4) 14.5\"",
+        "count": 1,
+        "desc": "采用 14.5 英寸枪管和皮卡汀尼导轨护木的 AR 平台步枪。其包含一个聚合物护木，使用一体式提把瞄具。",
+        "type": "weapon",
+        "weapon": {
+          "type": "ranged",
+          "range": 350,
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "concealability": 4,
+          "rof": 900,
+          "mode": 3,
+          "reliability": 1,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": "14.5\" 枪管，+0 精度",
+                "effects": {
+                  "1": {
+                    "mod": {
+                      "target": "diff",
+                      "value": {
+                        "flat": 0.1,
+                        "level": -2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "underbarrel": {
+              "75f83490-4a5b-4e04-b2b3-404392857c6b": {
+                "presetId": "opcode-attachment-underbarrel",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-underbarrel",
+                  "name": "Underbarrel",
+                  "desc": "Template slot for UBGLs and grips.",
+                  "attachment": {
+                    "slot": "underbarrel",
+                    "effect": "Template slot for UBGLs and grips."
+                  },
+                  "count": 1
+                },
+                "name": "Underbarrel",
+                "description": "Template slot for UBGLs and grips.",
+                "effects": {}
+              }
+            },
+            "accessory": {
+              "edf527f1-a914-418a-8dba-af1766042f39": {
+                "presetId": "opcode-attachment-accessory",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-accessory",
+                  "name": "Accessory",
+                  "desc": "Template slot for lasers, flashlights, rangefinders, and rail covers.",
+                  "attachment": {
+                    "slot": "accessory",
+                    "effect": "Template slot for lasers, flashlights, rangefinders, and rail covers."
+                  },
+                  "count": 1
+                },
+                "name": "Accessory",
+                "description": "Template slot for lasers, flashlights, rangefinders, and rail covers.",
+                "effects": {}
+              }
+            },
+            "muzzle": {
+              "61c4fb46-4976-47ae-a070-0f52a0e86e2f": {
+                "presetId": "opcode-attachment-muzzle",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-muzzle",
+                  "name": "Muzzle device",
+                  "desc": "Template slot for suppressors, brakes, and other muzzle devices.",
+                  "attachment": {
+                    "slot": "muzzle",
+                    "effect": "Template slot for suppressors, brakes, and other muzzle devices."
+                  },
+                  "count": 1
+                },
+                "name": "Muzzle device",
+                "description": "Template slot for suppressors, brakes, and other muzzle devices.",
+                "effects": {}
+              }
+            },
+            "stock": {
+              "3a7a54ff-1b27-41f4-9f50-6b8f5730685a": {
+                "presetId": "opcode-attachment-stock",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-stock",
+                  "name": "Stock",
+                  "desc": "Template slot for stock and stability modifications.",
+                  "attachment": {
+                    "slot": "stock",
+                    "effect": "Template slot for stock and stability modifications."
+                  },
+                  "count": 1
+                },
+                "name": "Stock",
+                "description": "Template slot for stock and stability modifications.",
+                "effects": {}
+              }
+            },
+            "receiver": {
+              "c06e3767-2c7b-433e-affb-e953652dd9d9": {
+                "presetId": "opcode-attachment-receiver",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-receiver",
+                  "name": "Receiver",
+                  "desc": "Template slot for uppers, conversions, and smartgun systems.",
+                  "attachment": {
+                    "slot": "receiver",
+                    "effect": "Template slot for uppers, conversions, and smartgun systems."
+                  },
+                  "count": 1
+                },
+                "name": "Receiver",
+                "description": "Template slot for uppers, conversions, and smartgun systems.",
+                "effects": {}
+              }
+            },
+            "barrel": {
+              "5633434c-2bee-4a62-987e-235d93e51546": {
+                "presetId": "opcode-attachment-barrel",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-barrel",
+                  "name": "Barrel",
+                  "desc": "Template slot trading concealability and reliability for range and accuracy.",
+                  "attachment": {
+                    "slot": "barrel",
+                    "effect": "Template slot trading concealability and reliability for range and accuracy."
+                  },
+                  "count": 1
+                },
+                "name": "Barrel",
+                "description": "Template slot trading concealability and reliability for range and accuracy.",
+                "effects": {}
+              }
+            },
+            "secondary-optic": {
+              "95c892f7-9c91-4f3d-98ec-524ef5321180": {
+                "presetId": "opcode-attachment-secondary-optic",
+                "presetCategory": "attachments",
+                "presetData": {
+                  "id": "opcode-attachment-secondary-optic",
+                  "name": "Secondary optic",
+                  "desc": "Ignores primary high-magnification optic penalties when switched.",
+                  "attachment": {
+                    "slot": "secondary-optic",
+                    "effect": "Ignores primary high-magnification optic penalties when switched."
+                  },
+                  "count": 1
+                },
+                "name": "Secondary optic",
+                "description": "Ignores primary high-magnification optic penalties when switched.",
+                "effects": {}
+              }
+            }
+          }
+        }
+      },
+      {
+        "presetId": "opcode-attachment-magazine",
+        "presetCategory": "attachments",
+        "presetData": {
+          "id": "opcode-attachment-magazine",
+          "name": "Magazine modification",
+          "desc": "Template slot for magazine modifications.",
+          "attachment": {
+            "slot": "magazine",
+            "effect": "Template slot for magazine modifications."
+          },
+          "count": 1
+        },
+        "id": "9bc6e1c5-0d0b-4bd4-885c-f9600d5cde53",
+        "name": "Magazine modification",
+        "count": 1,
+        "desc": "Template slot for magazine modifications.",
+        "weight": 0
+      },
+      {
+        "presetId": "opcode-attachment-secondary-optic",
+        "presetCategory": "attachments",
+        "presetData": {
+          "id": "opcode-attachment-secondary-optic",
+          "name": "Secondary optic",
+          "desc": "Ignores primary high-magnification optic penalties when switched.",
+          "attachment": {
+            "slot": "secondary-optic",
+            "effect": "Ignores primary high-magnification optic penalties when switched."
+          },
+          "count": 1
+        },
+        "id": "5c985709-1895-4a0b-9ee5-2c418197849c",
+        "name": "Secondary optic",
+        "count": 1,
+        "desc": "Ignores primary high-magnification optic penalties when switched.",
+        "weight": 0
+      }
+    ]
+  }
+}

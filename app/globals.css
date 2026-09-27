@@ -1,26 +1,299 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Occurrence neo theme, mapped onto HeroUI v3 tokens.
+  Source: occurrence-front/uno.config.ts [data-occurrence-theme='neo']
+*/
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  :root,
+  .light,
+  [data-theme="light"] {
+    --oc-foreground: #1a1a1a;
+    --oc-page-bg: #f5f5f5;
+    --oc-background: #f5f5f5;
+    --oc-primary: #ffa705;
+    --oc-success: #18745a;
+    --oc-warning: #9a5800;
+    --oc-error: #be3f4b;
+    --oc-info: #2e6f82;
+    --oc-content1: #ffffff;
+    --oc-content2: #fafafa;
+    --oc-content3: #ffffff;
+    --oc-border1: color-mix(in oklab, var(--oc-foreground) 10%, transparent);
+    --oc-border2: color-mix(in oklab, var(--oc-foreground) 6%, transparent);
+    --oc-border3: color-mix(in oklab, var(--oc-foreground) 18%, transparent);
+    --oc-shadow1: 0 1px 3px 0 color-mix(in oklab, #000 14%, transparent);
+    --oc-shadow2: 0 12px 30px -16px color-mix(in oklab, #000 36%, transparent);
+    --oc-shadow3: 0 24px 56px -22px color-mix(in oklab, #000 44%, transparent);
+    --oc-shadow-primary: 0 0 0 3px color-mix(in oklab, var(--oc-primary) 30%, transparent);
+    --oc-shadow-error: 0 0 0 3px color-mix(in oklab, var(--oc-error) 30%, transparent);
+    --oc-radius: 12px;
+    --oc-radius-sm: 8px;
+    --oc-radius-md: 12px;
+    --oc-radius-lg: 16px;
+    --oc-radius-xl: 20px;
+    --oc-radius-2xl: 24px;
+    --oc-radius-3xl: 32px;
+    --oc-radius-full: 9999px;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* page < content1 (low) < content2 < content3 (high) */
+    --background: var(--oc-background);
+    --foreground: var(--oc-foreground);
+    --muted: color-mix(in oklab, var(--oc-foreground) 58%, transparent);
+    --surface-tertiary: var(--oc-content1);
+    --surface-tertiary-foreground: var(--oc-foreground);
+    --surface-secondary: var(--oc-content2);
+    --surface-secondary-foreground: var(--oc-foreground);
+    --surface: var(--oc-content3);
+    --surface-foreground: var(--oc-foreground);
+    --overlay: var(--oc-content3);
+    --overlay-foreground: var(--oc-foreground);
+    --default: var(--oc-content2);
+    --default-foreground: var(--oc-foreground);
+    --segment: var(--oc-content2);
+    --segment-foreground: var(--oc-foreground);
+    --accent: var(--oc-primary);
+    --accent-foreground: var(--oc-foreground);
+    --success: var(--oc-success);
+    --success-foreground: #ffffff;
+    --warning: var(--oc-warning);
+    --warning-foreground: #ffffff;
+    --danger: var(--oc-error);
+    --danger-foreground: #ffffff;
+    --border: var(--oc-border1);
+    --separator: var(--oc-border2);
+    --focus: var(--oc-primary);
+    --link: var(--oc-foreground);
+    --field-background: var(--oc-content3);
+    --field-foreground: var(--oc-foreground);
+    --field-placeholder: var(--muted);
+    --field-border: var(--oc-border1);
+    --radius: var(--oc-radius);
+    --field-radius: var(--oc-radius-md);
+    --surface-shadow: var(--oc-shadow1);
+    --overlay-shadow: var(--oc-shadow2);
+    --field-shadow: var(--oc-shadow1);
+    color-scheme: light;
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    --oc-foreground: #ececec;
+    --oc-page-bg: #0d0d0d;
+    --oc-background: #0f0f0f;
+    --oc-primary: #ffa705;
+    --oc-success: #4fc59a;
+    --oc-warning: #eab45e;
+    --oc-error: #ff7580;
+    --oc-info: #79c2d2;
+    --oc-content1: #111111;
+    --oc-content2: #141414;
+    --oc-content3: #171717;
+    --oc-border1: color-mix(in oklab, var(--oc-foreground) 10%, transparent);
+    --oc-border2: color-mix(in oklab, var(--oc-foreground) 6%, transparent);
+    --oc-border3: color-mix(in oklab, var(--oc-foreground) 18%, transparent);
+    --oc-shadow1: 0 1px 2px 0 rgb(0 0 0 / 0.42), 0 0 0 1px rgb(255 255 255 / 0.02);
+    --oc-shadow2: 0 12px 28px -18px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.03);
+    --oc-shadow3: 0 22px 48px -24px rgb(0 0 0 / 0.8), 0 0 0 1px rgb(255 255 255 / 0.04);
+    --oc-shadow-primary: 0 0 0 3px color-mix(in oklab, var(--oc-primary) 30%, transparent);
+    --oc-shadow-error: 0 0 0 3px color-mix(in oklab, var(--oc-error) 30%, transparent);
+
+    --background: var(--oc-background);
+    --foreground: var(--oc-foreground);
+    --muted: color-mix(in oklab, var(--oc-foreground) 65%, transparent);
+    --surface-tertiary: var(--oc-content1);
+    --surface-tertiary-foreground: var(--oc-foreground);
+    --surface-secondary: var(--oc-content2);
+    --surface-secondary-foreground: var(--oc-foreground);
+    --surface: var(--oc-content3);
+    --surface-foreground: var(--oc-foreground);
+    --overlay: var(--oc-content3);
+    --overlay-foreground: var(--oc-foreground);
+    --default: var(--oc-content2);
+    --default-foreground: var(--oc-foreground);
+    --segment: var(--oc-content2);
+    --segment-foreground: var(--oc-foreground);
+    --accent: var(--oc-primary);
+    --accent-foreground: var(--oc-background);
+    --success: var(--oc-success);
+    --success-foreground: var(--oc-background);
+    --warning: var(--oc-warning);
+    --warning-foreground: var(--oc-background);
+    --danger: var(--oc-error);
+    --danger-foreground: var(--oc-background);
+    --border: var(--oc-border1);
+    --separator: var(--oc-border2);
+    --focus: var(--oc-primary);
+    --link: var(--oc-foreground);
+    --field-background: var(--oc-content3);
+    --field-foreground: var(--oc-foreground);
+    --field-placeholder: var(--muted);
+    --field-border: var(--oc-border1);
+    --surface-shadow: var(--oc-shadow1);
+    --overlay-shadow: var(--oc-shadow2);
+    --field-shadow: var(--oc-shadow1);
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --font-sans: var(--font-poppins), "PingFang SC", "Hiragino Sans GB", "Noto Sans JP", ui-sans-serif, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+  --color-content1: var(--oc-content1);
+  --color-content2: var(--oc-content2);
+  --color-content3: var(--oc-content3);
+  --color-surface-tertiary: var(--oc-content1);
+  --color-surface-secondary: var(--oc-content2);
+  --color-surface: var(--oc-content3);
+  --color-overlay: var(--oc-content3);
+  --color-field: var(--oc-content3);
+  --color-default: var(--oc-content2);
+  --color-info: var(--oc-info);
+  --color-primary: var(--oc-primary);
+  --color-error: var(--oc-error);
+  --color-border1: var(--oc-border1);
+  --color-border2: var(--oc-border2);
+  --color-border3: var(--oc-border3);
+  --shadow-oc-1: var(--oc-shadow1);
+  --shadow-oc-2: var(--oc-shadow2);
+  --shadow-oc-3: var(--oc-shadow3);
+  --shadow-oc-primary: var(--oc-shadow-primary);
+  --shadow-oc-error: var(--oc-shadow-error);
+  --radius-sm: var(--oc-radius-sm);
+  --radius-md: var(--oc-radius-md);
+  --radius-lg: var(--oc-radius-lg);
+  --radius-xl: var(--oc-radius-xl);
+  --radius-2xl: var(--oc-radius-2xl);
+  --radius-3xl: var(--oc-radius-3xl);
+  --radius-full: var(--oc-radius-full);
+}
+
+@utility shadow1 {
+  box-shadow: var(--oc-shadow1);
+}
+@utility shadow2 {
+  box-shadow: var(--oc-shadow2);
+}
+@utility shadow3 {
+  box-shadow: var(--oc-shadow3);
+}
+@utility shadow-primary {
+  box-shadow: var(--oc-shadow-primary);
+}
+@utility shadow-error {
+  box-shadow: var(--oc-shadow-error);
+}
+@utility oc-pill-card {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 3.25rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--oc-border1);
+  background: var(--oc-content3);
+  box-shadow: var(--oc-shadow2);
+  border-radius: 9999px !important;
+}
+@utility scrollbar-subtle {
+  scrollbar-width: auto;
+  scrollbar-color: var(--oc-content2) transparent;
+}
+
+:root {
+  --oc-motion: 150ms;
+}
+
+@keyframes oc-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.oc-fade {
+  animation: oc-fade var(--oc-motion) ease-out both;
+}
+
+button:not(:disabled),
+a,
+[role="button"] {
+  transition:
+    color var(--oc-motion) ease,
+    background-color var(--oc-motion) ease,
+    border-color var(--oc-motion) ease,
+    box-shadow var(--oc-motion) ease,
+    opacity var(--oc-motion) ease,
+    transform var(--oc-motion) ease;
+}
+
+button:not(:disabled):active,
+a:active,
+[role="button"]:active {
+  transform: translate(1px, 1px);
+}
+
+.card,
+[data-slot="card"] {
+  transition:
+    background-color var(--oc-motion) ease,
+    box-shadow var(--oc-motion) ease,
+    transform var(--oc-motion) ease;
+}
+
+.card:hover,
+[data-slot="card"]:hover {
+  box-shadow: var(--oc-shadow2);
+}
+
+.oc-md .tiptap,
+.oc-md .ProseMirror {
+  min-height: 500px;
+  outline: none;
+}
+
+.oc-md .tiptap p.is-empty::before,
+.oc-md .tiptap p.is-editor-empty:first-child::before {
+  color: color-mix(in oklab, var(--oc-foreground) 40%, transparent);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.oc-md .tiptap img {
+  max-height: 16rem;
+  width: auto;
+  max-width: 100%;
+  border-radius: var(--oc-radius-sm);
+}
+
+.oc-md .tiptap ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.oc-md .tiptap ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+
+.oc-md .tiptap blockquote {
+  border-left: 3px solid var(--oc-primary);
+  padding-left: 0.75rem;
+  color: color-mix(in oklab, var(--oc-foreground) 70%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-fade {
+    animation: none !important;
+  }
+
+  button,
+  a,
+  [role="button"],
+  .card,
+  [data-slot="card"] {
+    transition: none !important;
+    transform: none !important;
+  }
 }

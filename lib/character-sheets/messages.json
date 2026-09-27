@@ -1,0 +1,683 @@
+{
+  "characterSheets": {
+    "skillNames": {
+      "perception": "Focus / Perception",
+      "survival": "Survival",
+      "knowledge": "Knowledge",
+      "medical": "Medical",
+      "calm": "Composure",
+      "social": "Social",
+      "charm": "Seduction",
+      "disguise": "Disguise",
+      "camoflauge": "Concealment",
+      "operate": "Operate",
+      "library": "Library",
+      "recon": "Reconnaissance",
+      "manufacture": "Fabrication",
+      "marksmanship": "Marksmanship",
+      "athelete": "Athletics",
+      "acrobat": "Acrobat",
+      "consitution": "Fortitude",
+      "martial": "Martial Arts",
+      "projectile": "Archery",
+      "swim": "Swimming / Unconventional Environment Movement",
+      "melee": "Brawling",
+      "push": "Pulling / Lifting"
+    },
+    "skillDescriptions": {
+      "perception": "The character’s perception capability — their proficiency at SLLS (Stop, Look, Listen, Smell), passive awareness, and the capability to concentrate. In other terms, how easily they can keep their mind focused without being distracted by the outside world.",
+      "survival": "The character’s overall ability to survive in most of the environment, conducting long-term animal (apparently, human included) tracking, hunting, this and that. This covers practical survival skills ranging from urban survival to the fun stuff all alone in wilderness.",
+      "knowledge": "The character’s command of a particular field of knowledge. To some extent, this reflects the character’s overall education and their languages they can use. Engineering in particular, to be precise, explosives, stress analysis, structural science, and how to use nitroglycerine to blow the shit out of everyone, yourself included, is covered here as well.",
+      "medical": "The character’s knowledge on paramedics and first-aid, also works for combat first aid.",
+      "calm": "The character’s ability to keep themselves together under internal-sourced stress — in most cases, psychological or mental in nature, or where the resulting complications are mostly physiological or psychological. Maybe you are high as a kite, or happens you are dosed with so muchbarbiturates or benzodiazepines that you want to tell everyone everything, or you are just a bit shitfaced. That’s the time you should use this skill for a roll, in case you’re dealing with some kind of nerve agent or other lethal thingies — and the shittier part is that it’s apparently fairly acute that your body aren’t gonna metabolise teh thing any time soon — your better bet is go for a CON save and pray you can make it, or might as well just go and tuck your head between your legs, kiss your ass goodbye.",
+      "social": "The ability to conduct any prolonged persuasion or social interaction sessions: make the sense in to them, make the sense out of them, or just simply convince the dude — or dudes — in front of you that you all want the same thing and ought to be pointing your guns in the same direction, instead of going all Mexican Standoff everywhere or decide to give the neighborhood a bit of a refurbish with lead.",
+      "charm": "Using force of personality (or the personality of force) to get a listener — or observer — lower their guard, or the ability to instigate in a short time period, nominally against the crowd. In case you actually wanted to seduce a dragon I’d better off hope that you got enough points into LUK and I have a damn good reason why you’re going to need them. This skill is also used to intimidate a target.",
+      "disguise": "The sum total of the character’s ability mix in convincingly amongst one particular group in one particular environment. It could be a relatively brief, in-and-out gig at a party (Charisma), or it could be some unsanctioned off-the-book deep cover lasting several years (WIL). But apparently nobody knows, or do the hell they, or they dont. You’re the social butterfly at the end of the day and nobody’s the wiser...",
+      "camoflauge": "Proficiency in the arts of “don’t be spotted” and “don’t be there” when attempting to hide or disguise yourself. In the “don’t be spotted” department, use WIL, and for finding the cozy spot where you are mostly not being there, you’ll generally either use a Survival check or Concealment + INT. Stealth also uses this skill.",
+      "operate": "The ability to operate vehicles, industrial equipment, and specialized tools. This includes a wide range of industrial systems, electronics, specialized machinery, aircraft, vehicles, and computers. Most Specialisations under this skill group requires training.",
+      "library": "Proficiency in conducting prolonged investigations around certain information, the usage of databases or other mass information, which could be anything from a time series db to some national library, some shitty ass wizard’s tower, some unlucky ass necromancer who might never met you in your life’s tomb, a search engine, paper or digital intelligence, closed-source and OSINT.",
+      "recon": "The ability to locate, collate, and search for specific targets or information. This covers everything from conducting a search on a physical location, te conduction of intelligence-oriented recon, writing the post-action report for said recon for your boss, operating common reconnaissance and battlefield intelligence systems — or triangulating from three ranging spells.",
+      "manufacture": "Proficiency in implement, design, carrying out R&D work on projects and prototypes. Shout-out to 〇LCPCB...*",
+      "marksmanship": "The general ability, knowledge and proficiency required to use direct-fire ranged kinetic projectile weapons, direct-fire high-energy weapons, and technically arma biancas that does mostly the same, and in case you fancy English, guns.",
+      "athelete": "The ability to run, throw, and jump. You can also use this skill for climbing. In the previous version, Climbing and Athletics were separate skills, but I figured it could be the right move to just jam these together in a relatively neat package and call it a day around here.",
+      "acrobat": "The character’s hand-eye coordination, their proficiency on locksmith and pocket picking, their fine motor control, and their proficiency in acrobatic actions such as balancing, jumps, etc. This also covers a range of delicate work — albeit maybe not technical work, which, such as dealing with PCBs. But if when you actually put a bit thought into it, nowaday everyone got their own reflow station so… With that being said in case your setting is before the good old 00s, you might actually need this skill to deal with it.",
+      "consitution": "A representation of the character’s physical strength and their capability of exploiting it to some extent: how much beat their body can take before they start to roll stun saves or death saves, their ability to resist a diverse set of external condition— consists of flashbang, extreme environment, and other externally imposed conditions that do not originate from within the character themselves.",
+      "martial": "Martial art techniques, beyond that, those which requires certain melee weapon to operate are also treated as martial arts in general. You need a style specialization to be assigned to your Martial Arts to use it. For whatever’s worth here, Yip Man does have a good teacher.",
+      "projectile": "The ability and proficiency on operating indirect-fire or direct-fire projectile weapons that utilizes a parabolical ballistic trajectory, which mostly includes crossbows, recursive bows, hunting bows, slingshots, javelins and everything in between. We’ll skip the full house today for your own ideas.",
+      "swim": "The character’s ability to swim and hold breath, avoiding hypothermia while they are at it, and their overall ability to navigate in underwater environments. The same skill in general also applies in vacuum, low to zero-g environments, and other kind of environments that is related to complex gravitational conditions.",
+      "melee": "The character’s ability to commence combat operations using their bare hands and improvised weapons.",
+      "push": "The character’s ability to pull, lift, manually remove obstacles, and physically interact with objects."
+    },
+    "specializationPresets": {
+      "perception": {
+        "observation": "Observation",
+        "listening": "Listening",
+        "smell": "Smell",
+        "lowLightPerception": "Low-Light Perception",
+        "composure": "Composure",
+        "recallMemory": "Recall / Memory",
+        "meditation": "Meditation"
+      },
+      "survival": {
+        "urbanSurvival": "Urban Survival",
+        "wildernessSurvival": "Wilderness Survival",
+        "humanTracking": "Human Tracking",
+        "animalTracking": "Animal Tracking"
+      },
+      "knowledge": {
+        "physics": "Physics",
+        "chemistry": "Chemistry",
+        "engineering": "Engineering",
+        "languages": "Languages",
+        "occultism": "Occultism",
+        "magic": "Magic"
+      },
+      "medical": {
+        "firstAid": "First Aid",
+        "longTermAid": "Long-Term Aid",
+        "diagnosis": "Diagnosis"
+      },
+      "social": {
+        "negotiation": "Negotiation",
+        "persuasion": "Persuasion",
+        "specificTargetPersuasion": "Persuasion: Specific Target Category",
+        "leadership": "Leadership"
+      },
+      "charm": {
+        "oppositeGenderSocialising": "Socialising with the Opposite Gender",
+        "sameGenderSocialising": "Socialising with the Same Gender",
+        "speaking": "Speaking",
+        "instigation": "Instigation",
+        "performance": "Performance",
+        "dance": "Dance"
+      },
+      "disguise": {
+        "specificEnvironments": "Specific Environments"
+      },
+      "camoflauge": {
+        "concealment": "Concealment",
+        "camouflage": "Camouflage"
+      },
+      "operate": {
+        "computers": "Computers",
+        "industrialMachinery": "Industrial Machinery",
+        "heavyVehicles": "Heavy Vehicles",
+        "tacticalDriving": "Tactical Driving",
+        "rotaryWingAircraft": "Rotary Wing Aircraft",
+        "fixedWingAircraft": "Fixed Wing Aircraft",
+        "specializedVehicles": "Specialized Vehicles"
+      },
+      "library": {
+        "databases": "Databases",
+        "libraries": "Libraries"
+      },
+      "recon": {
+        "reconnaissance": "Reconnaissance",
+        "readingPeople": "Reading People",
+        "intelligenceGathering": "Intelligence Gathering",
+        "search": "Search",
+        "intelligenceAnalysis": "Intelligence Analysis",
+        "cartography": "Cartography"
+      },
+      "manufacture": {
+        "kineticWeapons": "Kinetic Weapons",
+        "equipment": "Equipment",
+        "props": "Props",
+        "industrialDesign": "Industrial Design",
+        "productDesign": "Product Design",
+        "ergonomics": "Ergonomics"
+      },
+      "marksmanship": {
+        "assaultRifles": "Assault Rifles",
+        "submachineGuns": "Submachine Guns",
+        "pistols": "Pistols",
+        "carbines": "Carbines",
+        "boltActionRifles": "Bolt-Action Rifles"
+      },
+      "athelete": {
+        "running": "Running",
+        "throwing": "Throwing",
+        "jumping": "Jumping",
+        "marathonRunning": "Marathon Running",
+        "longDistanceCrossCountry": "Long-Distance Cross-Country",
+        "climbing": "Climbing"
+      },
+      "acrobat": {
+        "theft": "Theft",
+        "lockpicking": "Lockpicking",
+        "crafting": "Crafting",
+        "jewellery": "Jewellery",
+        "art": "Art",
+        "sculpture": "Sculpture"
+      },
+      "consitution": {
+        "fortitude": "Fortitude"
+      },
+      "projectile": {
+        "crossbows": "Crossbows",
+        "recurveBows": "Recurve Bows",
+        "huntingBows": "Hunting Bows",
+        "bowsAndArrows": "Bows and Arrows",
+        "slingshots": "Slingshots",
+        "throwingSpears": "Throwing Spears"
+      },
+      "swim": {
+        "swimming": "Swimming",
+        "diving": "Diving",
+        "spaceNavigation": "Space Navigation"
+      },
+      "push": {
+        "pulling": "Pulling",
+        "lifting": "Lifting",
+        "dragging": "Dragging"
+      }
+    },
+    "sections": {
+      "basics": "Basics",
+      "character": "Character",
+      "characterHint": "Link a character now, or leave this sheet unlinked.",
+      "attributes": "Attributes",
+      "attributesHint": "Set the six core attributes. Movement and senses are calculated below.",
+      "healthHint": "Hit points are calculated from Will and Body. Choose the calculation mode here.",
+      "preview": "Sheet preview",
+      "previewHint": "A live overview of the values on this sheet.",
+      "ready": "Ready when you are"
+    },
+    "points": {
+      "attributePointsUsed": "Attribute points spent",
+      "skillPointsUsed": "Skill points spent"
+    },
+    "saves": {
+      "stun": "Stun save",
+      "death": "Death save"
+    },
+    "units": {
+      "meters": " m"
+    },
+    "navLabel": "Character Sheets",
+    "ruleBook": "Opcode",
+    "list": {
+      "title": "Character Sheets",
+      "search": "Search sheets",
+      "filterAll": "All characters",
+      "filterLabel": "Filter by character",
+      "create": "New sheet",
+      "loading": "Loading character sheets…",
+      "failedTitle": "Couldn't load character sheets",
+      "errorDescription": "Your sheets could not be refreshed. Check your connection and try again.",
+      "retry": "Retry",
+      "emptyTitle": "No character sheets yet",
+      "emptyDescription": "Create your first character sheet to take a character into the story.",
+      "noSearchResults": "No sheets match this search",
+      "searchEmptyHint": "Try another term, or clear the search and filters."
+    },
+    "view": {
+      "status": "Viewing",
+      "title": "Character sheet",
+      "description": "See this character sheet as it is now.",
+      "edit": "Edit",
+      "back": "Back to sheets",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this sheet?",
+      "deleted": "Character sheet deleted",
+      "deleteFailed": "This sheet could not be deleted.",
+      "notFoundTitle": "Sheet not found",
+      "notFoundDescription": "This sheet may have been deleted, or it isn't available.",
+      "invalidId": "This sheet link is not valid."
+    },
+    "create": {
+      "status": "Creating",
+      "title": "New character sheet",
+      "description": "Choose a character and fill in their basics.",
+      "save": "Create sheet",
+      "cancel": "Cancel",
+      "success": "Character sheet created"
+    },
+    "edit": {
+      "status": "Editing",
+      "title": "Edit character sheet",
+      "description": "Update the abilities on this sheet.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "success": "Character sheet saved"
+    },
+    "unsaved": {
+      "status": "Unsaved changes",
+      "confirm": "Leave without saving your changes?"
+    },
+    "fields": {
+      "name": "Sheet name",
+      "unnamed": "Untitled sheet",
+      "character": "Linked character",
+      "unlinked": "Not linked",
+      "version": "Version",
+      "ruleBook": "Ruleset",
+      "id": "Sheet ID",
+      "createdAt": "Created",
+      "updatedAt": "Updated"
+    },
+    "stats": {
+      "ref": "Reflex",
+      "int": "Intelligence",
+      "wil": "Willpower",
+      "chr": "Charisma",
+      "bod": "Constitution",
+      "luk": "Luck",
+      "mov": "Movement Speed",
+      "sensA": "Auditory",
+      "sensV": "Visual",
+      "sensS": "Sense",
+      "weight": "Carry weight (kg)",
+      "hp": "HP"
+    },
+    "statDescriptions": {
+      "ref": "This attribute measures a character's physical reaction speed and hand-eye coordination. It is applied when calculating initiative (round order). Furthermore, it serves as the attribute for the vast majority of attack rolls. Its derivatives include movement speed, jumping distance, and—through initiative, which dictates the maximum number of actions a character can actually perform per turn.",
+      "int": "This attribute measures a character's speed of reasoning. It is used as the key attribute for the vast majority of complex mental activities and for some survival-related attribute checks.",
+      "wil": "This attribute measures a character's ability to react under pressure (and how steady their trigger finger would be when the adrenaline hits). It is applied to Initiative and a range of saving rolls. It is used to make Perception saves.",
+      "chr": "The extent to which a character can draw upon their personal charm. In Opcode, we figured decoupling the character's appearance from their Charisma (albeit generally speaking a fair looking character is unlikely to have a low Charisma attribute) is the better move. It is used in a range of social checks.",
+      "bod": "A measure of a character's physical robustness. This affects a character's ability to recover from injury, the damage dealt when using melee weapons and certain ranged weapons, and damage reduction. Generally, characters with a higher BOD attribute would be mostly more robust. It provides bonus to a series of derived attributes and is related to death saves.",
+      "luk": "This is a tool-esque attribute. It is used for Luck saves and is used as a resource for rerolling certain checks. All characters come with a Luck pool, the maximum value of which is set upon character creation. This resource is reset at the end of each chapter of the story per GM's discretion. Upon making a Luck saving throw, you use your adjusted Luck value (for example, if your character has 7 Luck but burned one point of Luck for rerolling the previous check, you receive only a +6 bonus for this Luck save)."
+    },
+    "health": {
+      "mode": "Calculation mode",
+      "simple": "Overall",
+      "normal": "By part",
+      "max": "Maximum",
+      "current": "Current",
+      "totalMax": "Total maximum",
+      "totalCurrent": "Total current",
+      "head": "Head",
+      "torso": "Torso",
+      "hand_primary": "Primary hand",
+      "hand_secondary": "Off hand",
+      "leg_left": "Left leg",
+      "leg_right": "Right leg",
+      "simpleHint": "One HP pool; stun at ¼ max, death at 0; nat 10 = headshot (×2).",
+      "normalHint": "HP per body part with destroy/separate, stun track, and death saves."
+    },
+    "skillGroups": {
+      "general": {
+        "title": "General",
+        "hint": "Perception, survival, knowledge, and composure skills."
+      },
+      "social": {
+        "title": "Social",
+        "hint": "Persuasion, disguise, and interpersonal skills."
+      },
+      "technical": {
+        "title": "Technical",
+        "hint": "Operating equipment, research, and fabrication skills."
+      },
+      "combat": {
+        "title": "Combat",
+        "hint": "Firearms, martial arts, and melee skills."
+      },
+      "physical": {
+        "title": "Physical",
+        "hint": "Athletics, endurance, and raw physical skills."
+      },
+      "custom": {
+        "title": "Custom",
+        "hint": "House-rule or player-defined skills."
+      }
+    },
+    "skills": {
+      "trained": "Trained",
+      "hint": "Set skill values, then expand a skill to add specializations.",
+      "empty": "Add a skill, then attach any specializations beneath it.",
+      "attributes": "Linked attributes",
+      "specialization": "Specialization",
+      "addSpecialization": "Add specialization",
+      "addCustomSpecialization": "Add custom specialization",
+      "presets": "Preset specializations",
+      "removeSpecialization": "Remove specialization",
+      "removeBranch": "Remove skill and specializations?",
+      "title": "Skills",
+      "about": "Rule text",
+      "budgetTitle": "Skill point budget",
+      "budgetMode": "Budget mode",
+      "budgetModeCap": "Highest stat × 5",
+      "budgetModeSum": "Stat total × 1.5 + 5",
+      "budgetFromCap": "Skill points = your highest attribute × 5. Right now: {stat} {value} → {points} points.",
+      "budgetFromAttributes": "Skill points = attribute total × 1.5 + 5 (rounded down). Right now: {total} → {points} points.",
+      "budgetRemaining": "Skill points remaining",
+      "specializationGuide": "One skill point buys one specialization rank. On a specialized check, you gain the specialization bonus plus an extra +1 for every 2 ranks in that specialization.",
+      "specializationRollBonus": "Check bonus {bonus}",
+      "add": "Add skill",
+      "name": "Name",
+      "value": "Value",
+      "remove": "Remove skill"
+    },
+    "validation": {
+      "required": "This field is required.",
+      "safeInteger": "Enter a whole number.",
+      "nonNegative": "Enter zero or a positive whole number.",
+      "invalidCharacter": "Choose a valid character.",
+      "versionTooLong": "Version is too long.",
+      "nameTooLong": "Name is too long.",
+      "duplicateSkill": "Skill names must be unique.",
+      "specializationAboveSkill": "A specialization cannot rank higher than its parent skill."
+    },
+    "errors": {
+      "form": "This sheet could not be saved. Check the highlighted fields.",
+      "field": "This value is not valid."
+    },
+    "a11y": {
+      "openSheet": "Open character sheet {id}",
+      "healthMode": "Choose calculation mode"
+    },
+    "inventory": {
+      "nav": "Inventory",
+      "navCount": "Inventory ({count})",
+      "status": "Inventory",
+      "title": "Inventory",
+      "crumb": "Inventory",
+      "description": "Weapons, magazines, ammunition, and armor carried on this sheet.",
+      "itemCountSummary": "{count} items",
+      "backToSheet": "Back to character sheet",
+      "save": "Save inventory",
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "leave": "Leave",
+      "stay": "Stay",
+      "saveDisabledClean": "No changes to save.",
+      "saveDisabledInvalid": "Fix the highlighted items before saving.",
+      "success": "Inventory saved",
+      "addItem": "Add item",
+      "addKind": {
+        "generic": "Add other item",
+        "weapon": "Add weapon",
+        "ammo": "Add ammunition",
+        "magazine": "Add magazine",
+        "throwable": "Add throwable",
+        "armor": "Add armor"
+      },
+      "editKind": {
+        "generic": "Edit other item",
+        "weapon": "Edit weapon",
+        "ammo": "Edit ammunition",
+        "magazine": "Edit magazine",
+        "throwable": "Edit throwable",
+        "armor": "Edit armor"
+      },
+      "updateKind": {
+        "generic": "Update item",
+        "weapon": "Update weapon",
+        "ammo": "Update ammunition",
+        "magazine": "Update magazine",
+        "throwable": "Update throwable",
+        "armor": "Update armor"
+      },
+      "edit": "Edit",
+      "delete": "Delete",
+      "drawerCancel": "Cancel",
+      "editTitle": "Edit item",
+      "createTitle": "Add item",
+      "createHint": "Choose what this item is. You cannot change its type later.",
+      "emptyTitle": "No items yet",
+      "emptyDescription": "Add weapons, ammunition, magazines, armor, and other gear to this sheet.",
+      "search": "Search gear",
+      "searchEmpty": "No gear matches this search.",
+      "selectItem": "Select an item",
+      "selectItemHint": "Pick something on the left, or add a new item.",
+      "unnamed": "Untitled item",
+      "validationSummary": "Fix the highlighted inventory fields before saving.",
+      "referenced": "In use",
+      "deleteBlocked": "This item is still used by {names}.",
+      "previewTitle": "Gear",
+      "previewMore": "+{count} more",
+      "kinds": {
+        "generic": "Other",
+        "weapon": "Weapon",
+        "ammo": "Ammunition",
+        "magazine": "Magazine",
+        "throwable": "Throwable",
+        "armor": "Armor"
+      },
+      "groups": {
+        "generic": "Other",
+        "weapon": "Weapons",
+        "ammo": "Ammunition",
+        "magazine": "Magazines",
+        "throwable": "Throwables",
+        "armor": "Armor"
+      },
+      "fields": {
+        "name": "Name",
+        "count": "Count",
+        "desc": "Description",
+        "caliber": "Caliber",
+        "coverage": "Coverage",
+        "kind": "Item type",
+        "chooseKind": "Choose a type",
+        "usedCalibers": "Used on this sheet",
+        "itemCount": "×{count}",
+        "ammoCount": "{count} rounds"
+      },
+      "weapon": {
+        "weaponType": "Weapon type",
+        "types": {
+          "melee": "Melee",
+          "ranged": "Ranged"
+        },
+        "damage": "Damage",
+        "range": "Range (m)",
+        "accuracy": "Accuracy",
+        "concealability": "Concealability",
+        "concealabilityLevels": {
+          "0": "E (Excellent)",
+          "1": "G (Good)",
+          "2": "C (Common)",
+          "3": "P (Poor)",
+          "4": "N (Non-concealable)"
+        },
+        "rof": "Rate of fire",
+        "mode": "Fire mode",
+        "modes": {
+          "semi": "Semi-automatic",
+          "auto": "Automatic",
+          "burst": "Burst"
+        },
+        "reliability": "Reliability",
+        "reliabilityLevels": {
+          "0": "V (Very Reliable)",
+          "1": "N (Normal)",
+          "2": "U (Unreliable)"
+        },
+        "weight": "Weight",
+        "magazine": "Loaded magazine",
+        "noMagazine": "No magazine",
+        "skills": "Uses sheet skills",
+        "addSkill": "Add skill use",
+        "addSkillUse": "Add skill use",
+        "removeSkill": "Remove skill use",
+        "removeSkillUse": "Remove skill use",
+        "skillName": "Sheet skill",
+        "usesSkill": "Sheet skill",
+        "skillMul": "Multiplier",
+        "addSpecialization": "Add specialization",
+        "removeSpecialization": "Remove specialization",
+        "specializationName": "Specialization",
+        "specializationMul": "Specialization multiplier"
+      },
+      "ammo": {
+        "damageKind": "Damage type",
+        "kinds": {
+          "ball": "Ball",
+          "buck": "Buckshot",
+          "explosive": "Area"
+        },
+        "penetration": "Armor piercing",
+        "projectileCount": "Projectile count"
+      },
+      "magazine": {
+        "capacity": "Capacity",
+        "loaded": "Loaded rounds",
+        "load": "Load",
+        "unload": "Unload",
+        "unloadRound": "Unload {name}",
+        "empty": "This magazine is empty.",
+        "nextRound": "Next round: {name}",
+        "loadedCount": "{loaded} / {capacity} loaded",
+        "stackCount": "{name} ×{count}",
+        "loadOne": "Load round · {count} remaining",
+        "fill": "Fill",
+        "fillCount": "Rounds",
+        "fillOption": "{name} · {count} loose",
+        "fillWith": "Fill {count}",
+        "emptyMag": "Empty",
+        "looseAmmo": "Loose ammunition",
+        "full": "This magazine is full.",
+        "noCompatibleAmmo": "No matching loose ammunition with remaining rounds."
+      },
+      "throwable": {
+        "explosives": "Throwable effects",
+        "addExplosive": "Add",
+        "removeExplosive": "Remove explosive",
+        "explosiveType": "Explosive type",
+        "types": {
+          "he": "High explosive",
+          "frag": "Fragmentation",
+          "thermal": "Thermal"
+        },
+        "lethal": "Lethal radius",
+        "wound": "Wound radius (m)",
+        "persistance": "Persistence",
+        "fuse": "Fuse distance (m)"
+      },
+      "armor": {
+        "material": "Material",
+        "materials": {
+          "uhmpe": "UHMPE",
+          "metal": "Metal",
+          "ceramic": "Ceramic"
+        },
+        "layer": "Armor priority",
+        "protection": "Normal-mode protection",
+        "protectionHint": "Uncovered parts are 0.",
+        "coverageLabel": "Coverage preset",
+        "coverage": {
+          "none": "None",
+          "helmet": "Helmet",
+          "vest": "Vest",
+          "helmetVest": "Helmet and vest",
+          "limbs": "Limbs",
+          "full": "Full body",
+          "custom": "Custom"
+        }
+      },
+      "modifications": {
+        "title": "Modifications",
+        "hint": "Installed attachments stay on this weapon.",
+        "add": "Add attachment",
+        "edit": "Edit attachment",
+        "update": "Update attachment",
+        "mount": "Mount",
+        "slot": "Slot",
+        "extraSlot": "Extra mounts",
+        "slots": {
+          "receiver": "Receiver",
+          "attachment": "Attachment",
+          "muzzle": "Muzzle",
+          "underbarrel": "Underbarrel",
+          "sight": "Sight",
+          "stock": "Stock",
+          "barrel": "Barrel"
+        },
+        "name": "Name",
+        "description": "Description",
+        "effects": "Effects",
+        "addEffect": "Add effect",
+        "editEffect": "Edit effect",
+        "hideEffect": "Hide",
+        "removeEffect": "Remove effect",
+        "untitledEffect": "New effect",
+        "effectsEmpty": "No effects yet. Add one if this attachment changes the weapon.",
+        "kind": "Kind",
+        "kinds": {
+          "mod": "Stat change",
+          "enable_slot": "Extra mounts",
+          "unknown": "Other"
+        },
+        "target": "Changes",
+        "targets": {
+          "diff": "To-hit",
+          "range": "Range",
+          "caliber": "Caliber",
+          "accuracy": "Accuracy",
+          "concealability": "Concealability",
+          "weight": "Weight"
+        },
+        "flat": "Flat",
+        "level": "Level",
+        "count": "Count",
+        "max": "Maximum",
+        "when": "Only in some cases",
+        "rangeBand": "Range",
+        "rangeMin": "Range min",
+        "rangeMax": "Range max",
+        "rangeBands": {
+          "any": "All ranges",
+          "pointBlank": "Point blank",
+          "close": "Close (0–0.5× range)",
+          "mid": "Mid (0.5–1× range)",
+          "long": "Long (1–2× range)",
+          "extreme": "Extreme (2–)",
+          "custom": "Custom"
+        },
+        "concealMax": "Concealability at most",
+        "note": "Applies when",
+        "slotLine": "{slot} ×{count}",
+        "slotLineMax": "{slot} {count}/{max}"
+      },
+      "validation": {
+        "required": "This field is required.",
+        "safeInteger": "Enter a whole number.",
+        "nonNegative": "Enter zero or a positive number.",
+        "positive": "Enter a number greater than zero.",
+        "invalidId": "This identifier is not valid.",
+        "duplicateId": "Item identifiers must be unique.",
+        "duplicateModification": "Modification identifiers must be unique.",
+        "invalidType": "This item type is not supported.",
+        "missingBlock": "This item is missing its typed data.",
+        "magazineCount": "A magazine count must be exactly 1.",
+        "caliber": "Enter a caliber.",
+        "damageKind": "Choose a damage type.",
+        "damageBranch": "This damage type needs a matching damage record.",
+        "projectileCount": "Buckshot needs a projectile count greater than zero.",
+        "token": "Magazine tokens must be exactly one character.",
+        "tokenAmmo": "This token must point to ammunition of the same caliber.",
+        "loadedToken": "Every loaded round must use a mapped token.",
+        "capacity": "Loaded rounds cannot exceed magazine capacity.",
+        "tokenReassigned": "A token still in the magazine cannot be remapped.",
+        "magazineReference": "Choose a valid magazine.",
+        "magazineCaliber": "The magazine caliber must match the weapon.",
+        "bodyPart": "Armor protection can only use Opcode body parts.",
+        "weaponType": "Choose melee or ranged.",
+        "concealability": "Concealability must be between 0 and 4.",
+        "reliability": "Reliability must be between 0 and 2.",
+        "finite": "Enter a valid number.",
+        "opaqueDamage": "Damage data on this item is not valid.",
+        "explosive": "A throwable needs an explosive record.",
+        "loadCaliber": "That ammunition does not match this magazine.",
+        "loadAmmoCount": "There are no remaining loose rounds to load.",
+        "loadCapacity": "This magazine is already full.",
+        "loadToken": "No free magazine token is available.",
+        "unloadIndex": "That loaded round could not be removed.",
+        "weaponMagazine": "Choose an existing magazine of the same caliber."
+      },
+      "a11y": {
+        "editItem": "Edit {name}",
+        "deleteItem": "Delete {name}"
+      }
+    }
+  },
+  "common": {
+    "close": "Close"
+  },
+  "shared": {
+    "phrases": {
+      "deleteConfirm": "Delete?"
+    }
+  }
+}

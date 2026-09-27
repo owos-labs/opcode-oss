@@ -1,0 +1,4060 @@
+{
+  "version": 1,
+  "updated_at": "2026-09-27T00:00:00.000Z",
+  "source": {
+    "name": "Opcode-D10",
+    "url": "https://github.com/owos-labs/Opcode-D10",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "note": "Structured item data adapted from the weapon, armor, cover, and heavy firepower reference tables.",
+    "filler": "Local placeholder values for UI and API coverage; not canonical rules data."
+  },
+  "items": {
+    "items": {
+      "preset-field-kit": {
+        "created_by": "00000000-0000-0000-0000-000000000000",
+        "created_at": "2026-08-26T00:00:00.000Z",
+        "data": {
+          "id": "preset-field-kit",
+          "name": "Field kit",
+          "count": 1,
+          "weight": 1,
+          "desc": {
+            "en": "A compact field kit."
+          }
+        }
+      },
+      "filler-small-caliber-maintenance-kit": {
+        "created_by": "00000000-0000-0000-0000-000000000000",
+        "created_at": "2026-09-27T00:00:00.000Z",
+        "data": {
+          "id": "filler-small-caliber-maintenance-kit",
+          "name": "Small caliber maintenance kit",
+          "desc": {
+            "en": "Local filler equipment for small caliber weapons."
+          },
+          "equipment": {
+            "caliberClass": "small",
+            "function": "maintenance",
+            "compatible": [
+              "9x19",
+              "5.56x45",
+              "7.62x39",
+              "7.62x51",
+              "12.7x99"
+            ]
+          },
+          "weight": 1.5,
+          "count": 1
+        }
+      },
+      "filler-large-caliber-loading-kit": {
+        "created_by": "00000000-0000-0000-0000-000000000000",
+        "created_at": "2026-09-27T00:00:00.000Z",
+        "data": {
+          "id": "filler-large-caliber-loading-kit",
+          "name": "Large caliber loading kit",
+          "desc": {
+            "en": "Local filler equipment for large caliber systems."
+          },
+          "equipment": {
+            "caliberClass": "large",
+            "function": "loading",
+            "compatible": [
+              "20mm",
+              "30mm",
+              "40mm",
+              "60mm",
+              "105mm",
+              "120mm"
+            ]
+          },
+          "weight": 8,
+          "count": 1
+        }
+      },
+      "filler-ballistic-rangefinder": {
+        "created_by": "00000000-0000-0000-0000-000000000000",
+        "created_at": "2026-09-27T00:00:00.000Z",
+        "data": {
+          "id": "filler-ballistic-rangefinder",
+          "name": "Ballistic rangefinder",
+          "desc": {
+            "en": "Local filler targeting equipment."
+          },
+          "equipment": {
+            "category": "targeting",
+            "range": "2000m",
+            "magnification": "6x"
+          },
+          "weight": 0.8,
+          "count": 1
+        }
+      }
+    }
+  },
+  "melee": {
+    "opcode-melee-dagger": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-dagger",
+        "name": "Dagger",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "2d4"
+          },
+          "concealability": 0,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "opcode-melee-kukri": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-kukri",
+        "name": "Kukri",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "3d4"
+          },
+          "concealability": 1,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "opcode-melee-broadsword": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-broadsword",
+        "name": "Broadsword",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "2d6"
+          },
+          "concealability": 1,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "opcode-melee-two-handed-sword": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-two-handed-sword",
+        "name": "Two-Handed Sword",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "3d6"
+          },
+          "concealability": 4,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "opcode-melee-chainsaw": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-chainsaw",
+        "name": "Chainsaw",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "2d8"
+          },
+          "concealability": 4,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "opcode-melee-safari-13": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-safari-13",
+        "name": "S〇g Safari 13\"",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "2d6+2"
+          },
+          "concealability": 1,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "opcode-melee-kabar-m9": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-melee-kabar-m9",
+        "name": "Ka-Bar M9",
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "2d4"
+          },
+          "concealability": 0,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon",
+        "count": 1
+      }
+    },
+    "preset-knife": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "preset-knife",
+        "name": "Knife",
+        "count": 1,
+        "desc": {
+          "en": "A short blade."
+        },
+        "weapon": {
+          "type": "melee",
+          "damage": {
+            "dice": "2d4"
+          },
+          "concealability": 0,
+          "mode": 0,
+          "range": 1,
+          "rof": 20
+        },
+        "type": "weapon"
+      }
+    }
+  },
+  "ranged": {
+    "opcode-ranged-ar-m4-14-5": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-m4-14-5",
+        "name": "AR(M4) 14.5\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "采用 14.5 英寸枪管和皮卡汀尼导轨护木的 AR 平台步枪。其包含一个聚合物护木，使用一体式提把瞄具。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 3,
+          "range": 350,
+          "concealability": 4,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "14.5\" 枪管，+0 精度"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-m4-16": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-m4-16",
+        "name": "AR(M4) 16\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "采用 16 英寸枪管和 M-LOK 护木的 AR 平台非列装模块化步枪。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 3,
+          "range": 400,
+          "concealability": 4,
+          "weight": 3.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "16\" 枪管，提供 +1 精度"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-m4-11-5": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-m4-11-5",
+        "name": "AR(M4) 11.5\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "采用 11.5 英寸枪管的 AR 平台短管步枪，配备聚合物护木和可折叠枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 3,
+          "range": 250,
+          "concealability": 3,
+          "weight": 3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "11.5\" 枪管，-1 精度"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-m16-20": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-m16-20",
+        "name": "AR(M16) 20\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "采用 20 英寸枪管的全尺寸 AR 平台步枪。\n\n提供一个白板变体，使用 16\" 枪管，精度 -1"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 1,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 3,
+          "range": 500,
+          "concealability": 4,
+          "weight": 3.9,
+          "damage": {},
+          "modifications": {
+            "barrel": {
+              "70000000-0000-4000-8000-000000000006": {
+                "name": "20\" barrel",
+                "description": {
+                  "zh": "20 英寸枪管。"
+                },
+                "effects": {
+                  "1": {
+                    "mod": {
+                      "target": "accuracy",
+                      "value": {
+                        "flat": 2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-m4-dmr-20": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-m4-dmr-20",
+        "name": "AR(M4 DMR) 20\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "采用 20 英寸精度枪管和半自动击发机构的精确射手步枪。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 2,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 1,
+          "range": 600,
+          "concealability": 4,
+          "weight": 4.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "20\" 精度枪管"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-acr-16": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-acr-16",
+        "name": "ACR 16\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "Special Operations Forces Combat Assault Rifle（SOCOM 特种部队战斗突击步枪）。其具有一个自带皮卡汀尼导轨的聚合物枪身，并可使用 STANAG 弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 750,
+          "mode": 3,
+          "range": 350,
+          "concealability": 3,
+          "weight": 3.5,
+          "damage": {},
+          "modifications": {
+            "receiver": {
+              "70000000-0000-4000-8000-000000000008": {
+                "name": "Polymer receiver",
+                "description": {
+                  "zh": "带一体式皮卡汀尼导轨的聚合物枪身。"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-p17-9x19": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-p17-9x19",
+        "name": "P17 9x19",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "半自动聚合物手枪。使用扳机保险。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 1100,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 0.9,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-p18-9x19": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-p18-9x19",
+        "name": "P18 9x19",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "支持全自动射击，且包含快慢机的紧凑型聚合物枪身 9x19mm 手枪。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -2,
+          "reliability": 1,
+          "rof": 1200,
+          "mode": 3,
+          "range": 50,
+          "concealability": 1,
+          "weight": 0.9,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-m1911a1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-m1911a1",
+        "name": "M1911A1",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用 .45 ACP 弹药的半自动手枪，采用扳机保险和 7 发单排弹匣。\n\n该型号专利已过期"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".45ACP",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 450,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 1.1,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-ak-5-45": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-5-45",
+        "name": "AK 5.45",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "卡拉什尼科夫自动步枪，1991 型，使用 5.45x39mm 弹药。包含聚酰胺聚合物护手、枪托和握把。GRAU 编号：6P34。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.45x39",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 650,
+          "mode": 3,
+          "range": 400,
+          "concealability": 4,
+          "weight": 3.3,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-ak-7-62": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-7-62",
+        "name": "AK 7.62",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "卡拉什尼科夫自动步枪，1959 型，使用 7.62x39mm 弹药。包含木制护手和枪托，电木握把。GRAU 编号：6P1。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x39",
+          "accuracy": -1,
+          "reliability": 0,
+          "rof": 600,
+          "mode": 3,
+          "range": 300,
+          "concealability": 4,
+          "weight": 3.5,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-ak-545-100": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-545-100",
+        "name": "AK-545(100)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用 5.45x39mm 弹药的短管突击卡宾枪，采用导气式、气冷结构，配备 314mm 枪管、聚合物护手、侧置光学瞄具导轨和可折叠聚合物枪托。GRAU 编号：6P47。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.45x39",
+          "accuracy": -1,
+          "reliability": 0,
+          "rof": 650,
+          "mode": 3,
+          "range": 300,
+          "concealability": 3,
+          "weight": 3.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "314mm 枪管、侧置光学瞄具导轨、可折叠聚合物枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sd-54r-100": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sd-54r-100",
+        "name": "SD 54R (100)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "现代化型号的德拉贡诺夫狙击步枪。使用 7.62x54R 口径，包含 AK100 世代的聚合物装具和皮卡汀尼导轨。GRAU 编号：6V11。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x54R",
+          "accuracy": 1,
+          "reliability": 0,
+          "rof": 600,
+          "mode": 1,
+          "range": 600,
+          "concealability": 4,
+          "weight": 4.3,
+          "damage": {},
+          "modifications": {
+            "receiver": {
+              "70000000-0000-4000-8000-000000000012": {
+                "name": "Receiver rail",
+                "description": {
+                  "zh": "机匣皮卡汀尼导轨。"
+                },
+                "effects": {}
+              }
+            },
+            "stock": {
+              "70000000-0000-4000-8000-000000000013": {
+                "name": "Polymer stock",
+                "description": {
+                  "zh": "聚合物枪托。"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sd-ratnik-54r": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sd-ratnik-54r",
+        "name": "SD Ratnik-54R",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "勇士计划下的现代化精确射手步枪，用于取代 SVD。由楚卡文在 2010 年代开发。GRAU 编号：6V14。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x54R",
+          "accuracy": 2,
+          "reliability": 0,
+          "rof": 600,
+          "mode": 1,
+          "range": 700,
+          "concealability": 4,
+          "weight": 4.4,
+          "damage": {},
+          "modifications": {
+            "receiver": {
+              "70000000-0000-4000-8000-000000000014": {
+                "name": "Receiver rail dust cover",
+                "description": {
+                  "zh": "带机匣导轨的皮轨防尘盖，提供两个战术配件槽位。"
+                },
+                "effects": {
+                  "1": {
+                    "enable_slot": "attachment",
+                    "count": 2,
+                    "max": 2
+                  }
+                }
+              }
+            },
+            "underbarrel": {
+              "70000000-0000-4000-8000-000000000015": {
+                "name": "Integrated pistol grip",
+                "description": {
+                  "zh": "一体式手枪握把。"
+                },
+                "effects": {}
+              }
+            },
+            "stock": {
+              "70000000-0000-4000-8000-000000000016": {
+                "name": "Retractable stock",
+                "description": {
+                  "zh": "一体式可伸缩枪托。"
+                },
+                "effects": {}
+              }
+            },
+            "attachment": {
+              "70000000-0000-4000-8000-000000000017": {
+                "name": "Polymer handguard",
+                "description": {
+                  "zh": "现代化聚合物护手。"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-a-971": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-a-971",
+        "name": "A-971",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用 5.45x39mm 弹药的突击步枪，于阿巴坎计划期间由科夫罗夫机械厂开发。采用平衡自动原理、气动和气冷结构，配备聚合物护手与可折叠枪托，支持半自动、全自动和三发点射。GRAU 编号：6P67。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.45x39",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 7,
+          "range": 400,
+          "concealability": 3,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "聚合物护手、可折叠枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-xm249-para": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-xm249-para",
+        "name": "XM249 Para",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用 5.56x45 NATO 弹药的班组支援轻机枪，于 1984 年列装。采用气动、气冷原理，为空降步兵设计，配备可伸缩铝制枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 800,
+          "mode": 2,
+          "range": 600,
+          "concealability": 4,
+          "weight": 7.5,
+          "damage": {},
+          "modifications": {
+            "barrel": {
+              "70000000-0000-4000-8000-000000000020": {
+                "name": "Quick-change barrel",
+                "description": {
+                  "zh": "可快速更换的气冷枪管。"
+                },
+                "effects": {}
+              }
+            },
+            "stock": {
+              "70000000-0000-4000-8000-000000000021": {
+                "name": "Telescoping aluminum stock",
+                "description": {
+                  "zh": "可伸缩铝制后托。"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-aw-50": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-aw-50",
+        "name": "AW .50",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用 12.7x99mm NATO 弹药的栓动反器材步枪，基于 AW 平台。采用手动旋转后拉式枪机、重型气冷枪管、5 发可拆卸弹匣、可折叠枪托、可调两脚架和全长皮卡汀尼导轨。GRAU 编号：无。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x99",
+          "accuracy": 3,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 1500,
+          "concealability": 4,
+          "weight": 15,
+          "damage": {},
+          "modifications": {
+            "stock": {
+              "70000000-0000-4000-8000-000000000022": {
+                "name": "Folding stock",
+                "description": {
+                  "zh": "可折叠枪托。"
+                },
+                "effects": {}
+              }
+            },
+            "barrel": {
+              "70000000-0000-4000-8000-000000000023": {
+                "name": "Heavy barrel",
+                "description": {
+                  "zh": "重型气冷枪管。"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-hmg-12-7": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-hmg-12-7",
+        "name": "HMG 12.7",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "适合固定阵地或载具使用的 12.7mm 重机枪，具备高穿透力和长时间持续射击能力。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x99",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 550,
+          "mode": 3,
+          "range": 1800,
+          "concealability": 4,
+          "weight": 38.2,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-mosin-nagant-m1891-30": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-mosin-nagant-m1891-30",
+        "name": "Mosin-Nagant M1891/30",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "苏联制栓动步枪，使用固定式弹仓和长枪管，是二战时期最常见的苏联制式步枪之一。GRAU 编号：56-V-222。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x54R",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 8,
+          "mode": 0,
+          "range": 500,
+          "concealability": 4,
+          "weight": 4,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "刺刀座、机械瞄具"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-mosin-nagant-m1891-30-pu": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-mosin-nagant-m1891-30-pu",
+        "name": "Mosin-Nagant M1891/30 PU",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "M1891/30 的狙击构型，安装侧置 PU 光学瞄具。GRAU 编号：56-V-222A。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x54R",
+          "accuracy": 1,
+          "reliability": 0,
+          "rof": 8,
+          "mode": 0,
+          "range": 600,
+          "concealability": 4,
+          "weight": 4.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "PU 光学瞄具"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sv-98": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sv-98",
+        "name": "SV-98",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "俄罗斯现代栓动狙击步枪，采用自由浮置枪管、可调枪托和可拆卸弹匣。GRAU 编号：6V10。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x54R",
+          "accuracy": 3,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 800,
+          "concealability": 4,
+          "weight": 6.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "两脚架、光学导轨、可调枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-7-62": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-7-62",
+        "name": "运动步枪 7.62",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "现代轻型栓动卡宾枪，使用短枪管和聚合物枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x39",
+          "accuracy": 1,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 300,
+          "concealability": 3,
+          "weight": 2.7,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "光学导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sks-m1945": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sks-m1945",
+        "name": "SKS M1945",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "西蒙诺夫设计的半自动卡宾枪，采用固定式 10 发弹仓和短行程活塞系统。GRAU 编号：56-A-231。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x39",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 450,
+          "mode": 1,
+          "range": 400,
+          "concealability": 4,
+          "weight": 3.9,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠刺刀"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-army-92fs": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-army-92fs",
+        "name": "Army 92FS",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "全尺寸双排弹匣半自动手枪，采用开放式套筒和 DA/SA 击发机构。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 450,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 1,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-usp9": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-usp9",
+        "name": "USP9",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "聚合物底把军警手枪，采用传统短后坐闭锁系统。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 600,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 0.8,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "配件导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-tt-33": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-tt-33",
+        "name": "TT-33",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "苏联制单动半自动手枪，使用高速 7.62x25mm 弹药。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x25TT",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 480,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 0.85,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-xm17": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-xm17",
+        "name": "XM17",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "模块化击针击发手枪，美国军用 M17/M18 系列的基础平台。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 600,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 0.85,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "模块化火控组件、配件导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-mk-23": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-mk-23",
+        "name": "Mk 23",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "为特种作战需求开发的大型 .45 ACP 手枪，强调耐久性和抑制器使用能力。\n\n体积巨大，隐蔽性低于一般手枪"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".45ACP",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 450,
+          "mode": 1,
+          "range": 50,
+          "concealability": 2,
+          "weight": 1.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "螺纹枪管、配件接口"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-416": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-416",
+        "name": "AR(416)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用短行程活塞系统的 AR 式突击步枪，配备自由浮置护木和全长顶部导轨。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 1,
+          "reliability": 1,
+          "rof": 850,
+          "mode": 3,
+          "range": 400,
+          "concealability": 4,
+          "weight": 3.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "14.5\" 枪管、皮轨护木"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-416-a5-11": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-416-a5-11",
+        "name": "AR(416) A5 11\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "短行程活塞 AR 式突击步枪，11 英寸枪管构型。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 850,
+          "mode": 3,
+          "range": 300,
+          "concealability": 3,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "11\" 枪管、皮轨护木"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-aur-a3-16": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-aur-a3-16",
+        "name": "AUR-A3 16\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "无托式突击步枪，采用可快速更换枪管和聚合物枪身。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 750,
+          "mode": 3,
+          "range": 450,
+          "concealability": 3,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "16\" 快拆枪管、顶部导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-gewehr-36-s": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-gewehr-36-s",
+        "name": "Gewehr 36 (S)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "短管卡宾突击步枪。使用聚合物机匣和折叠枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.56x45",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 750,
+          "mode": 3,
+          "range": 350,
+          "concealability": 3,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠枪托、光学瞄具接口"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ak-7-62-mg": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-7-62-mg",
+        "name": "AK 7.62 (MG)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "基于 AKM 系统发展的班用轻机枪，采用加长重型枪管、加强机匣和固定两脚架。GRAU编号：6P2"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "7.62x39",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 600,
+          "mode": 3,
+          "range": 500,
+          "concealability": 4,
+          "weight": 4.8,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "两脚架、长重枪管"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ak-5-45-mg": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-5-45-mg",
+        "name": "AK 5.45(MG)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "5.45x39mm 班用自动武器，基于 AK-74 系统发展。GRAU 编号：6P18。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.45x39",
+          "accuracy": 1,
+          "reliability": 0,
+          "rof": 650,
+          "mode": 3,
+          "range": 600,
+          "concealability": 4,
+          "weight": 4.7,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "长重枪管、两脚架"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ratnik-545-mg": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ratnik-545-mg",
+        "name": "Ratnik-545(MG)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "新一代模块化班用自动武器，可使用长短两种枪管以及 95 发弹鼓。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.45x39",
+          "accuracy": 1,
+          "reliability": 0,
+          "rof": 800,
+          "mode": 3,
+          "range": 600,
+          "concealability": 4,
+          "weight": 4.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "可更换枪管、顶部导轨、两脚架"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ak-5-45-sbr": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-5-45-sbr",
+        "name": "AK 5.45(SBR)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "极短枪管 AK-74 卡宾枪，采用折叠枪托和特制膨胀室式枪口装置。GRAU：6P26。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.45x39",
+          "accuracy": -2,
+          "reliability": 0,
+          "rof": 650,
+          "mode": 3,
+          "range": 200,
+          "concealability": 2,
+          "weight": 2.7,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠枪托、短枪管"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ar-virtus-300": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ar-virtus-300",
+        "name": "AR Virtus .300",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "为极短构型和抑制器使用设计的 PDW，采用 5.5 英寸枪管和折叠枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".300BLK",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 3,
+          "range": 200,
+          "concealability": 2,
+          "weight": 2.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "5.5\" 枪管、折叠枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-acr-300-blk": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-acr-300-blk",
+        "name": "ACR .300 BLK",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "ACR 系列超紧凑卡宾枪的 .300 BLK 构型。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".300BLK",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 750,
+          "mode": 3,
+          "range": 250,
+          "concealability": 2,
+          "weight": 3.1,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "伸缩枪托、全长导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-honey-badger-7": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-honey-badger-7",
+        "name": "Honey Badger 7\"",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "极轻型 .300 BLK PDW/SBR，使用 7 英寸枪管并围绕抑制器使用设计。\n\n军用原型可另设 SA / FA 版本"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".300BLK",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 1,
+          "range": 200,
+          "concealability": 2,
+          "weight": 2.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "伸缩枪托、可调导气系统"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sd-9x39": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sd-9x39",
+        "name": "SD 9x39",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "中央精密机械研究所于 1980 年代开发的微声狙击步枪，1987 年列装。一体式消音器，使用亚音速 9x39mm 弹药。GRAU 编号：6P29。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x39",
+          "accuracy": 1,
+          "reliability": 0,
+          "rof": 700,
+          "mode": 3,
+          "range": 400,
+          "concealability": 3,
+          "weight": 2.6,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "一体式消音器、侧置光学瞄具导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-as-9x39": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-as-9x39",
+        "name": "AS 9x39",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "与 VSS 同期开发的微声突击步枪，采用一体式消音器、折叠枪托和 20 发弹匣。GRAU 编号：6P30。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x39",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 900,
+          "mode": 3,
+          "range": 300,
+          "concealability": 3,
+          "weight": 2.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "一体式消音器、折叠枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sr-9x39": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sr-9x39",
+        "name": "SR 9x39",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "基于 AS 内部结构发展的紧凑型突击步枪，取消一体式消音器以缩短长度，配备折叠枪托。1990 年代由中央精密机械研究所开发。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x39",
+          "accuracy": -1,
+          "reliability": 0,
+          "rof": 900,
+          "mode": 3,
+          "range": 200,
+          "concealability": 2,
+          "weight": 2.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠枪托、可加装消音器"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-sd-12-7x55": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-sd-12-7x55",
+        "name": "SD 12.7x55",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "图拉中央体育狩猎武器设计局在「排气」计划下为联邦安全局开发的微声栓动狙击步枪，约 2004 年列装。无托布局，一体式消音器，使用亚音速 12.7x55mm 弹药，5 发弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x55",
+          "accuracy": 2,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 600,
+          "concealability": 4,
+          "weight": 6.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "一体式消音器、光学导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ash-12-7": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ash-12-7",
+        "name": "ASh 12.7",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "同一计划下的大口径无托突击步枪，与 VKS 共用 12.7x55mm 弹药，约 2011 年列装。短行程枪管后坐，10/20 发弹匣。复合型号称 ШАК-12。\n\n含消音器约 6.0kg"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x55",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 500,
+          "mode": 3,
+          "range": 300,
+          "concealability": 3,
+          "weight": 5.2,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "可拆消音器、光学导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-rsh-12-7": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-rsh-12-7",
+        "name": "RSh 12.7",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "「排气」计划的副产品。图拉 KBP 研制的 5 发双动转轮手枪，使用同一 12.7x55mm 弹药。\n\n体积远大于制式手枪"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x55",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 30,
+          "mode": 1,
+          "range": 50,
+          "concealability": 2,
+          "weight": 2.2,
+          "damage": {}
+        }
+      }
+    },
+    "opcode-ranged-pdw90": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-pdw90",
+        "name": "PDW90",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "无托式个人防卫武器，使用顶部横置 50 发弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.7x28",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 900,
+          "mode": 3,
+          "range": 200,
+          "concealability": 2,
+          "weight": 2.8,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "一体式/导轨瞄具接口"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-5-7": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-5-7",
+        "name": "5-7",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "Five-seveN 的现代化构型，原生支持微型红点瞄具。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "5.7x28",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 600,
+          "mode": 1,
+          "range": 50,
+          "concealability": 1,
+          "weight": 0.68,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "MRD 光学接口"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-mp-7a1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-mp-7a1",
+        "name": "MP-7A1",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "极紧凑短行程活塞 PDW，使用伸缩枪托和 20/30/40 发弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "4.6x30",
+          "accuracy": 0,
+          "reliability": 1,
+          "rof": 950,
+          "mode": 3,
+          "range": 200,
+          "concealability": 2,
+          "weight": 1.9,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "伸缩枪托、折叠前握把"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-vector-9": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-vector-9",
+        "name": "Vector-9",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "使用 KRISS Super V 延迟反冲系统的短管冲锋枪构型。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 1100,
+          "mode": 7,
+          "range": 100,
+          "concealability": 2,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "6.5\" 枪管、折叠枪托、M-LOK"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-vector-45": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-vector-45",
+        "name": "Vector-45",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "Vector 的 .45 ACP 构型，使用 Glock 21 系弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".45ACP",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 1100,
+          "mode": 7,
+          "range": 100,
+          "concealability": 2,
+          "weight": 3.3,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "6.5\" 枪管、折叠枪托、M-LOK"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-mp-5-a3": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-mp-5-a3",
+        "name": "MP-5(A3)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "经典滚柱延迟反冲冲锋枪，A3 使用伸缩枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": 0,
+          "reliability": 0,
+          "rof": 800,
+          "mode": 3,
+          "range": 150,
+          "concealability": 3,
+          "weight": 2.9,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "伸缩枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-mp-5k-a4": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-mp-5k-a4",
+        "name": "MP-5K(A4)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "MP5K 的 PDW 构型，使用极短枪管和折叠枪托。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 0,
+          "rof": 900,
+          "mode": 7,
+          "range": 100,
+          "concealability": 2,
+          "weight": 2.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠枪托、短枪管"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-evolution-3a1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-evolution-3a1",
+        "name": "Evolution-3A1",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "聚合物机匣现代冲锋枪，采用简单反冲式工作原理。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 1,
+          "rof": 1100,
+          "mode": 3,
+          "range": 150,
+          "concealability": 3,
+          "weight": 2.6,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠伸缩枪托、附件导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ak-9mm-gen-100": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ak-9mm-gen-100",
+        "name": "AK 9mm(Gen 100)",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "基于 AK 系统人机布局发展的俄罗斯 9mm 冲锋枪。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 0,
+          "rof": 650,
+          "mode": 3,
+          "range": 150,
+          "concealability": 3,
+          "weight": 2.9,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠枪托、侧置光学导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-imi-uzi": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-imi-uzi",
+        "name": "IMI Uzi",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "经典开放枪机冲锋枪，采用包络式枪机和握把内弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "9x19",
+          "accuracy": -1,
+          "reliability": 0,
+          "rof": 600,
+          "mode": 3,
+          "range": 150,
+          "concealability": 3,
+          "weight": 3.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "折叠枪托"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-arctic-mc": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-arctic-mc",
+        "name": "Arctic MC",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "模块化长机匣精确步枪，采用折叠可调枪托和自由浮置重型枪管。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": ".338LM",
+          "accuracy": 3,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 1200,
+          "concealability": 4,
+          "weight": 7.4,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "27\" 枪管、折叠枪托、两脚架接口"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-xm107a1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-xm107a1",
+        "name": "XM107A1",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "长后坐式半自动反器材步枪，采用 10 发弹匣和大型枪口制退器。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x99",
+          "accuracy": 2,
+          "reliability": 1,
+          "rof": 60,
+          "mode": 1,
+          "range": 1500,
+          "concealability": 4,
+          "weight": 12.5,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "两脚架、27 MOA 导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-hs-50": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-hs-50",
+        "name": "HS-50",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "大型栓动反器材步枪，使用 900mm 重型枪管和侧置 5 发弹匣。"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "12.7x99",
+          "accuracy": 3,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 1500,
+          "concealability": 4,
+          "weight": 13.8,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "两脚架、20 MOA 导轨"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "opcode-ranged-ntw-20": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ranged-ntw-20",
+        "name": "NTW-20",
+        "type": "weapon",
+        "count": 1,
+        "desc": {
+          "zh": "超大口径栓动反器材系统，采用液压/弹簧后坐缓冲机构，可更换为 14.5x114mm 构型。\n\n极重，通常拆分运输"
+        },
+        "weapon": {
+          "type": "ranged",
+          "caliber": "20x82",
+          "accuracy": 2,
+          "reliability": 1,
+          "rof": 8,
+          "mode": 0,
+          "range": 1500,
+          "concealability": 4,
+          "weight": 26,
+          "damage": {},
+          "modifications": {
+            "attachment": {
+              "70000000-0000-4000-8000-000000000099": {
+                "name": "Default loadout",
+                "description": {
+                  "zh": "两脚架、后脚架、后坐缓冲系统"
+                },
+                "effects": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "attachments": {
+    "preset-optic": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "preset-optic",
+        "name": "Optic",
+        "count": 1,
+        "weight": 0.4,
+        "desc": {
+          "en": "An attachment placeholder."
+        },
+        "attachment": {
+          "slot": "optic"
+        }
+      }
+    },
+    "opcode-attachment-optic": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-optic",
+        "name": "Optic",
+        "desc": {
+          "en": "Modifies range and accuracy within a designated zoom interval."
+        },
+        "attachment": {
+          "slot": "optic",
+          "effect": {
+            "en": "Modifies range and accuracy within a designated zoom interval."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-secondary-optic": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-secondary-optic",
+        "name": "Secondary optic",
+        "desc": {
+          "en": "Ignores primary high-magnification optic penalties when switched."
+        },
+        "attachment": {
+          "slot": "secondary-optic",
+          "effect": {
+            "en": "Ignores primary high-magnification optic penalties when switched."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-accessory": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-accessory",
+        "name": "Accessory",
+        "desc": {
+          "en": "Template slot for lasers, flashlights, rangefinders, and rail covers."
+        },
+        "attachment": {
+          "slot": "accessory",
+          "effect": {
+            "en": "Template slot for lasers, flashlights, rangefinders, and rail covers."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-underbarrel": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-underbarrel",
+        "name": "Underbarrel",
+        "desc": {
+          "en": "Template slot for UBGLs and grips."
+        },
+        "attachment": {
+          "slot": "underbarrel",
+          "effect": {
+            "en": "Template slot for UBGLs and grips."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-muzzle": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-muzzle",
+        "name": "Muzzle device",
+        "desc": {
+          "en": "Template slot for suppressors, brakes, and other muzzle devices."
+        },
+        "attachment": {
+          "slot": "muzzle",
+          "effect": {
+            "en": "Template slot for suppressors, brakes, and other muzzle devices."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-stock": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-stock",
+        "name": "Stock",
+        "desc": {
+          "en": "Template slot for stock and stability modifications."
+        },
+        "attachment": {
+          "slot": "stock",
+          "effect": {
+            "en": "Template slot for stock and stability modifications."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-receiver": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-receiver",
+        "name": "Receiver",
+        "desc": {
+          "en": "Template slot for uppers, conversions, and smartgun systems."
+        },
+        "attachment": {
+          "slot": "receiver",
+          "effect": {
+            "en": "Template slot for uppers, conversions, and smartgun systems."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-barrel": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-barrel",
+        "name": "Barrel",
+        "desc": {
+          "en": "Template slot trading concealability and reliability for range and accuracy."
+        },
+        "attachment": {
+          "slot": "barrel",
+          "effect": {
+            "en": "Template slot trading concealability and reliability for range and accuracy."
+          }
+        },
+        "count": 1
+      }
+    },
+    "opcode-attachment-magazine": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-attachment-magazine",
+        "name": "Magazine modification",
+        "desc": {
+          "en": "Template slot for magazine modifications."
+        },
+        "attachment": {
+          "slot": "magazine",
+          "effect": {
+            "en": "Template slot for magazine modifications."
+          }
+        },
+        "count": 1
+      }
+    }
+  },
+  "ammo": {
+    "opcode-ammo-4-6x30-ap-sx": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-4-6x30-ap-sx",
+        "name": "4.6x30 AP SX",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "4.6x30",
+          "damage": "ball",
+          "penetration": 30,
+          "ball": {
+            "damage": {
+              "dice": "2d4-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-4-6x30-fmj-sx": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-4-6x30-fmj-sx",
+        "name": "4.6x30 FMJ SX",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "4.6x30",
+          "damage": "ball",
+          "penetration": 20,
+          "ball": {
+            "damage": {
+              "dice": "2d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-45x39-ps-gs-7n6": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-45x39-ps-gs-7n6",
+        "name": "5.45x39 PS gs (7N6)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "penetration": 35,
+          "ball": {
+            "damage": {
+              "dice": "3d6+1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-45x39-pp-gs-7n10": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-45x39-pp-gs-7n10",
+        "name": "5.45x39 PP gs (7N10)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "penetration": 40,
+          "ball": {
+            "damage": {
+              "dice": "3d6"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-45x39-bp-gs-7n22": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-45x39-bp-gs-7n22",
+        "name": "5.45x39 BP gs (7N22)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "penetration": 45,
+          "ball": {
+            "damage": {
+              "dice": "3d6-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-45x39-bs-gs-7n24": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-45x39-bs-gs-7n24",
+        "name": "5.45x39 BS gs (7N24)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "penetration": 50,
+          "ball": {
+            "damage": {
+              "dice": "3d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-45x39-ppbs-gs-7n39": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-45x39-ppbs-gs-7n39",
+        "name": "5.45x39 PPBS gs (7N39)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.45x39",
+          "damage": "ball",
+          "penetration": 55,
+          "ball": {
+            "damage": {
+              "dice": "3d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-56x45-fmj": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-56x45-fmj",
+        "name": "5.56x45 FMJ",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.56x45",
+          "damage": "ball",
+          "penetration": 33,
+          "ball": {
+            "damage": {
+              "dice": "3d6"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-56x45-sp-bt": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-56x45-sp-bt",
+        "name": "5.56x45 SP BT",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.56x45",
+          "damage": "ball",
+          "penetration": 20,
+          "ball": {
+            "damage": {
+              "dice": "3d6+1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-56x45-fmjbt-ball-m855": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-56x45-fmjbt-ball-m855",
+        "name": "5.56x45 FMJBT Ball (M855)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.56x45",
+          "damage": "ball",
+          "penetration": 35,
+          "ball": {
+            "damage": {
+              "dice": "3d6"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-56x45-fmjbt-epr-m855a1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-56x45-fmjbt-epr-m855a1",
+        "name": "5.56x45 FMJBT EPR (M855A1)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.56x45",
+          "damage": "ball",
+          "penetration": 45,
+          "ball": {
+            "damage": {
+              "dice": "3d6-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-56x45-fmjbt-ap-m995": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-56x45-fmjbt-ap-m995",
+        "name": "5.56x45 FMJBT AP (M995)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.56x45",
+          "damage": "ball",
+          "penetration": 55,
+          "ball": {
+            "damage": {
+              "dice": "3d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-7x28-tracer-l191": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-7x28-tracer-l191",
+        "name": "5.7x28 Tracer (L191)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.7x28",
+          "damage": "ball",
+          "penetration": 30,
+          "ball": {
+            "damage": {
+              "dice": "2d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-7x28-subsonic-sb193": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-7x28-subsonic-sb193",
+        "name": "5.7x28 Subsonic (SB193)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.7x28",
+          "damage": "ball",
+          "penetration": 10,
+          "ball": {
+            "damage": {
+              "dice": "2d4-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-7x28-ball-ss190": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-7x28-ball-ss190",
+        "name": "5.7x28 Ball (SS190)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.7x28",
+          "damage": "ball",
+          "penetration": 30,
+          "ball": {
+            "damage": {
+              "dice": "2d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-5-7x28-v-max-ss197sr": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-5-7x28-v-max-ss197sr",
+        "name": "5.7x28 V-Max (SS197SR)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "5.7x28",
+          "damage": "ball",
+          "penetration": 10,
+          "ball": {
+            "damage": {
+              "dice": "2d4+1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x25-tt-sp": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x25-tt-sp",
+        "name": "7.62x25 TT SP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x25TT",
+          "damage": "ball",
+          "penetration": 12,
+          "ball": {
+            "damage": {
+              "dice": "3d4+1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x25-tt-fmj": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x25-tt-fmj",
+        "name": "7.62x25 TT FMJ",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x25TT",
+          "damage": "ball",
+          "penetration": 20,
+          "ball": {
+            "damage": {
+              "dice": "3d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x25-tt-pst-gzh-57-n-134s": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x25-tt-pst-gzh-57-n-134s",
+        "name": "7.62x25 TT Pst gzh (57-N-134S)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x25TT",
+          "damage": "ball",
+          "penetration": 30,
+          "ball": {
+            "damage": {
+              "dice": "3d4-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x39-t-45m1-gzh-57-t-231pm1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x39-t-45m1-gzh-57-t-231pm1",
+        "name": "7.62x39 T-45M1 gzh (57-T-231PM1)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x39",
+          "damage": "ball",
+          "penetration": 35,
+          "ball": {
+            "damage": {
+              "dice": "4d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x39-sp": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x39-sp",
+        "name": "7.62x39 SP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x39",
+          "damage": "ball",
+          "penetration": 20,
+          "ball": {
+            "damage": {
+              "dice": "4d6+1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x39-ps-gzh-57-n-231": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x39-ps-gzh-57-n-231",
+        "name": "7.62x39 PS gzh (57-N-231)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x39",
+          "damage": "ball",
+          "penetration": 35,
+          "ball": {
+            "damage": {
+              "dice": "4d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x39-bp-gzh-7n23": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x39-bp-gzh-7n23",
+        "name": "7.62x39 BP gzh (7N23)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x39",
+          "damage": "ball",
+          "penetration": 50,
+          "ball": {
+            "damage": {
+              "dice": "4d6-3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x39-us-gzh-57-n-231u": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x39-us-gzh-57-n-231u",
+        "name": "7.62x39 US gzh (57-N-231U)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x39",
+          "damage": "ball",
+          "penetration": 25,
+          "ball": {
+            "damage": {
+              "dice": "4d6-3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x54r-sn-gzh-7n1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x54r-sn-gzh-7n1",
+        "name": "7.62x54R SN gzh (7N1)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x54R",
+          "damage": "ball",
+          "penetration": 50,
+          "ball": {
+            "damage": {
+              "dice": "5d6+1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x54r-bt-gzh-7bt1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x54r-bt-gzh-7bt1",
+        "name": "7.62x54R BT gzh (7BT1)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x54R",
+          "damage": "ball",
+          "penetration": 55,
+          "ball": {
+            "damage": {
+              "dice": "5d6"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x54r-lps-gzh-57-n-323s": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x54r-lps-gzh-57-n-323s",
+        "name": "7.62x54R LPS gzh (57-N-323S)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x54R",
+          "damage": "ball",
+          "penetration": 40,
+          "ball": {
+            "damage": {
+              "dice": "5d6+4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x54r-t-46m-gzh-7t2m": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x54r-t-46m-gzh-7t2m",
+        "name": "7.62x54R T-46M gzh (7T2M)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x54R",
+          "damage": "ball",
+          "penetration": 40,
+          "ball": {
+            "damage": {
+              "dice": "5d6+3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-7-62x54r-snb-gzh-7n14": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-7-62x54r-snb-gzh-7n14",
+        "name": "7.62x54R SNB gzh (7N14)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "7.62x54R",
+          "damage": "ball",
+          "penetration": 65,
+          "ball": {
+            "damage": {
+              "dice": "5d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x19-fmj": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x19-fmj",
+        "name": "9x19 FMJ",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x19",
+          "damage": "ball",
+          "penetration": 15,
+          "ball": {
+            "damage": {
+              "dice": "2d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x19-rip": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x19-rip",
+        "name": "9x19 RIP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x19",
+          "damage": "ball",
+          "penetration": 10,
+          "ball": {
+            "damage": {
+              "dice": "2d4+3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x19-pbp-gzh-7n31": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x19-pbp-gzh-7n31",
+        "name": "9x19 PBP gzh (7N31)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x19",
+          "damage": "ball",
+          "penetration": 30,
+          "ball": {
+            "damage": {
+              "dice": "2d4-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x39-fmj": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x39-fmj",
+        "name": "9x39 FMJ",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x39",
+          "damage": "ball",
+          "penetration": 20,
+          "ball": {
+            "damage": {
+              "dice": "4d4+2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x39-sp-5-gs-7n8": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x39-sp-5-gs-7n8",
+        "name": "9x39 SP-5 gs (7N8)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x39",
+          "damage": "ball",
+          "penetration": 25,
+          "ball": {
+            "damage": {
+              "dice": "4d4+2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x39-sp-6-gs-7n9": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x39-sp-6-gs-7n9",
+        "name": "9x39 SP-6 gs (7N9)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x39",
+          "damage": "ball",
+          "penetration": 35,
+          "ball": {
+            "damage": {
+              "dice": "4d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-9x39-bp-gs-7n12": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-9x39-bp-gs-7n12",
+        "name": "9x39 BP gs (7N12)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "9x39",
+          "damage": "ball",
+          "penetration": 45,
+          "ball": {
+            "damage": {
+              "dice": "4d4-1"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-300-blk-ap": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-300-blk-ap",
+        "name": ".300 BLK AP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".300BLK",
+          "damage": "ball",
+          "penetration": 45,
+          "ball": {
+            "damage": {
+              "dice": "4d6-3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-300-blk-v-max": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-300-blk-v-max",
+        "name": ".300 BLK V-Max",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".300BLK",
+          "damage": "ball",
+          "penetration": 18,
+          "ball": {
+            "damage": {
+              "dice": "4d6+2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-300-blk-whisper": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-300-blk-whisper",
+        "name": ".300 BLK Whisper",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".300BLK",
+          "damage": "ball",
+          "penetration": 15,
+          "ball": {
+            "damage": {
+              "dice": "3d6+2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-338-lm-fmj": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-338-lm-fmj",
+        "name": ".338 LM FMJ",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".338LM",
+          "damage": "ball",
+          "penetration": 70,
+          "ball": {
+            "damage": {
+              "dice": "6d6-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-338-lm-ap": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-338-lm-ap",
+        "name": ".338 LM AP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".338LM",
+          "damage": "ball",
+          "penetration": 90,
+          "ball": {
+            "damage": {
+              "dice": "6d6-4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-45-acp-fmj": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-45-acp-fmj",
+        "name": ".45 ACP FMJ",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".45ACP",
+          "damage": "ball",
+          "penetration": 17,
+          "ball": {
+            "damage": {
+              "dice": "3d4+2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-45-acp-rip": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-45-acp-rip",
+        "name": ".45 ACP RIP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".45ACP",
+          "damage": "ball",
+          "penetration": 10,
+          "ball": {
+            "damage": {
+              "dice": "3d4+4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-45-acp-ap": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-45-acp-ap",
+        "name": ".45 ACP AP",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": ".45ACP",
+          "damage": "ball",
+          "penetration": 25,
+          "ball": {
+            "damage": {
+              "dice": "3d4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x55-ps12a": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x55-ps12a",
+        "name": "12.7x55 PS12A",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x55",
+          "damage": "ball",
+          "penetration": 25,
+          "ball": {
+            "damage": {
+              "dice": "6d6+3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x55-ps12b": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x55-ps12b",
+        "name": "12.7x55 PS12B",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x55",
+          "damage": "ball",
+          "penetration": 45,
+          "ball": {
+            "damage": {
+              "dice": "6d6"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x99-tracer-m21": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x99-tracer-m21",
+        "name": "12.7x99 Tracer (M21)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x99",
+          "damage": "ball",
+          "penetration": 65,
+          "ball": {
+            "damage": {
+              "dice": "5d10+4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x99-ball-m33": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x99-ball-m33",
+        "name": "12.7x99 Ball (M33)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x99",
+          "damage": "ball",
+          "penetration": 70,
+          "ball": {
+            "damage": {
+              "dice": "5d10+5"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x99-slap-m903": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x99-slap-m903",
+        "name": "12.7x99 SLAP (M903)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x99",
+          "damage": "ball",
+          "penetration": 225,
+          "ball": {
+            "damage": {
+              "dice": "5d10-3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x108-b-32-gl-57-bz-542-7bz2": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x108-b-32-gl-57-bz-542-7bz2",
+        "name": "12.7x108 B-32 gl (57-BZ-542 / 7BZ2)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x108",
+          "damage": "ball",
+          "penetration": 200,
+          "ball": {
+            "damage": {
+              "dice": "6d10-4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x108-api-7bz7": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x108-api-7bz7",
+        "name": "12.7x108 API (7BZ7)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x108",
+          "damage": "ball",
+          "penetration": 220,
+          "ball": {
+            "damage": {
+              "dice": "6d10-4"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-12-7x108-bzt-44-gl-57-bzt-542": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-12-7x108-bzt-44-gl-57-bzt-542",
+        "name": "12.7x108 BZT-44 gl (57-BZT-542)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "12.7x108",
+          "damage": "ball",
+          "penetration": 190,
+          "ball": {
+            "damage": {
+              "dice": "6d10-3"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-14-5x114-mdz-gs-57-z-564s": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-14-5x114-mdz-gs-57-z-564s",
+        "name": "14.5x114 MDZ gs (57-Z-564S)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "14.5x114",
+          "damage": "ball",
+          "penetration": 80,
+          "ball": {
+            "damage": {
+              "dice": "7d10+2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-14-5x114-b-32-gs-57-bz-561s": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-14-5x114-b-32-gs-57-bz-561s",
+        "name": "14.5x114 B-32 gs (57-BZ-561S)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "14.5x114",
+          "damage": "ball",
+          "penetration": 220,
+          "ball": {
+            "damage": {
+              "dice": "7d10-2"
+            }
+          }
+        }
+      }
+    },
+    "opcode-ammo-14-5x114-bs-41-gl-57-bz-562": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "opcode-ammo-14-5x114-bs-41-gl-57-bz-562",
+        "name": "14.5x114 BS-41 gl (57-BZ-562)",
+        "type": "ammo",
+        "count": 1,
+        "ammo": {
+          "caliber": "14.5x114",
+          "damage": "ball",
+          "penetration": 320,
+          "ball": {
+            "damage": {
+              "dice": "7d10-4"
+            }
+          }
+        }
+      }
+    }
+  },
+  "magazines": {
+    "preset-556-mag": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "preset-556-mag",
+        "name": "5.56 magazine",
+        "count": 1,
+        "desc": {
+          "en": "A 30 round magazine."
+        },
+        "magazine": {
+          "caliber": "5.56x45",
+          "ammo": {
+            "contains_max": 30
+          }
+        },
+        "type": "magazine"
+      }
+    },
+    "opcode-magazine-template": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-magazine-template",
+        "name": "Detachable magazine template",
+        "count": 1,
+        "magazine": {
+          "caliber": ""
+        },
+        "type": "magazine"
+      }
+    }
+  },
+  "throwable": {
+    "preset-frag": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "preset-frag",
+        "name": "Fragmentation grenade",
+        "count": 1,
+        "desc": {
+          "en": "A throwable placeholder."
+        },
+        "ammo": {
+          "damage": "explosive",
+          "penetration": 0,
+          "explosive": {
+            "0": {
+              "type": "frag",
+              "damage": {},
+              "lethal": 3,
+              "wound": 8,
+              "persistance": 0,
+              "fuse": 2
+            }
+          }
+        },
+        "type": "throwable"
+      }
+    },
+    "opcode-explosive-40x46-m441": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-explosive-40x46-m441",
+        "name": "40x46mm M441",
+        "ammo": {
+          "damage": "explosive",
+          "penetration": 0,
+          "explosive": {
+            "0": {
+              "type": "F",
+              "damage": {},
+              "lethal": 2,
+              "wound": 2,
+              "persistance": 0,
+              "fuse": 15
+            }
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-explosive-rg-60": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-explosive-rg-60",
+        "name": "RG-60",
+        "ammo": {
+          "damage": "explosive",
+          "penetration": 0,
+          "explosive": {
+            "0": {
+              "type": "HE",
+              "damage": {},
+              "lethal": 3,
+              "wound": 0,
+              "persistance": 0,
+              "fuse": 5
+            }
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-explosive-f1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-explosive-f1",
+        "name": "F-1",
+        "ammo": {
+          "damage": "explosive",
+          "penetration": 0,
+          "explosive": {
+            "0": {
+              "type": "F",
+              "damage": {},
+              "lethal": 1,
+              "wound": 3,
+              "persistance": 0,
+              "fuse": 5
+            }
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-throwable-smoke": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-throwable-smoke",
+        "name": "Smoke grenade",
+        "desc": {
+          "en": "Concealment: 1/3 height up to 20m, 1/2 height up to 7.5m, full within 2.5m."
+        },
+        "throwable": {
+          "effect": {
+            "en": "Concealment: 1/3 height up to 20m, 1/2 height up to 7.5m, full within 2.5m."
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-throwable-stun": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-throwable-stun",
+        "name": "Stun / concussion grenade",
+        "desc": {
+          "en": "Placeholder throwable for stun and concussion effects."
+        },
+        "throwable": {
+          "effect": {
+            "en": "Placeholder throwable for stun and concussion effects."
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-throwable-ir-enhancer": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-throwable-ir-enhancer",
+        "name": "IR enhancer",
+        "desc": {
+          "en": "Placeholder throwable for infrared illumination or marking."
+        },
+        "throwable": {
+          "effect": {
+            "en": "Placeholder throwable for infrared illumination or marking."
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-throwable-flare": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-throwable-flare",
+        "name": "Flare",
+        "desc": {
+          "en": "Placeholder throwable for illumination."
+        },
+        "throwable": {
+          "effect": {
+            "en": "Placeholder throwable for illumination."
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    },
+    "opcode-throwable-glow-stick": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-08-26T00:00:00.000Z",
+      "data": {
+        "id": "opcode-throwable-glow-stick",
+        "name": "Glow stick",
+        "desc": {
+          "en": "Placeholder throwable for low-light marking."
+        },
+        "throwable": {
+          "effect": {
+            "en": "Placeholder throwable for low-light marking."
+          }
+        },
+        "type": "throwable",
+        "count": 1
+      }
+    }
+  },
+  "armor": {
+    "filler-nij-1": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-1",
+        "name": "NIJ 1",
+        "armor": {
+          "material": "soft armor",
+          "coverage": "torso",
+          "protection": {
+            "normal": {
+              "torso": 10
+            }
+          },
+          "weight": "1–2kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 2,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "filler-nij-2": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-2",
+        "name": "NIJ 2",
+        "armor": {
+          "material": "soft armor",
+          "coverage": "torso",
+          "protection": {
+            "normal": {
+              "torso": 25
+            }
+          },
+          "weight": "3–4kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 4,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "preset-plate": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "preset-plate",
+        "name": "NIJ 3A",
+        "armor": {
+          "material": "soft armor",
+          "coverage": "torso-arms-half",
+          "protection": {
+            "normal": {
+              "torso": 35,
+              "hand_primary": 17.5,
+              "hand_secondary": 17.5
+            }
+          },
+          "weight": "4–6kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 6,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "filler-nij-3a-plus": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-3a-plus",
+        "name": "NIJ 3A+",
+        "armor": {
+          "material": "composite",
+          "coverage": "torso-arms-half",
+          "protection": {
+            "normal": {
+              "torso": 40,
+              "hand_primary": 20,
+              "hand_secondary": 20
+            }
+          },
+          "weight": "5–7kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 7,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "filler-nij-3-plus": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-3-plus",
+        "name": "NIJ 3+",
+        "armor": {
+          "material": "composite",
+          "coverage": "torso-arms-full",
+          "protection": {
+            "normal": {
+              "torso": 55,
+              "hand_primary": 55,
+              "hand_secondary": 55
+            }
+          },
+          "weight": "6–8kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 8,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "filler-nij-3-plus-plus": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-3-plus-plus",
+        "name": "NIJ 3++",
+        "armor": {
+          "material": "composite",
+          "coverage": "torso-arms-half-legs-quarter",
+          "protection": {
+            "normal": {
+              "torso": 60,
+              "hand_primary": 30,
+              "hand_secondary": 30,
+              "leg_left": 15,
+              "leg_right": 15
+            }
+          },
+          "weight": "7–10kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 10,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "filler-nij-4": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-4",
+        "name": "NIJ 4",
+        "armor": {
+          "material": "ceramic",
+          "coverage": "torso-arms-half-legs-half",
+          "protection": {
+            "normal": {
+              "torso": 70,
+              "hand_primary": 35,
+              "hand_secondary": 35,
+              "leg_left": 35,
+              "leg_right": 35
+            }
+          },
+          "weight": "8–12kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 12,
+        "type": "armor",
+        "count": 1
+      }
+    },
+    "filler-nij-4-plus": {
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "created_at": "2026-09-27T00:00:00.000Z",
+      "data": {
+        "id": "filler-nij-4-plus",
+        "name": "NIJ 4+",
+        "armor": {
+          "material": "ceramic composite",
+          "coverage": "torso-arms-full-legs-half",
+          "protection": {
+            "normal": {
+              "torso": 75,
+              "hand_primary": 75,
+              "hand_secondary": 75,
+              "leg_left": 37.5,
+              "leg_right": 37.5
+            }
+          },
+          "weight": "12–18kg",
+          "note": "Coverage multipliers are relative to the listed torso AR."
+        },
+        "weight": 18,
+        "type": "armor",
+        "count": 1
+      }
+    }
+  }
+}

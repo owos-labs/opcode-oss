@@ -1,0 +1,82 @@
+{
+    "stats": { // character base stats
+        "ref": {"base": 10, "mod": 10},
+        "int": {"base": 10, "mod": 10},
+        "wil": {"base": 10, "mod": 10},
+        "chr": {"base": 10, "mod": 10},
+        "bod": {"base": 10, "mod": 10},
+        "luk": {"base": 10, "mod": 10},
+        "extra": { // extra stats from extensions and shit
+        }
+    },
+    "derivated": {
+        "mov": {"base": 10, "mod": 10}, // meter, =bod+ref+2+mod
+        "sens": { // vision radius
+            "a": {"base": 10, "mod": 10}, // audio perc, meter, ref+wil*2
+            "v": {"base": 10, "mod": 10}, // visual, ref+wil*10
+            "s": {"base": 10, "mod": 10} // sensory, ref+wil+2
+        },
+        "weight": {"base": 10}, // 20+10*BOD, KG
+        "health": {
+            "mode": "normal", // simple, normal
+            "mul": 1, // mult, applied after below
+            "max": 10, // this shit should be generated according to stats below
+            "normal": { // max hp, have literally no relationship with everything current
+                "head": {"base": 10, "mod": 10}, // head, sum*0.1
+                "torso": {"base": 10, "mod": 10}, // torso, sum*0.3
+                "hand_primary": {"base": 10, "mod": 10}, // main hand, 0.1 hp
+                "hand_secondary": {"base": 10, "mod": 10}, // secondary hand, 0.2hp
+                "leg_left": {"base": 10, "mod": 10},
+                "leg_right": {"base": 10, "mod": 10}
+            },
+            // same goes for this
+            "simple": {"base": 10, "mod": 10} // simple mode max hp 
+        }
+    },
+    "skills": {
+        "base": {
+            "perception": {
+                "stat": ["wil"], // key stat required to make skill check
+                "base": 10,
+                "mod": 10,
+                "trained": false,
+                "specialization": {
+                    "observation": { // Example specialization skill data, allow user input
+                        "base": 10,
+                        "mod": 10
+                    }
+                }
+            }, // Mostly SLLS, includes meditation and recall
+            "survival": {"stat": ["wil"], "base": 10, "mod": 10}, // Tracking, survival and enviroment specific knowledge
+            "knowledge": {"stat": ["int"], "base": 10, "mod": 10}, // Self-explainatory
+            "medical": {"stat": ["wil", "int"], "base": 10, "mod": 10}, // 
+            "calm": {"stat": ["wil", "bod"], "base": 10, "mod": 10}, // drug resist / composure
+            "social": {"stat": ["chr", "int"], "base": 10, "mod": 10}, // persuade / bargain
+            "charm": {"stat": ["chr", "wil", "bod"], "base": 10, "mod": 10}, // charm / intimidate
+            "disguise": {"stat": ["chr", "wil"], "base": 10, "mod": 10}, // fucking around person
+            "camoflauge": {"stat": ["wil", "int"], "base": 10, "mod": 10}, // hide on bush
+            "operate": {"stat": ["int"], "base": 10, "mod": 10}, // use item, computer etc.
+            "library": {"stat": ["wil", "int"], "base": 10, "mod": 10}, // info search
+            "recon": {"stat": ["int"], "base": 10, "mod": 10}, // recon, cartograph, search of item, summarization of intel, cold reading etc
+            "manufacture": {"stat": ["int"], "base": 10, "mod": 10}, // stealing shit and crafting shit
+            "marksmanship": {"stat": ["ref"], "base": 10, "mod": 10}, // direct line of fire ranged weapon
+            "athelete": {"stat": ["ref"], "base": 10, "mod": 10}, // run and shit, maybe climb
+            "acrobat": {"stat": ["ref"], "base": 10, "mod": 10}, // stealing shit and this and that
+            "consitution": {"stat": ["bod"], "base": 10, "mod": 10}, // con save anyone
+            "martial": {"stat": ["ref", "bod"], "base": 10, "mod": 10}, // beating dudes with a knife or a khukuri
+            "projectile": {"stat": ["ref"], "base": 10, "mod": 10}, // bows and javelins and shit, arties goes into operate if wo extensions
+            "swim": {"stat": ["ref", "bod"], "base": 10, "mod": 10}, // swim or zero g movement and shit
+            "melee": {"stat": ["bod"], "base": 10, "mod": 10}, // hitting dudes with fist and stuff
+            "push": {"stat": ["bod"], "base": 10, "mod": 10} // push and pull
+        },
+        "extra": {
+            
+        } // extra skill from extensions and shit
+    },
+    "rules": {
+        "extensions": {
+        },
+        "optionals": {
+        }
+    }
+}

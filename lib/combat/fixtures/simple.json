@@ -1,0 +1,32 @@
+{
+  "id": "simple-alley",
+  "segments": [
+    {
+      "id": "wall-mid",
+      "a": { "x": 8, "y": -2 },
+      "b": { "x": 8, "y": 2 },
+      "blocksVision": true,
+      "armorRating": 40,
+      "maxSsp": 25,
+      "currentSsp": 25,
+      "thicknessCm": 10
+    },
+    {
+      "id": "cover-low",
+      "a": { "x": 5, "y": -0.5 },
+      "b": { "x": 5, "y": 0.5 },
+      "blocksVision": false,
+      "armorRating": 45,
+      "maxSsp": 30,
+      "currentSsp": 30,
+      "thicknessCm": 30
+    }
+  ],
+  "emplacements": [
+    {
+      "id": "bags",
+      "emplacement": "half_body",
+      "distanceToEnter": 1
+    }
+  ]
+}

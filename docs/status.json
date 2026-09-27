@@ -1,0 +1,58 @@
+{
+    "stats": { // character extended live time modification stats
+        "ref": {"mod": 5}, // example
+        "extra": {}
+    },
+    "derivated": {
+        "sens": { // example, it is mostly a direct copy from stats json except there are only mod
+            "s": {"mod": 10}
+        }
+    },
+    "health": {
+        "mode": "normal",
+        "normal": { // current health
+            "head": {"base": 10, "mod": 10},
+            "torso": {"base": 10, "mod": 10},
+            "hand_primary": {"base": 10, "mod": 10},
+            "hand_secondary": {"base": 10, "mod": 10},
+            "leg_left": {"base": 10, "mod": 10},
+            "leg_right": {"base": 10, "mod": 10}
+        }
+    },
+    "armor": { // armor value calculation, goes the same as health but in following format:
+        "normal": {
+            "head": 12,
+            "torso": 12,
+            "hand_primary": 12
+            // ...etc
+        }
+    },
+    
+    "skills": {
+        "base": {
+            "charm": {"mod": 10} // The SOB was wearing something funny so he has a +10 bonus for fucked up reason
+        },
+        "extra": {
+            
+        } // extra skill from extensions and shit
+    },
+    "containers": {
+        "uuid": {
+            "name": "name",
+            "weight": {
+                "base": 1.5, // Base weight for container
+                "allows": 5 // Extra carrying weight granted by the container
+            },
+            "items": [
+                "uuid" // item uuid
+            ]
+        }
+    },
+    "inventory": [
+        {
+            "name": "",
+            "count": 12,
+            "desc": ""
+        }
+    ]
+}

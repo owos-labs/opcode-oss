@@ -1,0 +1,21 @@
+---
+description: Every feature implementation must ship with tests
+alwaysApply: true
+---
+
+# Tests
+
+Do not implement a feature without tests. Run `pnpm test` and leave it green before calling the work done.
+
+- Cover the domain logic the feature actually changed (moves, labels, parse, validation), not just that a page renders.
+- Colocate as `*.test.ts` next to the module. Use `node:test` + `node:assert/strict`. No new test runner.
+- UI chrome still needs a test for the functions/state it calls. Skip a test only for a one-line copy or CSS change.
+- A feature is unfinished if `pnpm test` was not run, or if it fails.
+
+```ts
+// ❌ BAD — ship the editor, no test
+export function moveContainerItem(...) { ... }
+
+// ✅ GOOD — same change, plus a test that fails if the move is wrong
+test("moveContainerItem inserts before the target", () => { ... });
+```
