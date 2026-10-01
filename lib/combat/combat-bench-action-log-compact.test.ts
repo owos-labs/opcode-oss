@@ -16,15 +16,40 @@ test("compactPlanActionLine shortens move and fire intents", () => {
   );
   assert.equal(
     compactActionLogDetailLine(
-      "R1 standard_fire→ (15.4, 19.8) m @ Bot · immediate",
+      "R1 standard_fire→ (15.4, 19.8) m @ Bot（困难） · immediate",
     ),
-    "射→(15,20)@Bot · 即时",
+    "射→(15,20) · Bot（困难） · 即时",
+  );
+  assert.equal(
+    compactActionLogDetailLine(
+      "R1 move→ (28.2, 17.4) m @ Bot（困难） · immediate",
+    ),
+    "移动 (28, 17) · Bot（困难） · 即时",
   );
   assert.equal(
     compactActionLogDetailLine("R1 suppressive_fire · immediate"),
     "压制 · 即时",
   );
   assert.equal(compactActionLogDetailLine("压制 耗弹30 剩0"), "耗弹 30 · 剩 0");
+});
+
+test("compactActionLogDetailLine keeps stay reasons intact", () => {
+  const line = "不移动：可走站位的开火/掩体分不超过这里";
+  assert.equal(compactActionLogDetailLine(line), line);
+  assert.equal(
+    compactActionLogDetailLine("R1 不移动：移动力已用完 · immediate"),
+    "不移动：移动力已用完 · 即时",
+  );
+});
+
+test("compactActionLogDetailLine keeps attack-choice reason lines intact", () => {
+  const line = "选择 直射：火压未达大概率清场 · 本动清≥1人 0.20>直射0.26，剩弹0 其余1人 0.00>直射0.26 · 掩0 位0";
+  assert.equal(compactActionLogDetailLine(line), line);
+});
+
+test("compactActionLogDetailLine keeps intel gain lines intact", () => {
+  const line = "情报 Alpha（困难） 视V·枪声 Bot（普通） 完全";
+  assert.equal(compactActionLogDetailLine(line), line);
 });
 
 test("compactActionLogDetailLine keeps a vision line intact", () => {
@@ -36,15 +61,21 @@ test("compactActionLogDetailLine keeps a vision line intact", () => {
 test("compactFireLines keep the attack check breakdown", () => {
   assert.equal(
     compactActionLogDetailLine(
-      "对 Bot 射击检定：1d10[9]+4专精+3技能+6属性-3惩罚（连续射击）=19 vs 难度15(距10+位5+掩0) → 命中",
+      "对 Bot 射击检定：1d10[9]+4专精+3技能+6属性-3惩罚（连续射击）=19 vs 难度15(距10+位5+掩0) → 命中 · 全自动12发 走火-3 命中4",
     ),
-    "射击 Bot · 1d10[9]+4专精+3技能+6属性-3惩罚（连续射击）=19 vs 15 · 距 10 位 5 掩 0 · 命中",
+    "射击 Bot · 1d10[9]+4专精+3技能+6属性-3惩罚（连续射击）=19 vs 15 · 距 10 位 5 掩 0 · 命中 · 全自动12发 走火-3 命中4",
   );
   assert.equal(
     compactActionLogDetailLine(
       "对 T 射击检定：1d10[1]+6属性=7 vs 难度10(距0+位0+掩0) → 未中",
     ),
     "射击 T · 1d10[1]+6属性=7 vs 10 · 未中",
+  );
+  assert.equal(
+    compactActionLogDetailLine(
+      "对 Bot（困难） 射击检定：1d10[9]+4=13 vs 难度15(距10+位5+掩0) → 命中",
+    ),
+    "射击 Bot（困难） · 1d10[9]+4=13 vs 15 · 距 10 位 5 掩 0 · 命中",
   );
 });
 

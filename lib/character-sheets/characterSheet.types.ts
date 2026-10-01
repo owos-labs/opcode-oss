@@ -93,6 +93,14 @@ export interface OpcodeSheetSummary {
   healthMode: OpcodeHealthMode | null
   maxHealth: number
   currentHealth: number | null
+  stunGauge: number | null
+  stunGaugeMax: number
+  stunSaveDifficulty: number
+  deathSaveDifficulty: number
+  stunPenalty: number
+  vitalsUnconscious: boolean
+  vitalsDeathSave: boolean
+  vitalsDead: boolean
   parts: OpcodeHealthPartSummary[]
   skills: Array<{
     name: string

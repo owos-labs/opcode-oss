@@ -1,24 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useSheetApp } from "@/app/components/sheet-app";
 import { BenchControlButton } from "@/app/components/bench-control-button";
 import { CombatBenchActionBudgetPanel } from "@/app/components/combat-bench-action-budget-panel";
+import { CombatBenchActionLogSidebar } from "@/app/components/combat-bench-action-log-sidebar";
 import { CombatBenchMap } from "@/app/components/combat-bench-map";
 import { CombatBenchInitiativePlans } from "@/app/components/combat-bench-initiative-plans";
-import { CombatBenchRosterSidebar } from "@/app/components/combat-bench-roster-sidebar";
 import { CombatBenchTopOptions } from "@/app/components/combat-bench-top-options";
 import { CombatInitiativeSequenceBar } from "@/app/components/combat-initiative-sequence-bar";
 import { CombatPlanIntents } from "@/app/components/combat-plan-intents";
 import type { CompiledCombatMap } from "@/lib/combat/map-adapter/compile";
 import { useT } from "@/lib/character-sheets/i18n";
-import {
-  NPC_DIFFICULTY_IDS,
-  NPC_DIFFICULTY_LABELS,
-  type NpcDifficultyId,
-} from "@/lib/combat-ai/difficulty";
+import { type NpcDifficultyId } from "@/lib/combat-ai/difficulty";
 import { benchUnitStatusViews } from "@/lib/combat/combat-bench-unit-status";
 import { parseImportedSheet, sheetListLabel } from "@/lib/character-sheets/model";
 import {
@@ -27,23 +22,55 @@ import {
   upsertCombatBenchSheetCache,
 } from "@/lib/character-sheets/sheet-catalog";
 import { opfsAvailable, writeSheet } from "@/lib/character-sheets/storage";
-import type { CombatBenchSession } from "@/lib/combat/combat-bench";
+import { benchCombatEndLabel, type CombatBenchSession } from "@/lib/combat/combat-bench";
+import { placementIsNeutralized } from "@/lib/combat/combat-bench-outcome";
 import {
   benchStartValidation,
   defaultDeciderPlacementId,
+  nextDefaultTeam,
+  normalizeTeamId,
   type CombatMapPlacement,
 } from "@/lib/combat/combat-bench-placements";
-import { planIntentRows } from "@/lib/combat/combat-plan-intent";
+import {
+  benchCanEditRoster,
+  benchStartAllowed,
+  benchStepAllowed,
+  benchStepAtRoundBoundary,
+} from "@/lib/combat/combat-bench-controls";
+import { actorHintSlot, formatActorStepActionHint } from "@/lib/combat/actor-step-action-hint";
+import { buildCombatBenchActionLog } from "@/lib/combat/combat-bench-action-log";
+import { planIntentRows, planStayReason } from "@/lib/combat/combat-plan-intent";
+import { remainingMoveBudgetMeters } from "@/lib/combat/movement";
 import { buildCombatBenchActionBudgetView } from "@/lib/combat/combat-bench-action-budget";
 import {
+  buildCombatBenchCoverMarks,
+  buildCombatBenchFsmHints,
+  buildCombatBenchLocMarks,
+  buildCombatBenchNavOverlay,
+  buildCombatBenchPatrolPaths,
+  buildCombatBenchMoveDebugHints,
+  buildCombatBenchPlanFireLegs,
+  buildCombatBenchPlanMoveLegs,
+  buildCombatBenchSenseRings,
+  buildCombatBenchWalkPreviews,
+  buildSquadLeaderPlacementIds,
+} from "@/lib/combat/combat-bench-map-graphics";
+import { buildEncounterNav } from "@/lib/combat/patrol";
+import {
+  buildCombatBenchEffectLines,
   buildCombatBenchMapOverlay,
-  DEFAULT_BENCH_VISION_RANGE_M,
+  buildCombatBenchUnitVisions,
 } from "@/lib/combat/combat-bench-map-overlay";
+import { weaponRangeBandRadii } from "@/lib/combat/weapon-range-bands";
 import {
   buildCombatBenchRoundDebugJson,
   serializeCombatBenchRoundDebug,
 } from "@/lib/combat/combat-bench-debug-export";
-import { COMBAT_TEST_MAP_SVG_PATH } from "@/lib/combat/combat-test-scene";
+import {
+  COMBAT_BENCH_MAPS,
+  combatBenchMapMetersPerUnit,
+  parseSvgViewBox,
+} from "@/lib/combat/combat-test-scene";
 
 export function CombatBenchWorkbench() {
   const { t } = useT();
@@ -55,6 +82,7 @@ export function CombatBenchWorkbench() {
   const [deciderPlacementId, setDeciderPlacementId] = useState<string | null>(null);
   const [session, setSession] = useState<CombatBenchSession | null>(null);
   const [lastStepLabel, setLastStepLabel] = useState<string | null>(null);
+  const [mapId, setMapId] = useState<string>(COMBAT_BENCH_MAPS[0]!.id);
   const [mapSvg, setMapSvg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [importLocalError, setImportLocalError] = useState(false);
@@ -63,11 +91,24 @@ export function CombatBenchWorkbench() {
   const [debugCopyHint, setDebugCopyHint] = useState<string | null>(null);
 
   useEffect(() => {
-    void fetch(COMBAT_TEST_MAP_SVG_PATH)
+    const spec = COMBAT_BENCH_MAPS.find((m) => m.id === mapId) ?? COMBAT_BENCH_MAPS[0]!;
+    setMapSvg(null);
+    setBenchMap(null);
+    setSession(null);
+    setLastStepLabel(null);
+    let cancelled = false;
+    void fetch(spec.path)
       .then((r) => r.text())
-      .then(setMapSvg)
-      .catch(() => setMapSvg(null));
-  }, []);
+      .then((text) => {
+        if (!cancelled) setMapSvg(text);
+      })
+      .catch(() => {
+        if (!cancelled) setMapSvg(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [mapId]);
 
   useEffect(() => {
     if (!mapSvg) return;
@@ -77,13 +118,15 @@ export function CombatBenchWorkbench() {
         import("@/lib/combat/map-adapter/compile-opcode-map"),
         import("@/lib/combat/combat-test-scene"),
       ]);
-      const map = compileOpcodeMap(combatTestPlaceholderDocument(mapSvg));
+      const viewBox = parseSvgViewBox(mapSvg);
+      const metersPerUnit = viewBox ? combatBenchMapMetersPerUnit(mapId, viewBox.w) : undefined;
+      const map = compileOpcodeMap(combatTestPlaceholderDocument(mapSvg, mapId, metersPerUnit));
       if (!cancelled) setBenchMap(map);
     })();
     return () => {
       cancelled = true;
     };
-  }, [mapSvg]);
+  }, [mapSvg, mapId]);
 
   const catalog = useMemo(() => {
     void cacheTick;
@@ -101,7 +144,7 @@ export function CombatBenchWorkbench() {
         setLastStepLabel(t("combat.bench.placeFailed"));
         return;
       }
-      const team = placements.length % 2 === 0 ? "hostile" : "friendly";
+      const team = nextDefaultTeam(placements);
       const placement: CombatMapPlacement = {
         id: crypto.randomUUID(),
         sheetId,
@@ -154,20 +197,22 @@ export function CombatBenchWorkbench() {
     setLastStepLabel(null);
   }
 
-  function toggleTeam(id: string) {
-    setPlacements((prev) =>
-      prev.map((p) =>
-        p.id === id
-          ? { ...p, team: p.team === "hostile" ? "friendly" : "hostile" }
-          : p,
-      ),
-    );
+  function setPlacementTeam(id: string, team: string) {
+    const nextTeam = normalizeTeamId(team);
+    if (!nextTeam) return;
+    setPlacements((prev) => prev.map((p) => (p.id === id ? { ...p, team: nextTeam } : p)));
     setSession(null);
+  }
+
+  function movePlacement(id: string, x: number, y: number) {
+    setPlacements((prev) => prev.map((p) => (p.id === id ? { ...p, x, y } : p)));
+    setSession((prev) => (prev ? null : prev));
   }
 
   function removePlacement(id: string) {
     setPlacements((prev) => prev.filter((p) => p.id !== id));
     setDeciderPlacementId((prev) => (prev === id ? null : prev));
+    setSelectedPlacementId((prev) => (prev === id ? null : prev));
     setSession(null);
   }
 
@@ -181,7 +226,9 @@ export function CombatBenchWorkbench() {
           import("@/lib/combat/map-adapter/compile-opcode-map"),
           import("@/lib/combat/combat-test-scene"),
         ]);
-      const map = compileOpcodeMap(combatTestPlaceholderDocument(mapSvg));
+      const viewBox = parseSvgViewBox(mapSvg);
+      const metersPerUnit = viewBox ? combatBenchMapMetersPerUnit(mapId, viewBox.w) : undefined;
+      const map = compileOpcodeMap(combatTestPlaceholderDocument(mapSvg, mapId, metersPerUnit));
       const next = startCombatBenchSession({
         map,
         deciderPlacementId,
@@ -192,7 +239,7 @@ export function CombatBenchWorkbench() {
       setSession(next);
       setLastStepLabel(
         next.combatEnded
-          ? "战斗已开始但一方已无可战单位。"
+          ? `战斗已开始 · ${benchCombatEndLabel(next.endReason ?? "stalemate")}`
           : `战斗开始 · 第 ${next.combatRound} 战斗轮 · 本段 ${next.turnSequence.length} 步`,
       );
     } catch {
@@ -314,21 +361,187 @@ export function CombatBenchWorkbench() {
     return buildCombatBenchActionBudgetView(selectedPlanBundle);
   }, [selectedPlanBundle]);
 
+  const actionLogEntries = useMemo(() => buildCombatBenchActionLog(session), [session]);
+
+  const selectedActionHint = useMemo(() => {
+    if (!session || !selectedPlacementId || !selectedPlanBundle) return [];
+    const slot = actorHintSlot({
+      placementId: selectedPlacementId,
+      turn: session.turnSequence[session.turnIndex] ?? null,
+      actions: selectedPlanBundle.plan.actions,
+      lastCompletedSlot: session.lastCompletedSlotByPlacementId?.[selectedPlacementId] ?? -1,
+    });
+    if (slot == null) return [];
+    return formatActorStepActionHint({
+      origin: selectedPlanBundle.snapshot.position,
+      actions: selectedPlanBundle.plan.actions,
+      slot,
+      stancePositions: selectedPlanBundle.payload.stancePositions,
+      targetIds: selectedPlanBundle.payload.targetIds,
+      targetLabel: (id) => placementLabelById.get(id) ?? id.slice(0, 8),
+      snapshot: selectedPlanBundle.snapshot,
+      stayReason: planStayReason({
+        payload: selectedPlanBundle.payload,
+        actions: selectedPlanBundle.plan.actions,
+        slot,
+        movRemaining: remainingMoveBudgetMeters(
+          selectedPlanBundle.snapshot.mov,
+          selectedPlanBundle.snapshot.metersMovedThisRound,
+        ),
+        coverId: selectedPlanBundle.snapshot.coverId,
+        profileId: selectedPlanBundle.snapshot.encounter.profileId,
+      }),
+    });
+  }, [session, selectedPlacementId, selectedPlanBundle, placementLabelById]);
+
   const selectedPlacementLabel =
     placements.find((p) => p.id === selectedPlacementId)?.label ?? "—";
+
+  const originByPlacementId = useMemo(() => {
+    const out: Record<string, { x: number; y: number }> = {};
+    for (const unit of rosterUnits) out[unit.placementId] = unit.position;
+    return out;
+  }, [rosterUnits]);
+
+  const senseRings = useMemo(
+    () =>
+      buildCombatBenchSenseRings({
+        placements,
+        sheetById,
+        originByPlacementId,
+      }),
+    [placements, sheetById, originByPlacementId],
+  );
+
+  const visionUnits = useMemo(
+    () =>
+      rosterUnits.map((unit) => {
+        const sense = senseRings.find((ring) => ring.placementId === unit.placementId);
+        const runtime = session?.healthByPlacementId[unit.placementId];
+        return {
+          placementId: unit.placementId,
+          team: unit.team,
+          origin: unit.position,
+          visionRangeM: sense?.openVisionV ?? 0,
+          alive: runtime ? !placementIsNeutralized(runtime) : true,
+        };
+      }),
+    [rosterUnits, senseRings],
+  );
+
+  const visions = useMemo(
+    () => (benchMap ? buildCombatBenchUnitVisions({ map: benchMap, units: visionUnits }) : []),
+    [benchMap, visionUnits],
+  );
+
+  const effectLines = useMemo(
+    () =>
+      benchMap
+        ? buildCombatBenchEffectLines({ walls: benchMap.walls, units: visionUnits })
+        : [],
+    [benchMap, visionUnits],
+  );
+
+  const patrolPaths = useMemo(
+    () =>
+      buildCombatBenchPatrolPaths({
+        placements,
+        fsmByPlacementId: session?.fsmByPlacementId,
+      }),
+    [placements, session],
+  );
+
+  const navOverlay = useMemo(() => {
+    const fromSession = Object.values(session?.plansByPlacementId ?? {})[0]?.snapshot.nav;
+    const nav = fromSession ?? (benchMap ? buildEncounterNav(benchMap) : null);
+    return buildCombatBenchNavOverlay(nav);
+  }, [benchMap, session]);
+
+  const planMoveLegs = useMemo(
+    () => buildCombatBenchPlanMoveLegs(session?.plansByPlacementId),
+    [session],
+  );
+
+  const walkPreviews = useMemo(
+    () =>
+      buildCombatBenchWalkPreviews({
+        placements,
+        plansByPlacementId: session?.plansByPlacementId,
+        fsmByPlacementId: session?.fsmByPlacementId,
+      }),
+    [placements, session],
+  );
+
+  const moveDebugHints = useMemo(
+    () => buildCombatBenchMoveDebugHints(session?.plansByPlacementId),
+    [session],
+  );
+
+  const planFireLegs = useMemo(
+    () => buildCombatBenchPlanFireLegs(session?.plansByPlacementId),
+    [session],
+  );
+
+  const locMarks = useMemo(
+    () =>
+      buildCombatBenchLocMarks({
+        observerId: selectedPlacementId,
+        plansByPlacementId: session?.plansByPlacementId,
+        labelById: (id) => placementLabelById.get(id) ?? id.slice(0, 8),
+      }),
+    [selectedPlacementId, session, placementLabelById],
+  );
+
+  const fsmHints = useMemo(
+    () =>
+      buildCombatBenchFsmHints({
+        placements,
+        plansByPlacementId: session?.plansByPlacementId,
+        fsmByPlacementId: session?.fsmByPlacementId,
+      }),
+    [placements, session],
+  );
+
+  const coverMarks = useMemo(
+    () =>
+      benchMap
+        ? buildCombatBenchCoverMarks({
+            placements,
+            plansByPlacementId: session?.plansByPlacementId,
+            barriers: benchMap.barriers,
+          })
+        : [],
+    [benchMap, placements, session],
+  );
+
+  const squadLeaderPlacementIds = useMemo(
+    () =>
+      buildSquadLeaderPlacementIds({
+        placements,
+        sheetById,
+        healthByPlacementId: session?.healthByPlacementId,
+      }),
+    [placements, sheetById, session],
+  );
+
+  const selectedRangeBands = useMemo(() => {
+    const unit = rosterUnits.find((u) => u.placementId === selectedPlacementId);
+    return weaponRangeBandRadii(unit?.weapon?.rangeM ?? 0);
+  }, [rosterUnits, selectedPlacementId]);
 
   const selectedMapOverlay = useMemo(() => {
     if (!benchMap || !selectedPlacementId) return null;
     const unit = rosterUnits.find((u) => u.placementId === selectedPlacementId);
     if (!unit || unit.mov === null) return null;
+    const sense = senseRings.find((ring) => ring.placementId === selectedPlacementId);
     return buildCombatBenchMapOverlay({
       map: benchMap,
       origin: unit.position,
       mov: unit.mov,
       metersMovedThisRound: unit.metersMovedThisRound ?? 0,
-      visionRangeM: unit.weapon?.rangeM ?? DEFAULT_BENCH_VISION_RANGE_M,
+      visionRangeM: sense?.openVisionV ?? 0,
     });
-  }, [benchMap, selectedPlacementId, rosterUnits]);
+  }, [benchMap, selectedPlacementId, rosterUnits, senseRings]);
 
   const topOptionUnits = useMemo(() => {
     if (!session) return [];
@@ -353,247 +566,182 @@ export function CombatBenchWorkbench() {
   }, [session, placements, placementLabelById]);
 
   const showImportError = importError || importLocalError;
+  const canStart = benchStartAllowed({
+    session,
+    validationOk: validation.ok,
+    mapReady: Boolean(mapSvg),
+    busy,
+  });
+  const canStep = benchStepAllowed({
+    session,
+    benchMapReady: Boolean(benchMap),
+    busy,
+  });
+  const atRoundBoundary = benchStepAtRoundBoundary(session);
+  const benchControls = (
+    <>
+      <BenchControlButton
+        className="h-8 rounded-lg bg-primary px-3 text-xs font-semibold text-background disabled:opacity-40"
+        disabled={!canStart}
+        onClick={() => void startRound()}
+      >
+        {t("combat.bench.startRound")}
+      </BenchControlButton>
+      <BenchControlButton
+        className="h-8 rounded-lg border border-foreground/15 bg-background px-3 text-xs font-semibold disabled:opacity-40"
+        disabled={!canStep}
+        onClick={() => void step()}
+      >
+        {t("combat.bench.step")}
+        {stepProgress ? ` (${stepProgress})` : ""}
+      </BenchControlButton>
+      {atRoundBoundary ? (
+        <p className="px-1 text-center text-[10px] text-foreground/50">
+          本 3 秒轮先攻段已跑完，继续点「步进」进入下一战斗轮。
+        </p>
+      ) : null}
+      <BenchControlButton
+        className="h-8 rounded-lg px-3 text-xs font-semibold text-foreground/70 hover:bg-foreground/5 disabled:opacity-40"
+        disabled={!session || busy}
+        onClick={resetBench}
+      >
+        {t("combat.bench.resetRound")}
+      </BenchControlButton>
+      {!validation.ok && placements.length > 0 ? (
+        <p className="px-1 text-[10px] text-foreground/50">{t(`combat.bench.err.${validation.reason}`)}</p>
+      ) : null}
+    </>
+  );
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-4">
+    <div className="flex flex-col gap-4 pb-2">
       <CombatInitiativeSequenceBar
         order={session?.initiativeOrder ?? []}
         turnSequence={session?.turnSequence ?? []}
         turnIndex={session?.turnIndex ?? 0}
         combatRound={session?.combatRound ?? null}
         combatEnded={session?.combatEnded ?? false}
+        t={t}
+        ready={ready}
+        catalog={catalog}
+        loadError={Boolean(loadError)}
+        showImportError={Boolean(showImportError)}
+        pendingSheetId={pendingSheetId}
+        setPendingSheetId={setPendingSheetId}
+        fileRef={fileRef}
+        refreshList={() => void refreshList().then(() => setCacheTick((n) => n + 1))}
+        placements={placements}
+        selectedPlacementId={selectedPlacementId}
+        deciderPlacementId={deciderPlacementId}
+        busy={busy}
+        rosterUnits={rosterUnits}
+        onSelectPlacement={setSelectedPlacementId}
+        onSetDecider={(id) => {
+          setDeciderPlacementId(id);
+          setSession(null);
+        }}
+        onRemovePlacement={removePlacement}
+        rosterEditable={benchCanEditRoster(session)}
+        onSetTeam={setPlacementTeam}
+        onSetProfile={setPlacementProfile}
+        onCopyDebugJson={() => void copyRoundDebugJson()}
+        debugCopyHint={debugCopyHint}
+        copyDebugDisabled={!session || busy}
+        squadLeaderPlacementIds={squadLeaderPlacementIds}
       />
-      <div className="flex min-h-0 flex-1 flex-col gap-4 lg:flex-row">
-      <aside className="flex w-full shrink-0 flex-col gap-3 rounded-2xl border border-foreground/10 bg-content3 p-4 shadow-sm lg:w-72 lg:min-h-0">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-xs font-semibold uppercase tracking-wide text-foreground/50">
-            {t("combat.bench.presets")}
-            {ready ? ` (${catalog.length})` : ""}
-          </p>
-          <div className="flex gap-1">
-            <BenchControlButton
-              type="button"
-              className="rounded-lg px-2 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
-              onClick={() => void refreshList().then(() => setCacheTick((n) => n + 1))}
+      <input
+        ref={fileRef}
+        type="file"
+        accept=".json,.md,.txt,application/json,text/markdown"
+        className="sr-only"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          e.target.value = "";
+          if (!file) return;
+          void file.text().then((text) => importCharacterFile(text));
+        }}
+      />
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
+        <div className="flex min-w-0 flex-col gap-4">
+          <label className="flex items-center gap-2 text-sm font-semibold">
+            <span className="text-foreground/70">{t("combat.bench.mapLabel")}</span>
+            <select
+              className="rounded-lg border border-foreground/15 bg-background px-2 py-1 text-sm font-semibold"
+              value={mapId}
+              disabled={busy}
+              onChange={(e) => setMapId(e.target.value)}
             >
-              {t("combat.bench.refresh")}
-            </BenchControlButton>
-            <BenchControlButton
-              type="button"
-              className="rounded-lg px-2 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
-              onClick={() => fileRef.current?.click()}
-            >
-              {t("list.import")}
-            </BenchControlButton>
-          </div>
-        </div>
-        <input
-          ref={fileRef}
-          type="file"
-          accept=".json,.md,.txt,application/json,text/markdown"
-          className="sr-only"
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            e.target.value = "";
-            if (!file) return;
-            void file.text().then((text) => importCharacterFile(text));
-          }}
-        />
-        {!ready ? (
-          <p className="text-sm text-foreground/60">…</p>
-        ) : loadError ? (
-          <p className="text-sm text-danger">{t("combat.bench.sheetsError")}</p>
-        ) : catalog.length === 0 ? (
-          <div className="space-y-2 text-sm text-foreground/60">
-            <p>{t("combat.bench.noSheets")}</p>
-            <p>{t("combat.bench.noSheetsHint")}</p>
-            <Link href="/character-sheet" className="font-semibold text-primary underline">
-              {t("nav.sheets")}
-            </Link>
-          </div>
-        ) : (
-          <ul className="flex max-h-48 flex-col gap-2 overflow-y-auto">
-            {catalog.map((sheet) => {
-              const selected = pendingSheetId === sheet.id;
-              return (
-                <li key={sheet.id}>
-                  <div
-                    draggable
-                    onDragStart={(e) => {
-                      e.dataTransfer.setData("text/plain", sheet.id);
-                      e.dataTransfer.setData("application/x-opcode-sheet-id", sheet.id);
-                      setPendingSheetId(sheet.id);
-                    }}
-                    onDragEnd={() => setPendingSheetId(null)}
-                    onClick={() => setPendingSheetId((prev) => (prev === sheet.id ? null : sheet.id))}
-                    className={`cursor-grab rounded-xl border px-3 py-2 text-sm font-semibold active:cursor-grabbing ${
-                      selected
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-foreground/10 bg-background"
-                    }`}
-                  >
-                    {sheetListLabel(sheet)}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-        {showImportError ? (
-          <p className="text-xs text-danger">{t("list.importFailed")}</p>
-        ) : null}
-        <p className="text-xs text-foreground/50">{t("combat.bench.deployHint")}</p>
-
-        {placements.length > 0 ? (
-          <>
-            <p className="text-xs font-semibold uppercase tracking-wide text-foreground/50">
-              {t("combat.bench.onMap")}
-            </p>
-            <ul className="flex flex-col gap-2 text-sm">
-              {placements.map((p) => (
-                <li
-                  key={p.id}
-                  className={`rounded-xl border p-2 ${
-                    selectedPlacementId === p.id ? "border-primary/50 bg-primary/5" : "border-foreground/10"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="decider"
-                        checked={deciderPlacementId === p.id}
-                        onChange={() => {
-                          setDeciderPlacementId(p.id);
-                          setSession(null);
-                        }}
-                      />
-                      <button
-                        type="button"
-                        className="font-semibold text-left"
-                        onClick={() => setSelectedPlacementId(p.id)}
-                      >
-                        {p.label}
-                      </button>
-                    </label>
-                    <BenchControlButton
-                      className="text-xs text-foreground/50 hover:text-danger"
-                      onClick={() => removePlacement(p.id)}
-                    >
-                      ×
-                    </BenchControlButton>
-                  </div>
-                  <p className="mt-1 font-mono text-[10px] text-foreground/50">
-                    ({p.x.toFixed(1)}, {p.y.toFixed(1)}) m · {p.team}
-                  </p>
-                  <label className="mt-2 flex flex-col gap-0.5">
-                    <span className="text-[10px] font-semibold uppercase text-foreground/45">NPC 难度</span>
-                    <select
-                      className="rounded-lg border border-foreground/15 bg-background px-2 py-1 text-xs font-semibold"
-                      value={p.profileId ?? "trained"}
-                      disabled={busy}
-                      onChange={(e) => setPlacementProfile(p.id, e.target.value as NpcDifficultyId)}
-                    >
-                      {NPC_DIFFICULTY_IDS.map((id) => (
-                        <option key={id} value={id}>
-                          {NPC_DIFFICULTY_LABELS[id]}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <BenchControlButton
-                    className="mt-1 text-xs text-primary"
-                    onClick={() => toggleTeam(p.id)}
-                  >
-                    {t("combat.bench.toggleTeam")}
-                  </BenchControlButton>
-                </li>
+              {COMBAT_BENCH_MAPS.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {t(m.labelKey)}
+                </option>
               ))}
-            </ul>
-          </>
-        ) : null}
-
-        <div className="mt-auto flex flex-col gap-2 pt-2">
-          <BenchControlButton
-            className="h-10 rounded-full bg-primary px-4 text-sm font-semibold text-background disabled:opacity-40"
-            disabled={!validation.ok || !mapSvg || busy}
-            onClick={() => void startRound()}
-          >
-            {t("combat.bench.startRound")}
-          </BenchControlButton>
-          <BenchControlButton
-            className="h-10 rounded-full border border-foreground/15 bg-background px-4 text-sm font-semibold disabled:opacity-40"
-            disabled={!session || !benchMap || session.combatEnded || busy}
-            onClick={() => void step()}
-          >
-            {t("combat.bench.step")}
-            {stepProgress ? ` (${stepProgress})` : ""}
-          </BenchControlButton>
-          <BenchControlButton
-            className="h-10 rounded-full px-4 text-sm font-semibold text-foreground/70 hover:bg-foreground/5 disabled:opacity-40"
-            disabled={!session || busy}
-            onClick={resetBench}
-          >
-            {t("combat.bench.resetRound")}
-          </BenchControlButton>
-          <BenchControlButton
-            className="h-10 rounded-full border border-dashed border-foreground/20 px-4 text-sm font-semibold text-foreground/70 hover:bg-foreground/5 disabled:opacity-40"
-            disabled={!session || busy}
-            onClick={() => void copyRoundDebugJson()}
-          >
-            复制本回合调试 JSON
-          </BenchControlButton>
-          {debugCopyHint ? (
-            <p className="text-center text-xs text-foreground/55">{debugCopyHint}</p>
-          ) : null}
-          {!validation.ok && placements.length > 0 ? (
-            <p className="text-xs text-foreground/50">{t(`combat.bench.err.${validation.reason}`)}</p>
-          ) : null}
-          {lastStepLabel ? (
-            <p className="break-all font-mono text-xs text-foreground/70">{lastStepLabel}</p>
-          ) : null}
+            </select>
+          </label>
+          <CombatBenchMap
+            svgMarkup={mapSvg}
+            placements={placements}
+            deciderPlacementId={deciderPlacementId}
+            selectedPlacementId={selectedPlacementId}
+            pendingSheetId={pendingSheetId}
+            overlay={selectedMapOverlay}
+            visions={visions}
+            effectLines={effectLines}
+            locMarks={locMarks}
+            fsmHints={fsmHints}
+            coverMarks={coverMarks}
+            patrolPaths={patrolPaths}
+            walkPreviews={walkPreviews}
+            navOverlay={navOverlay}
+            rangeBands={selectedRangeBands}
+            planMoveLegs={planMoveLegs}
+            planFireLegs={planFireLegs}
+            moveDebugHints={moveDebugHints}
+            squadLeaderPlacementIds={squadLeaderPlacementIds}
+            metersPerUnit={benchMap?.metersPerUnit}
+            actionHint={selectedActionHint}
+            controls={benchControls}
+            lastStepLabel={lastStepLabel}
+            rosterEditable={benchCanEditRoster(session)}
+            onPlaceSheet={placeSheet}
+            onSelectPlacement={setSelectedPlacementId}
+            onMovePlacement={benchCanEditRoster(session) ? movePlacement : undefined}
+            onRemovePlacement={removePlacement}
+            removeUnitLabel={t("combat.bench.removeUnit")}
+          />
+          <CombatBenchActionBudgetPanel
+            label={selectedPlacementLabel}
+            budget={selectedActionBudget}
+          />
+          <CombatBenchInitiativePlans
+            units={initiativePlanUnits}
+            activePlacementId={currentTurn?.placementId ?? null}
+            activeRound={activeInitiativeRound}
+          />
+          <CombatPlanIntents
+            rows={intentRows}
+            completedDeciderSlots={completedSlotsForCurrentActor}
+            activeInitiativeRound={activeInitiativeRound}
+            totalUtility={intentUtility}
+            title={
+              currentTurn
+                ? `当前步进：${currentTurn.label}（主动段 ${currentTurn.slot + 1}）`
+                : "当前步进"
+            }
+            emptyLabel="开始战斗轮后显示本步将执行的动作。"
+          />
+          <CombatBenchTopOptions
+            units={topOptionUnits}
+            emptyHint="开始战斗轮后为各单位计算 Top 选项。"
+          />
         </div>
-      </aside>
-
-      <div className="flex min-w-0 flex-1 flex-col gap-4">
-        <CombatBenchMap
-          placements={placements}
-          deciderPlacementId={deciderPlacementId}
-          selectedPlacementId={selectedPlacementId}
-          pendingSheetId={pendingSheetId}
-          overlay={selectedMapOverlay}
-          planMoveLegs={selectedActionBudget?.moveLegs ?? null}
-          onPlaceSheet={placeSheet}
-          onSelectPlacement={setSelectedPlacementId}
-        />
-        <CombatBenchActionBudgetPanel
-          label={selectedPlacementLabel}
-          budget={selectedActionBudget}
-        />
-        <CombatBenchInitiativePlans
-          units={initiativePlanUnits}
-          activePlacementId={currentTurn?.placementId ?? null}
-          activeRound={activeInitiativeRound}
-        />
-        <CombatPlanIntents
-          rows={intentRows}
-          completedDeciderSlots={completedSlotsForCurrentActor}
-          activeInitiativeRound={activeInitiativeRound}
-          totalUtility={intentUtility}
-          title={
-            currentTurn
-              ? `当前步进：${currentTurn.label}（主动段 ${currentTurn.slot + 1}）`
-              : "当前步进"
-          }
-          emptyLabel="开始战斗轮后显示本步将执行的动作。"
-        />
-        <CombatBenchTopOptions
-          units={topOptionUnits}
-          emptyHint="开始战斗轮后为各单位计算 Top 选项。"
-        />
-      </div>
-
-      <CombatBenchRosterSidebar units={rosterUnits} onSelectPlacement={setSelectedPlacementId} />
+        <div className="flex min-h-0 min-w-0 flex-col gap-4 lg:sticky lg:top-0 lg:max-h-[min(85dvh,900px)] lg:overflow-y-auto lg:overscroll-contain lg:scrollbar-subtle">
+          <CombatBenchActionLogSidebar
+            entries={actionLogEntries}
+            stepProgress={stepProgress}
+            busy={busy}
+          />
+        </div>
       </div>
     </div>
   );

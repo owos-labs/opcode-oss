@@ -68,6 +68,23 @@ test("en locale still resolves attributes keys", () => {
   assert.equal(messageForLocale(tables, "en", "characterSheets.skills.title"), "Skills");
 });
 
+test("character sheet hero title resolves per locale", () => {
+  const tables = buildMessageTables({
+    en: {},
+    zh: {},
+    ja: {
+      "characterSheets.list.heroLine1": "キャラクター",
+      "characterSheets.list.heroLine2": "デザイナー",
+    },
+  });
+  assert.equal(messageForLocale(tables, "en", "characterSheets.list.heroLine1"), "Character");
+  assert.equal(messageForLocale(tables, "en", "characterSheets.list.heroLine2"), "Designer");
+  assert.equal(messageForLocale(tables, "zh", "characterSheets.list.heroLine1"), "角色");
+  assert.equal(messageForLocale(tables, "zh", "characterSheets.list.heroLine2"), "设计器");
+  assert.equal(messageForLocale(tables, "ja", "characterSheets.list.heroLine1"), "キャラクター");
+  assert.equal(messageForLocale(tables, "ja", "characterSheets.list.heroLine2"), "デザイナー");
+});
+
 test("zh locale resolves inventory save label", () => {
   const localized = buildMessageTables({
     en: {},

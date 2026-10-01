@@ -240,11 +240,18 @@
       "leg_left": "左腿",
       "leg_right": "右腿",
       "simpleHint": "单一生命值；1/4 上限起晕眩豁免，归零死亡豁免；自然 10 为爆头（×2）。",
-      "normalHint": "分部位受击点数，含摧毁/分离、晕眩计量与死亡豁免。"
+      "normalHint": "分部位受击点数，含摧毁/分离、晕眩计量与死亡豁免。",
+      "vitalsToolbar": "晕眩与豁免",
+      "stunGauge": "晕眩槽",
+      "stunPenalty": "晕眩惩罚 −{value}",
+      "unconscious": "昏迷",
+      "deathSaveActive": "死亡豁免中",
+      "dead": "已死亡"
     },
     "saves": {
       "stun": "晕眩豁免",
-      "death": "死亡豁免"
+      "death": "死亡豁免",
+      "vs": "对 {value}"
     },
     "stats": {
       "ref": "反射",
@@ -280,6 +287,10 @@
       "attributesHint": "设置六项核心属性。移动与感官将在下方计算。",
       "preview": "角色卡预览",
       "previewHint": "本页数值的实时概览。"
+    },
+    "list": {
+      "heroLine1": "角色",
+      "heroLine2": "设计器"
     }
   }
 }

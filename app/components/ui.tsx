@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card as HeroCard } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { Dropdown } from "@heroui/react/dropdown";
 import { ChevronDown, Minus, Plus } from "lucide-react";
 import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
@@ -283,14 +283,7 @@ export function Stepper({
   );
 }
 
-export function Card({ className = "", ...props }: ComponentProps<typeof HeroCard>) {
-  return (
-    <HeroCard
-      className={`rounded-lg border border-border1 bg-content3 text-foreground shadow1 ${className}`}
-      {...props}
-    />
-  );
-}
+export { Card, cardSurfaceClass, type CardPadding, type CardRadius, type CardTone } from "@/app/components/card";
 
 export function Notice({
   title,

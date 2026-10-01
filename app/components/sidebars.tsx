@@ -23,6 +23,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useRef, useState, type DragEvent } from "react";
 
+import { Card } from "@/app/components/card";
 import { useSheetApp } from "@/app/components/sheet-app";
 import { ModalShortcutFooter, Stepper, TextField } from "@/app/components/ui";
 import { OPCODE_STAT_KEYS, type OpcodeStatKey } from "@/lib/character-sheets/characterSheet.types";
@@ -120,41 +121,43 @@ export function ListSidebar() {
 
   return (
     <div className="relative flex min-h-0 flex-1 flex-col" onClick={() => setContextMenu(null)}>
-      <div className="flex items-center justify-between gap-3 px-3 pt-3">
-        <div className="min-w-0">
-          <h2 className="truncate text-sm font-black">{t("list.title")}</h2>
-          <p className="text-xs text-foreground/55">{t("list.count", { count: sheets.length })}</p>
-        </div>
-        <div className="flex shrink-0 items-center gap-1">
-          <Dropdown>
-            <Button size="sm" variant="primary" aria-label={t("list.new")} className="size-9 min-w-9 p-0">
-              <Plus className="size-4" />
-            </Button>
-            <Dropdown.Popover>
-              <Dropdown.Menu
-                aria-label={t("list.new")}
-                onAction={async (key) => {
-                  if (key === "group") openNewGroup(null, "");
-                  if (key === "sheet") {
-                    const sheet = await createSheet();
-                    router.push(`/character-sheet/${sheet.id}/basics`);
-                  }
-                }}
-              >
-                <Dropdown.Item id="sheet" textValue={t("list.new")}>{t("list.new")}</Dropdown.Item>
-                <Dropdown.Item id="group" textValue={t("list.groupNew")}>{t("list.groupNew")}</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown.Popover>
-          </Dropdown>
-          <button
-            type="button"
-            aria-label={t("list.import")}
-            title={t("list.import")}
-            className="flex size-9 items-center justify-center rounded-lg border border-border1 bg-content3 shadow1 transition-colors duration-150 hover:bg-content2 focus-visible:shadow-primary"
-            onClick={() => fileRef.current?.click()}
-          >
-            <Upload className="size-4" />
-          </button>
+      <div className="flex flex-col gap-3 px-3 pt-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <h2 className="truncate text-sm font-black">{t("list.title")}</h2>
+            <p className="text-xs text-foreground/55">{t("list.count", { count: sheets.length })}</p>
+          </div>
+          <div className="flex shrink-0 items-center gap-1">
+            <Dropdown>
+              <Button size="sm" variant="primary" aria-label={t("list.new")} className="size-9 min-w-9 p-0">
+                <Plus className="size-4" />
+              </Button>
+              <Dropdown.Popover>
+                <Dropdown.Menu
+                  aria-label={t("list.new")}
+                  onAction={async (key) => {
+                    if (key === "group") openNewGroup(null, "");
+                    if (key === "sheet") {
+                      const sheet = await createSheet();
+                      router.push(`/character-sheet/${sheet.id}/basics`);
+                    }
+                  }}
+                >
+                  <Dropdown.Item id="sheet" textValue={t("list.new")}>{t("list.new")}</Dropdown.Item>
+                  <Dropdown.Item id="group" textValue={t("list.groupNew")}>{t("list.groupNew")}</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
+            <button
+              type="button"
+              aria-label={t("list.import")}
+              title={t("list.import")}
+              className="flex size-9 items-center justify-center rounded-lg border border-border1 bg-content3 shadow1 transition-colors duration-150 hover:bg-content2 focus-visible:shadow-primary"
+              onClick={() => fileRef.current?.click()}
+            >
+              <Upload className="size-4" />
+            </button>
+          </div>
         </div>
       </div>
       <input
@@ -302,9 +305,11 @@ export function ListSidebar() {
         )}
       </div>
       {contextMenu ? (
-        <div
+        <Card
           role="menu"
-          className="fixed z-50 flex min-w-44 flex-col rounded-lg border border-border1 bg-content3 p-1 shadow3"
+          radius="md"
+          padding="sm"
+          className="fixed z-50 min-w-44 !gap-0 !p-1 shadow3"
           style={{ left: contextMenu.x, top: contextMenu.y }}
           onClick={(event) => event.stopPropagation()}
         >
@@ -342,7 +347,7 @@ export function ListSidebar() {
           >
             {t("sheet.delete")}
           </button>
-        </div>
+        </Card>
       ) : null}
       <Modal
         isOpen={newGroup !== null}

@@ -34,6 +34,26 @@ test("rangedAttackActionMalus stacks unified and consecutive fire penalties", ()
   );
 });
 
+test("semi-auto with only one planned attack ignores unified and consecutive malus", () => {
+  assert.deepEqual(
+    rangedAttackMalusParts({
+      declaredStandardActions: 2,
+      declaredStandardFiresInRound: 1,
+      priorStandardFiresThisRound: 0,
+      fireMode: "semi",
+    }),
+    { unified: 0, consecutiveFire: 0 },
+  );
+  const twoSemi = rangedAttackMalusParts({
+    declaredStandardActions: 2,
+    declaredStandardFiresInRound: 2,
+    priorStandardFiresThisRound: 0,
+    fireMode: "semi",
+  });
+  assert.equal(twoSemi.unified, -3);
+  assert.equal(twoSemi.consecutiveFire, 0);
+});
+
 test("priorStandardFireRoundsThisRound ignores suppressive_fire", () => {
   const suppress = actionKindIndex("suppressive_fire");
   const roundPlan = plan([

@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@/app/components/card";
 import type { BenchTopOptionRow } from "@/lib/combat/combat-bench-top-options";
 
 export function CombatBenchTopOptions({
@@ -16,20 +17,21 @@ export function CombatBenchTopOptions({
 }) {
   if (units.length === 0) {
     return (
-      <div className="rounded-2xl border border-foreground/10 bg-content3 p-4 text-sm text-foreground/60">
+      <Card radius="xl" padding="md" className="text-sm text-foreground/60">
         {emptyHint}
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div className="flex min-h-0 flex-col rounded-2xl border border-foreground/10 bg-content3 p-4">
+    <Card radius="xl" padding="md" className="min-h-0">
       <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-foreground/50">
         Top 选项（按效用）
       </h2>
       <ul className="max-h-64 space-y-3 overflow-y-auto text-sm lg:max-h-80">
         {units.map((unit) => (
-          <li key={unit.placementId} className="rounded-lg border border-foreground/10 p-2">
+          <li key={unit.placementId}>
+            <Card radius="md" padding="sm" spotlight={false} className="!border-foreground/10">
             <p className="font-semibold">
               {unit.label}
               {unit.isAi ? (
@@ -48,9 +50,10 @@ export function CombatBenchTopOptions({
                 ))}
               </ol>
             )}
+            </Card>
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 }

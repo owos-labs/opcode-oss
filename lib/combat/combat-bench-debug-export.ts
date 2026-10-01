@@ -5,6 +5,8 @@ import type { CombatMapPlacement } from "./combat-bench-placements.ts";
 
 export type CombatBenchRoundDebugJson = {
   exportedAt: string;
+  randomSeed: number;
+  stepLog: CombatBenchSession["stepLog"];
   combatRound: number;
   combatEnded: boolean;
   endReason: string | null;
@@ -64,6 +66,8 @@ export function buildCombatBenchRoundDebugJson(input: {
 
   return {
     exportedAt: new Date().toISOString(),
+    randomSeed: session.randomSeed,
+    stepLog: session.stepLog,
     combatRound: session.combatRound,
     combatEnded: session.combatEnded,
     endReason: session.endReason,

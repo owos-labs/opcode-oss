@@ -63,7 +63,14 @@ export function BasicsEditor() {
               </Card>
             ))}
             {images.length ? (
-              <label className="flex aspect-[4/5] h-full shrink-0 snap-start cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border1 bg-content2 text-sm font-semibold text-foreground/60 hover:bg-content3">
+              <Card
+                as="label"
+                tone="secondary"
+                radius="md"
+                padding="md"
+                spotlight={false}
+                className="aspect-[4/5] h-full shrink-0 cursor-pointer snap-start items-center justify-center !border-dashed text-sm font-semibold text-foreground/60 hover:bg-content3"
+              >
                 <ImagePlus className="size-8" />
                 {t("info.addImage")}
                 <input
@@ -76,7 +83,7 @@ export function BasicsEditor() {
                     event.target.value = "";
                   }}
                 />
-              </label>
+              </Card>
             ) : (
               <>
                 <input
@@ -91,14 +98,19 @@ export function BasicsEditor() {
                   }}
                 />
                 {["front", "side", "back", "extra"].map((slot) => (
-                  <label
+                  <Card
+                    as="label"
                     key={slot}
                     htmlFor="concept-image-file"
-                    className="flex h-full min-w-48 flex-1 cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-border1 bg-content2 text-sm font-semibold text-foreground/60 hover:bg-content3"
+                    tone="secondary"
+                    radius="md"
+                    padding="md"
+                    spotlight={false}
+                    className="h-full min-w-48 flex-1 cursor-pointer items-center justify-center !border-dashed text-sm font-semibold text-foreground/60 hover:bg-content3"
                   >
                     <ImagePlus className="size-10" />
                     {slot === "front" ? t("info.emptyImages") : t("info.addImage")}
-                  </label>
+                  </Card>
                 ))}
               </>
             )}

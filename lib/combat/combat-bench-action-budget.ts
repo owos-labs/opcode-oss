@@ -1,6 +1,7 @@
 import { actionKindIndex } from "../combat-ai/action-feasibility.ts";
 import type { ActionIntent } from "../combat-ai/search.ts";
 import type { RoundPlan } from "../combat-ai/decide.ts";
+import { walkPathPoints } from "../combat-ai/walk-path.ts";
 import type { Vec2 } from "../combat-ai/visibility.ts";
 import type { PlanningPayload } from "./build-planning-payload.ts";
 import { applyPlanStepToSnapshot } from "./apply-plan-step.ts";
@@ -21,6 +22,7 @@ export type PlanMoveLeg = {
   meters: number;
   metersAfterLeg: number;
   movRemainingAfterLeg: number;
+  path: Vec2[];
 };
 
 export type InitiativeRoundBudget = {
@@ -83,6 +85,7 @@ export function buildCombatBenchActionBudgetView(
       sim.metersMovedThisRound > metersBefore;
     if (!moved) continue;
     const meters = sim.metersMovedThisRound - metersBefore;
+    const walls = payload.walls ?? [];
     moveLegs.push({
       round: action.round,
       planIndex,
@@ -91,6 +94,7 @@ export function buildCombatBenchActionBudgetView(
       meters,
       metersAfterLeg: sim.metersMovedThisRound,
       movRemainingAfterLeg: remainingMoveBudgetMeters(snapshot.mov, sim.metersMovedThisRound),
+      path: walkPathPoints(before, sim.position, walls, meters + 8),
     });
   }
   metersMoved = sim.metersMovedThisRound;

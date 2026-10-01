@@ -23,6 +23,17 @@ export function actionKindIndex(kind: ActionKindId): ActionKindIndex {
   return index;
 }
 
+export function isStandardActionKindId(id: ActionKindId): boolean {
+  return (
+    id === "standard_fire" ||
+    id === "suppressive_fire" ||
+    id === "standard_reload" ||
+    id === "standard_aim" ||
+    id === "throw" ||
+    id === "insert"
+  );
+}
+
 /** Index 0 tile = hold position; index 0 target = no target (reload, move-only). */
 export type ActionFeasibilityShape = {
   initiativeRounds: number;

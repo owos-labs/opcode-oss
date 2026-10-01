@@ -6,6 +6,7 @@ import { Brain, Crosshair, Dumbbell, Sparkles, Users, Wrench } from "lucide-reac
 import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 
+import { SheetHealthToolbar } from "@/app/components/sheet-health-toolbar";
 import { useSheetApp } from "@/app/components/sheet-app";
 import { Card, ModalShortcutFooter, SelectField, Stepper, TextField } from "@/app/components/ui";
 import {
@@ -124,6 +125,7 @@ export function AttributesEditor() {
           <Cell label={t("characterSheets.stats.weight")} value={String(summary.weight)} />
           <Cell label={t("characterSheets.stats.hp")} value={String(summary.maxHealth)} />
         </div>
+        <SheetHealthToolbar className="mt-4" />
       </section>
 
       <div className="flex flex-col gap-6">

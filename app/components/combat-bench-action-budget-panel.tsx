@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@/app/components/card";
 import type { CombatBenchActionBudgetView } from "@/lib/combat/combat-bench-action-budget";
 
 const ROUND_COLORS = [
@@ -18,9 +19,9 @@ export function CombatBenchActionBudgetPanel({
 }) {
   if (!budget) {
     return (
-      <div className="rounded-2xl border border-foreground/10 bg-content3 p-4 text-sm text-foreground/55">
+      <Card radius="xl" padding="md" className="text-sm text-foreground/55">
         选中单位并开始战斗轮后，显示主动性 / 移动预算在本轮计划中的分配。
-      </div>
+      </Card>
     );
   }
 
@@ -32,7 +33,7 @@ export function CombatBenchActionBudgetPanel({
     budget.movRoundMax > 0 ? Math.min(100, (n / budget.movRoundMax) * 100) : 0;
 
   return (
-    <div className="rounded-2xl border border-foreground/10 bg-content3 p-4 text-sm">
+    <Card radius="xl" padding="md" className="text-sm">
       <h2 className="text-xs font-semibold uppercase tracking-wide text-foreground/50">
         行动预算 · {label}
       </h2>
@@ -103,6 +104,6 @@ export function CombatBenchActionBudgetPanel({
           <p className="text-[10px] text-foreground/45">计划中无移动动作。</p>
         )}
       </div>
-    </div>
+    </Card>
   );
 }

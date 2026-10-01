@@ -48,7 +48,7 @@
     },
     "derivated": {
       "mov": {
-        "base": 12,
+        "base": 15,
         "mod": 0
       },
       "weight": {

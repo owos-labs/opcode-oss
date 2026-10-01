@@ -10,7 +10,7 @@
         }
     },
     "derivated": {
-        "mov": {"base": 10, "mod": 10}, // meter, =bod+ref+2+mod
+        "mov": {"base": 10, "mod": 10}, // meter, =bod+ref+mod
         "sens": { // vision radius
             "a": {"base": 10, "mod": 10}, // audio perc, meter, ref+wil*2
             "v": {"base": 10, "mod": 10}, // visual, ref+wil*10

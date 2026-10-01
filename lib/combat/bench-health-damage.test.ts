@@ -52,6 +52,16 @@ test("applyDamageToBenchPlacement normal mode subtracts from hit part", () => {
   assert.equal(applied.state.current, 18);
 });
 
+test("applyDamageToBenchPlacement simple zero hp starts death saves and fills stun", () => {
+  const applied = applyDamageToBenchPlacement(
+    { mode: "simple", current: 3, max: 20, vitals: undefined },
+    { damage: 3 },
+  );
+  assert.equal(applied.state.current, 0);
+  assert.equal(applied.state.vitals?.deathSave, true);
+  assert.equal(applied.state.vitals?.stunGauge, 3);
+});
+
 test("applyDamageToBenchPlacement head destroyed neutralizes total", () => {
   const applied = applyDamageToBenchPlacement(
     {
@@ -71,6 +81,7 @@ test("applyDamageToBenchPlacement head destroyed neutralizes total", () => {
   );
   assert.equal(applied.headLethal, true);
   assert.equal(applied.state.current, 0);
+  assert.equal(applied.state.vitals?.dead, true);
 });
 
 test("initBenchPlacementHealth loads per-part pools for normal sheets", () => {

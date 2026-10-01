@@ -73,6 +73,7 @@ import {
   setAmmoDamageKind,
   setDamageDiceOnRecord,
 } from "@/lib/combat/opcode-ammo-damage";
+import { Card } from "@/app/components/card";
 import { AreaField, ModalShortcutFooter, SelectField, Stepper, TextField } from "@/app/components/ui";
 import { useSheetApp } from "@/app/components/sheet-app";
 import { InventoryPresetsSidebar } from "@/app/components/inventory-presets-sidebar";
@@ -397,7 +398,7 @@ export function InventoryEditor({ initialItemId }: { initialItemId?: string | nu
           }
         }}
       >
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border1 bg-content2 p-3 shadow1">
+      <Card tone="secondary" radius="md" padding="sm" className="flex-row flex-wrap items-center justify-between">
         <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-wide text-foreground/55">{t("sheet.inventory")}</p>
           <p className="mt-1 truncate text-sm font-semibold">
@@ -447,7 +448,7 @@ export function InventoryEditor({ initialItemId }: { initialItemId?: string | nu
             </Modal.Container>
           </Modal.Backdrop>
         </Modal>
-      </div>
+      </Card>
       <div className="flex flex-wrap items-center gap-2">
         <label className="relative min-w-[14rem] flex-1">
           <span className="sr-only">{t("inventory.search")}</span>
@@ -759,8 +760,11 @@ function GearCard({
   }
 
   return (
-    <div
-      className={`flex min-h-28 flex-col rounded-lg border bg-content2 p-2 shadow1 ${over ? "border-primary shadow-primary" : "border-border1"}`}
+    <Card
+      tone="secondary"
+      radius="md"
+      padding="sm"
+      className={`min-h-28 ${over ? "shadow-primary" : ""}`}
       onDragEnter={(event) => {
         if (event.dataTransfer.types.includes(DRAG_ITEM)) setOver(true);
       }}
@@ -843,7 +847,7 @@ function GearCard({
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 }
 
@@ -1109,7 +1113,7 @@ function EffectFields({
     onChange({ ...effect, ...patch });
   }
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-border1 bg-content3 p-3">
+    <Card radius="md" padding="sm" className="gap-3">
       <div className="flex items-end gap-2">
         <SelectField
           className="min-w-0 flex-1"
@@ -1204,7 +1208,7 @@ function EffectFields({
       ) : (
         <p className="text-sm text-foreground/60">{t("characterSheets.inventory.modifications.kinds.unknown")}</p>
       )}
-    </div>
+    </Card>
   );
 }
 
@@ -1251,14 +1255,17 @@ function CreatePanel({ onAdd }: { onAdd: (kind: OpcodeInventoryItemKind) => void
       <p className="text-sm text-foreground/60">{t("characterSheets.inventory.createHint")}</p>
       <div className="grid grid-cols-2 gap-3">
         {OPCODE_INVENTORY_LIST_KIND_ORDER.map((kind) => (
-          <button
+          <Card
+            as="button"
             key={kind}
             type="button"
-            className="min-h-11 rounded-lg border border-border1 bg-content3 p-3 text-left text-sm font-black shadow1 hover:bg-content2"
+            radius="md"
+            padding="sm"
+            className="min-h-11 text-left text-sm font-black hover:bg-content2"
             onClick={() => onAdd(kind)}
           >
             {t(`characterSheets.inventory.kinds.${kind}`)}
-          </button>
+          </Card>
         ))}
       </div>
     </div>

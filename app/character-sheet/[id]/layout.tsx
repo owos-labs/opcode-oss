@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
 
 import { useSheetApp } from "@/app/components/sheet-app";
+import { Card } from "@/app/components/card";
 import { ModalShortcutFooter, Notice, download } from "@/app/components/ui";
 import { formatComplianceErrorLine, listCareerComplianceErrors } from "@/lib/character-sheets/compliance-errors";
 import { useT } from "@/lib/character-sheets/i18n";
@@ -63,10 +64,10 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
       <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
         <h1 className="text-2xl font-black">{t("characterSheets.view.notFoundTitle")}</h1>
         <p className="text-sm text-foreground/60">{t("characterSheets.view.notFoundDescription")}</p>
-        <Link href="/character-sheet" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border1 px-4 py-2 font-semibold shadow1 hover:bg-content2">
+        <Card as={Link} href="/character-sheet" tone="secondary" radius="md" padding="sm" className="inline-flex min-h-11 flex-row items-center gap-2 font-semibold hover:bg-content2">
           <ArrowLeft className="size-4" />
           {t("sheet.back")}
-        </Link>
+        </Card>
       </div>
     );
   }
@@ -123,7 +124,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-end gap-2">
-          <div className="flex flex-wrap items-center gap-2 rounded-lg border border-border1 bg-content2 px-2 py-1">
+          <Card tone="secondary" radius="md" padding="sm" className="flex-row flex-wrap items-center">
             <Switch isSelected={autosave} onChange={setAutosave} aria-label={t("sheet.autosave")}>
               <Switch.Content>
                 <Switch.Control>
@@ -144,8 +145,8 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
                 {t("characterSheets.list.retry")}
               </Button>
             ) : null}
-          </div>
-          <div className="flex items-center rounded-lg bg-content2 p-0.5" role="group">
+          </Card>
+          <Card tone="secondary" radius="md" padding="none" spotlight={false} className="flex-row items-center !p-0.5" role="group">
             <Button
               size="sm"
               variant={sheet.mode === "create" ? "primary" : "ghost"}
@@ -166,7 +167,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
               <Swords className="size-4" />
               {t("mode.career")}
             </Button>
-          </div>
+          </Card>
           <Button size="sm" variant="outline" className="gap-2" onPress={async () => {
             const copy = await duplicate();
             if (copy) router.push(`/character-sheet/${copy.id}/basics`);
@@ -209,7 +210,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
         </div>
       </div>
       {modeErrors.length && !showErrorsInModal ? (
-        <div className="rounded-lg border border-error bg-content2 p-3 text-sm text-error">
+        <Card tone="danger" radius="md" padding="sm" className="bg-content2 text-sm">
           <p className="font-semibold">{t("mode.blocked")}</p>
           <ul className="mt-2 space-y-1 pl-4">
             {modeErrors.map((error) => (
@@ -218,7 +219,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
               </li>
             ))}
           </ul>
-        </div>
+        </Card>
       ) : null}
       <Modal
         isOpen={pendingMode !== null}
@@ -234,7 +235,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
                 {pendingMode === "career" ? t("mode.confirmCareerBody") : t("mode.confirmEditBody")}
               </p>
               {showErrorsInModal ? (
-                <div className="rounded-lg border border-error/60 bg-error/5 p-3 text-sm text-error">
+                <Card tone="danger" radius="md" padding="sm" className="bg-error/5 text-sm">
                   <p className="font-semibold">{t("mode.blocked")}</p>
                   <ul className="mt-2 max-h-48 space-y-1 overflow-y-auto pl-4">
                     {modeErrors.map((error) => (
@@ -243,7 +244,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Card>
               ) : null}
               <ModalShortcutFooter
                 cancelLabel={t("mode.cancelSwitch")}

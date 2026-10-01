@@ -8,42 +8,51 @@ import {
   suppressiveMarginHits,
 } from "./suppressive-fire-resolution.ts";
 
-test("suppressiveHitDieSides floors burst ammo over target count", () => {
-  assert.equal(suppressiveHitDieSides(20, 1), 20);
-  assert.equal(suppressiveHitDieSides(20, 2), 10);
+test("suppressiveHitDieSides is remaining unassigned ammo", () => {
+  assert.equal(suppressiveHitDieSides(20), 20);
+  assert.equal(suppressiveHitDieSides(7), 7);
+  assert.equal(suppressiveHitDieSides(0), 0);
 });
 
 test("suppressiveMarginHits is attack total minus hit difficulty", () => {
   assert.equal(suppressiveMarginHits(16, 15), 1);
+  assert.equal(suppressiveMarginHits(19, 10), 9);
 });
 
-test("resolveSuppressiveHitCount uses max of die roll and margin", () => {
-  const raised = resolveSuppressiveHitCount({
-    dieSides: 20,
-    marginHits: 1,
-    burstUnassigned: 10,
-    rng: () => 0.99,
+test("resolveSuppressiveHitCount is min of 1d(remaining) and success count", () => {
+  const capped = resolveSuppressiveHitCount({
+    ammoRemainingUnassigned: 30,
+    successCount: 9,
+    rng: () => 0.5,
   });
-  assert.equal(raised.dieRoll, 20);
-  assert.equal(raised.hits, 10);
+  assert.equal(capped.dieSides, 30);
+  assert.equal(capped.dieRoll, 16);
+  assert.equal(capped.hits, 9);
 
-  const floor = resolveSuppressiveHitCount({
-    dieSides: 10,
-    marginHits: 4,
-    burstUnassigned: 10,
+  const lowRoll = resolveSuppressiveHitCount({
+    ammoRemainingUnassigned: 10,
+    successCount: 4,
     rng: () => 0,
   });
-  assert.equal(floor.dieRoll, 1);
-  assert.equal(floor.hits, 4);
+  assert.equal(lowRoll.dieRoll, 1);
+  assert.equal(lowRoll.hits, 1);
 
-  const noMargin = resolveSuppressiveHitCount({
-    dieSides: 15,
-    marginHits: 0,
-    burstUnassigned: 30,
+  const afterOtherHits = resolveSuppressiveHitCount({
+    ammoRemainingUnassigned: 5,
+    successCount: 1,
     rng: () => 0.99,
   });
-  assert.equal(noMargin.dieRoll, 15);
-  assert.equal(noMargin.hits, 0);
+  assert.equal(afterOtherHits.dieSides, 5);
+  assert.equal(afterOtherHits.dieRoll, 5);
+  assert.equal(afterOtherHits.hits, 1);
+
+  const noSuccess = resolveSuppressiveHitCount({
+    ammoRemainingUnassigned: 15,
+    successCount: 0,
+    rng: () => 0.99,
+  });
+  assert.equal(noSuccess.dieRoll, 15);
+  assert.equal(noSuccess.hits, 0);
 });
 
 test("rollAgilitySaveAgainstSuppress uses REF and athletics", () => {

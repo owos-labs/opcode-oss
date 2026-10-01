@@ -2,6 +2,7 @@ import { isActionLegal } from "../combat-ai/action-feasibility.ts";
 import type { ScoredActionOption } from "../combat-ai/planning.ts";
 import type { PlanningPayload } from "./build-planning-payload.ts";
 import { remainingMoveBudgetMeters } from "./movement.ts";
+import { walkPathMeters } from "../combat-ai/walk-path.ts";
 import type { CombatSnapshot } from "./snapshot.ts";
 
 const EPS = 1e-6;
@@ -23,12 +24,16 @@ export function planActionLegalAtSnapshot(
     if (option.tile === 0) return true;
     const dest = payload.stancePositions[option.tile];
     if (!dest) return false;
-    const dist = Math.hypot(dest.x - snapshot.position.x, dest.y - snapshot.position.y);
-    return dist <= remainingMoveBudgetMeters(snapshot.mov, snapshot.metersMovedThisRound) + EPS;
+    const budget = remainingMoveBudgetMeters(snapshot.mov, snapshot.metersMovedThisRound);
+    const dist = walkPathMeters(snapshot.position, dest, payload.walls ?? [], {
+      cellSize: 1,
+      maxMeters: budget,
+    });
+    return dist != null && dist <= budget + EPS;
   }
 
   if (option.kindId === "standard_fire" || option.kindId === "suppressive_fire") {
-    return snapshot.ammo.roundsInMagazine > 0;
+    return (snapshot.ammo?.roundsInMagazine ?? 0) > 0;
   }
 
   return true;

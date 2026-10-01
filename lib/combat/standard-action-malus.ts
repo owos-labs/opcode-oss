@@ -1,4 +1,5 @@
 import { ACTION_KINDS } from "../combat-ai/action-feasibility.ts";
+import type { FireModeId } from "../combat-ai/combat-policy.ts";
 import type { RoundPlan } from "../combat-ai/decide.ts";
 import { maxStandardActionsInRound, unifiedStandardActionMalus } from "./initiative.ts";
 
@@ -9,6 +10,10 @@ export function isStandardActionKind(kindIndex: number): boolean {
 
 export function standardActionsDeclaredInPlan(plan: RoundPlan): number {
   return plan.actions.filter((a) => isStandardActionKind(a.kind)).length;
+}
+
+export function standardFiresDeclaredInPlan(plan: RoundPlan): number {
+  return plan.actions.filter((a) => ACTION_KINDS[a.kind] === "standard_fire").length;
 }
 
 /** 轮初声明的标准动作数：计划内标准动作，且不超过当前主动性买得起的段数（1.7）。 */
@@ -65,16 +70,31 @@ export function priorStandardFireRoundsThisRound(
 
 export function rangedAttackMalusParts(input: {
   declaredStandardActions: number;
+  /** Planned standard_fire actions this round (default: same as declaredStandardActions). */
+  declaredStandardFiresInRound?: number;
   /** Rounds already fired this combat round before this action. */
   priorStandardFiresThisRound: number;
   /** Rounds consumed by this action (1 for standard_fire, ROF/20 for suppress). */
   roundsThisAction?: number;
+  fireMode?: FireModeId;
 }): { unified: number; consecutiveFire: number } {
   const prior = Math.max(0, input.priorStandardFiresThisRound);
   const rounds = Math.max(1, input.roundsThisAction ?? 1);
+  const declaredFires = Math.max(
+    0,
+    input.declaredStandardFiresInRound ?? input.declaredStandardActions,
+  );
+  if (
+    input.fireMode === "semi" &&
+    declaredFires <= 1 &&
+    prior === 0
+  ) {
+    return { unified: 0, consecutiveFire: 0 };
+  }
+  const consecutiveFire = -3 * (prior + rounds - 1);
   return {
     unified: unifiedStandardActionMalus(input.declaredStandardActions),
-    consecutiveFire: -3 * (prior + rounds - 1),
+    consecutiveFire: consecutiveFire || 0,
   };
 }
 

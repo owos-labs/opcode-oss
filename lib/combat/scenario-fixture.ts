@@ -16,6 +16,7 @@ export function defaultCombatSnapshot(overrides?: Partial<CombatSnapshot>): Comb
     actorId: "npc-1",
     position: { x: 0, y: 0 },
     mov: 10,
+    attackBonus: 10,
     initiativeTotal: 21,
     initiativeRemaining: 21,
     metersMovedThisRound: 0,
@@ -46,6 +47,7 @@ export function defaultCombatSnapshot(overrides?: Partial<CombatSnapshot>): Comb
       profileId: "trained",
       allowNpcSurrender: false,
       surrenderThreshold: -Infinity,
+      mission: "hunt",
     },
     throwable: {
       rangeM: 30,
@@ -66,7 +68,7 @@ export function exactLocalizationSnapshot(): CombatSnapshot {
         coverId: null,
       },
     ],
-    encounter: { profileId: "expert", allowNpcSurrender: false, surrenderThreshold: -Infinity },
+    encounter: { profileId: "expert", allowNpcSurrender: false, surrenderThreshold: -Infinity, mission: "hunt" },
   });
 }
 

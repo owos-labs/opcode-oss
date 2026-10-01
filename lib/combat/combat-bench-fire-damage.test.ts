@@ -76,6 +76,123 @@ test("resolveBenchStandardFire writes the ranged check breakdown", () => {
   assert.match(result.lines[0] ?? "", /1d10\[1\]\+4专精\+3技能-3惩罚（连续射击）=5/);
 });
 
+test("resolveBenchStandardFire still damages through concealment-only cover", () => {
+  let n = 0;
+  const rng = () => {
+    n++;
+    if (n === 1) return 0.95;
+    return 0.5;
+  };
+
+  const result = resolveBenchStandardFire({
+    ...fireInput,
+    map: {
+      walls: [],
+      barriers: [
+        {
+          id: "bush-e0",
+          a: { x: 3, y: -2 },
+          b: { x: 3, y: 2 },
+          armorRating: 15,
+          maxSsp: 10,
+          currentSsp: 10,
+          blocksVision: false,
+        },
+        {
+          id: "bush-e2",
+          a: { x: 4, y: -2 },
+          b: { x: 4, y: 2 },
+          armorRating: 15,
+          maxSsp: 10,
+          currentSsp: 10,
+          blocksVision: false,
+        },
+      ],
+      solveBounds: null,
+      emplacements: [],
+    },
+    rng,
+  });
+
+  assert.match(result.lines[0] ?? "", /命中/);
+  assert.ok(result.healthByPlacementId.tgt!.current! < 20);
+  assert.ok(!(result.lines[1] ?? "").includes("→ 0伤"));
+});
+
+test("resolveBenchStandardFire auto walk-your-fire is X-1 hits from one roll", () => {
+  let n = 0;
+  const rng = () => {
+    n++;
+    if (n === 1) return 0.95;
+    return 0.5;
+  };
+
+  const result = resolveBenchStandardFire({
+    ...fireInput,
+    attackBonus: 10,
+    snapshot: defaultCombatSnapshot({
+      encounter: {
+        profileId: "expert",
+        allowNpcSurrender: false,
+        surrenderThreshold: -Infinity,
+        mission: "hunt",
+      },
+      weapon: {
+        rangeM: 400,
+        rateOfFire: 1200,
+        accuracy: -2,
+        semiAutoOrBetter: true,
+        availableFireModes: ["auto"],
+        defaultFireMode: "auto",
+      },
+      ammo: {
+        penetration: 55,
+        damageDiceExpr: "3d6",
+        expectedDamageDice: 3,
+        roundsInMagazine: 20,
+      },
+      targets: fireInput.snapshot.targets,
+    }),
+    rng,
+  });
+
+  assert.match(result.lines[0] ?? "", /全自动\d+发 走火-5 命中1/);
+  assert.equal(result.diceRolls.filter((r) => r.subjectLabel.includes("伤害")).length, 1);
+  assert.ok(result.healthByPlacementId.tgt!.current! < 20);
+});
+
+test("resolveBenchStandardFire applies walk-your-fire to the attack check", () => {
+  const result = resolveBenchStandardFire({
+    ...fireInput,
+    attackBonus: 9,
+    attackTerms: [
+      { value: 3, label: "技能" },
+      { value: 6, label: "属性" },
+    ],
+    snapshot: defaultCombatSnapshot({
+      weapon: {
+        rangeM: 400,
+        rateOfFire: 900,
+        accuracy: 0,
+        semiAutoOrBetter: true,
+        availableFireModes: ["auto"],
+        defaultFireMode: "auto",
+      },
+      ammo: {
+        penetration: 55,
+        damageDiceExpr: "3d6",
+        expectedDamageDice: 3,
+        roundsInMagazine: 30,
+      },
+      targets: fireInput.snapshot.targets,
+    }),
+    rng: () => 0.6,
+  });
+  assert.match(result.lines[0] ?? "", /1d10\[7\]\+3技能\+6属性-3惩罚（走火）=13 vs 难度15/);
+  assert.match(result.lines[0] ?? "", /未中/);
+  assert.equal(result.healthByPlacementId.tgt!.current, 20);
+});
+
 test("resolveBenchStandardFire rolls damage after hit", () => {
   let n = 0;
   const rng = () => {
@@ -276,7 +393,7 @@ test("resolveBenchSuppressiveFire damages only when agility save fails", () => {
   assert.ok(fail.lines.some((line) => line.includes("失败")));
 });
 
-test("resolveBenchSuppressiveFire hit count is max of 1d(burst/n) and margin over hit difficulty", () => {
+test("resolveBenchSuppressiveFire hit count is min of 1d(remaining ammo) and success count", () => {
   let n = 0;
   const rng = () => {
     n++;
@@ -309,5 +426,45 @@ test("resolveBenchSuppressiveFire hit count is max of 1d(burst/n) and margin ove
   });
 
   assert.ok(result.lines.some((line) => line.includes("射击检定") && line.includes("=16")));
-  assert.ok(result.lines.some((line) => /压制次数：max\(1d20\[1\], 胜出1\)/.test(line)));
+  assert.ok(result.lines.some((line) => /压制次数：min\(1d20\[1\], 成功1\)/.test(line)));
+});
+
+test("resolveBenchSuppressiveFire damage rolls apply armor at hit part", () => {
+  let n = 0;
+  const rng = () => {
+    n++;
+    if (n === 1) return 0.95;
+    if (n === 2) return 0;
+    return 0;
+  };
+
+  const result = resolveBenchSuppressiveFire({
+    snapshot: defaultCombatSnapshot({
+      ammo: {
+        penetration: 5,
+        damageDiceExpr: "3d6",
+        expectedDamageDice: 3,
+        roundsInMagazine: 30,
+      },
+      targets: [
+        {
+          id: "tgt",
+          position: { x: 6, y: 0 },
+          localization: "full",
+          armorByPart: { torso: 40 },
+          coverId: null,
+        },
+      ],
+    }),
+    map: { walls: [], barriers: [], solveBounds: null, emplacements: [] },
+    healthByPlacementId: { tgt: { current: 40, max: 40 } },
+    actorLabel: "A",
+    targetLabel: () => "T",
+    targetReflexSave: () => ({ ref: 0, athletics: 0 }),
+    attackBonus: 30,
+    roundsSpent: 30,
+    rng,
+  });
+
+  assert.ok(result.lines.some((line) => line.includes("AR40") && line.includes("欠穿")));
 });

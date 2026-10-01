@@ -4,7 +4,7 @@ import type { Vec2 } from "../../combat-ai/visibility.ts";
 import { coverHeightBandFromFraction } from "../cover-height.ts";
 import type { MapSegmentDto } from "./types.ts";
 
-export type SvgMapElementType = "bounding_box" | "barrier" | "concealment";
+export type SvgMapElementType = "bounding_box" | "barrier" | "concealment" | "room";
 
 export type SvgCompileOptions = {
   /** Meters per SVG user unit; default viewBox width → 100m. */
@@ -29,6 +29,11 @@ export type ParsedSvgShape = {
 export type SvgMapGeometry = {
   barriers: BallisticBarrier[];
   solveBounds: MapSolveBounds | null;
+  roomRings: { id: string; ring: Vec2[] }[];
+  visionRings: Vec2[][];
+  /** Barrier + concealment outlines. Vehicles/cover block walk, not necessarily vision. */
+  walkRings: Vec2[][];
+  metersPerUnit: number;
 };
 
 const TAG_RE = /<(rect|path)\b([^>]*)\/?>/gi;
@@ -49,10 +54,17 @@ function num(v: string | undefined, fallback: number): number {
   return Number.isFinite(n) ? n : fallback;
 }
 
-function viewBoxMetersPerUnit(svg: string): number {
+function viewBoxMetersPerUnit(svg: string, widthMeters = 100): number {
   const m = /viewBox="[\d.]+\s+[\d.]+\s+([\d.]+)\s+[\d.]+"/i.exec(svg);
   const w = m ? Number(m[1]) : 1000;
-  return 100 / Math.max(w, 1);
+  return widthMeters / Math.max(w, 1);
+}
+
+function inferShapeKind(attrs: Record<string, string>): SvgMapElementType {
+  const t = attrs.type;
+  if (t === "bounding_box" || t === "barrier" || t === "concealment" || t === "room") return t;
+  if (/^#ffcc24$/i.test(attrs.fill ?? "")) return "room";
+  return "barrier";
 }
 
 /** Logical cover height on barrier/concealment (not SVG rect pixel height). */
@@ -136,13 +148,13 @@ function shapeMeta(
   attrs: Record<string, string>,
   tag: "rect" | "path",
 ): Omit<ParsedSvgShape, "id" | "ring"> {
-  const kind = (attrs.type ?? "barrier") as SvgMapElementType;
-  const ar = num(attrs.ar, kind === "bounding_box" ? 0 : 15);
-  const ssp = num(attrs.ssp, kind === "bounding_box" ? 0 : 100);
+  const kind = inferShapeKind(attrs);
+  const ar = num(attrs.ar, kind === "bounding_box" || kind === "room" ? 0 : 15);
+  const ssp = num(attrs.ssp, kind === "bounding_box" || kind === "room" ? 0 : 100);
   const coverF = parseCoverHeightFraction(attrs, tag);
   const coverHeightBand =
-    coverF !== undefined ? coverHeightBandFromFraction(coverF) : "none";
-  const blocksVision = kind === "concealment" ? false : kind !== "bounding_box";
+    coverF !== undefined ? coverHeightBandFromFraction(coverF) : kind === "barrier" ? "full" : "none";
+  const blocksVision = kind === "barrier";
   return { kind, ar, ssp, coverHeightBand, blocksVision };
 }
 
@@ -154,8 +166,6 @@ export function parseSvgMapShapes(svg: string, options?: SvgCompileOptions): Par
   for (const match of svg.matchAll(TAG_RE)) {
     const tag = match[1]!.toLowerCase() as "rect" | "path";
     const attrs = parseAttrs(match[2] ?? "");
-    const kind = (attrs.type ?? "barrier") as SvgMapElementType;
-
     const id = attrs.name || attrs.id || `${tag}-${index++}`;
     const meta = shapeMeta(attrs, tag);
     let ring: Vec2[] = [];
@@ -195,7 +205,11 @@ export function compileSvgMapGeometry(
   svg: string,
   options?: SvgCompileOptions,
 ): SvgMapGeometry {
+  const mpu = options?.metersPerUnit ?? viewBoxMetersPerUnit(svg);
   const barriers: BallisticBarrier[] = [];
+  const roomRings: { id: string; ring: Vec2[] }[] = [];
+  const visionRings: Vec2[][] = [];
+  const walkRings: Vec2[][] = [];
   let solveBounds: MapSolveBounds | null = null;
 
   for (const shape of parseSvgMapShapes(svg, options)) {
@@ -203,10 +217,20 @@ export function compileSvgMapGeometry(
       solveBounds = ringBounds(shape.ring);
       continue;
     }
-    barriers.push(...ringToBarriers(shape));
+    if (shape.kind === "room") {
+      roomRings.push({ id: shape.id, ring: shape.ring });
+      continue;
+    }
+    if (shape.kind === "concealment" || shape.kind === "barrier") {
+      barriers.push(...ringToBarriers(shape));
+      if (shape.ring.length >= 3) {
+        walkRings.push(shape.ring);
+        if (shape.blocksVision) visionRings.push(shape.ring);
+      }
+    }
   }
 
-  return { barriers, solveBounds };
+  return { barriers, solveBounds, roomRings, visionRings, walkRings, metersPerUnit: mpu };
 }
 
 export function compileSvgToSegments(svg: string, options?: SvgCompileOptions): MapSegmentDto[] {

@@ -20,12 +20,24 @@ import {
 export { LOCALES, type Locale };
 const LOCALE_KEY = "opcode.locale";
 
+function syncLocaleCookie(locale: Locale) {
+  if (typeof document === "undefined") return;
+  document.cookie = `${LOCALE_KEY}=${locale};path=/;max-age=31536000;SameSite=Lax`;
+}
+
 const chrome = {
   en: {
     "nav.combat": "Combat",
     "nav.sheets": "Characters",
-    "nav.lore": "Lore",
+    "nav.lore": "Rulebook",
     "nav.coming": "Not built yet.",
+    "lore.contribute": "We're open source on GitHub. Contribute!",
+    "lore.meta.by": "By",
+    "lore.meta.lastUpdated": "Last updated",
+    "lore.toc": "On this page",
+    "lore.search": "Search chapters",
+    "lore.searchEmpty": "No chapters match your search.",
+    "lore.group.extensions": "Extensions",
     "combat.nav.overview": "Overview",
     "combat.nav.test": "Map test",
     "combat.overview.lead": "Combat round UI is in progress. Use the map test bench for the placeholder encounter layout.",
@@ -34,6 +46,9 @@ const chrome = {
     "combat.test.actors": "Runtime actors (meters)",
     "combat.test.cliHint": "Terminal: pnpm combat:check -- --map svg",
     "combat.bench.lead": "Drag local character sheets onto the map, pick the AI unit, start a round, then step through the planned actions.",
+    "combat.bench.mapLabel": "Map",
+    "combat.bench.map.sample": "Sample",
+    "combat.bench.map.connectedWalls": "Connected walls",
     "combat.bench.presets": "Local sheets",
     "combat.bench.noSheets": "No character sheets in browser storage yet.",
     "combat.bench.noSheetsHint": "Import a .json export, or create a sheet under Characters (saved to this browser).",
@@ -44,6 +59,9 @@ const chrome = {
     "combat.bench.placeFailed": "Could not deploy: sheet data missing. Import again or refresh.",
     "combat.bench.onMap": "On map",
     "combat.bench.toggleTeam": "Toggle friendly / hostile",
+    "combat.bench.removeUnit": "Remove unit",
+    "combat.bench.teamLabel": "Faction",
+    "combat.bench.err.need_two_factions": "Need at least two factions.",
     "combat.bench.startRound": "Start combat round",
     "combat.bench.step": "Step",
     "combat.bench.resetRound": "Reset round",
@@ -53,9 +71,9 @@ const chrome = {
     "combat.bench.err.need_decider": "Select which unit the AI controls.",
     "combat.bench.err.need_target": "Need at least one other unit as target.",
     "combat.bench.difficultyLabel": "NPC difficulty",
-    "combat.bench.difficulty.newstupid": "New / stupid",
-    "combat.bench.difficulty.novice": "Novice",
-    "combat.bench.difficulty.trained": "Trained",
+    "combat.bench.difficulty.newstupid": "Easy",
+    "combat.bench.difficulty.novice": "Normal",
+    "combat.bench.difficulty.trained": "Hard",
     "combat.bench.difficulty.expert": "Expert",
     "combat.bench.difficulty.professional": "Professional",
     "combat.bench.intentsTitle": "Round plan",
@@ -177,8 +195,15 @@ const chrome = {
   zh: {
     "nav.combat": "战斗轮",
     "nav.sheets": "角色",
-    "nav.lore": "资料",
+    "nav.lore": "规则书",
     "nav.coming": "尚未实现。",
+    "lore.contribute": "我们在 Github 上开源。加入贡献！",
+    "lore.meta.by": "作者",
+    "lore.meta.lastUpdated": "最后更新",
+    "lore.toc": "本章目录",
+    "lore.search": "搜索章节",
+    "lore.searchEmpty": "没有匹配的章节。",
+    "lore.group.extensions": "扩展规则",
     "combat.nav.overview": "概览",
     "combat.nav.test": "地图测试",
     "combat.overview.lead": "战斗轮界面仍在搭建。地图测试页提供占位遭遇布局。",
@@ -187,6 +212,9 @@ const chrome = {
     "combat.test.actors": "Runtime 单位（米）",
     "combat.test.cliHint": "终端：pnpm combat:check -- --map svg",
     "combat.bench.lead": "把本地角色卡拖到地图上，指定 AI 控制单位，开始战斗轮并逐步执行计划动作。",
+    "combat.bench.mapLabel": "地图",
+    "combat.bench.map.sample": "样例",
+    "combat.bench.map.connectedWalls": "相连墙体",
     "combat.bench.presets": "本地角色卡",
     "combat.bench.noSheets": "浏览器里还没有角色卡。",
     "combat.bench.noSheetsHint": "可导入 .json，或在「角色」里新建（会保存在本浏览器）。",
@@ -197,6 +225,9 @@ const chrome = {
     "combat.bench.placeFailed": "无法放置：找不到角色数据，请重新导入或刷新。",
     "combat.bench.onMap": "已在图上",
     "combat.bench.toggleTeam": "切换友军 / 敌军",
+    "combat.bench.removeUnit": "移除单位",
+    "combat.bench.teamLabel": "阵营",
+    "combat.bench.err.need_two_factions": "至少需要两个不同阵营。",
     "combat.bench.startRound": "开始战斗轮",
     "combat.bench.step": "步进",
     "combat.bench.resetRound": "重置本轮",
@@ -206,9 +237,9 @@ const chrome = {
     "combat.bench.err.need_decider": "请选择 AI 控制的单位。",
     "combat.bench.err.need_target": "至少还需要一个目标单位。",
     "combat.bench.difficultyLabel": "NPC 难度",
-    "combat.bench.difficulty.newstupid": "新手 / 愚钝",
-    "combat.bench.difficulty.novice": "入门",
-    "combat.bench.difficulty.trained": "训练有素",
+    "combat.bench.difficulty.newstupid": "简单",
+    "combat.bench.difficulty.novice": "普通",
+    "combat.bench.difficulty.trained": "困难",
     "combat.bench.difficulty.expert": "专家",
     "combat.bench.difficulty.professional": "职业",
     "combat.bench.intentsTitle": "本轮意图",
@@ -471,8 +502,15 @@ const chrome = {
   ja: {
     "nav.combat": "戦闘",
     "nav.sheets": "キャラクター",
-    "nav.lore": "資料",
+    "nav.lore": "ルールブック",
     "nav.coming": "まだありません。",
+    "lore.contribute": "GitHub でオープンソース。コントリビュートしよう！",
+    "lore.meta.by": "作者",
+    "lore.meta.lastUpdated": "最終更新",
+    "lore.toc": "このページ",
+    "lore.search": "章を検索",
+    "lore.searchEmpty": "一致する章がありません。",
+    "lore.group.extensions": "拡張ルール",
     "combat.nav.overview": "概要",
     "combat.nav.test": "マップテスト",
     "combat.overview.lead": "戦闘ラウンド UI は作業中です。マップテストでプレースホルダー遭遇を確認できます。",
@@ -481,6 +519,9 @@ const chrome = {
     "combat.test.actors": "Runtime ユニット（m）",
     "combat.test.cliHint": "ターミナル: pnpm combat:check -- --map svg",
     "combat.bench.lead": "ローカルシートをマップにドラッグし、AI ユニットを選んでラウンド開始→ステップ実行。",
+    "combat.bench.mapLabel": "マップ",
+    "combat.bench.map.sample": "サンプル",
+    "combat.bench.map.connectedWalls": "接続ウォール",
     "combat.bench.presets": "ローカルシート",
     "combat.bench.noSheets": "このブラウザにシートがありません。",
     "combat.bench.noSheetsHint": ".json をインポートするか、キャラクターで新規作成してください（このブラウザに保存）。",
@@ -491,6 +532,9 @@ const chrome = {
     "combat.bench.placeFailed": "配置できません。再インポートまたは更新してください。",
     "combat.bench.onMap": "配置済み",
     "combat.bench.toggleTeam": "友軍 / 敵を切替",
+    "combat.bench.removeUnit": "ユニットを削除",
+    "combat.bench.teamLabel": "陣営",
+    "combat.bench.err.need_two_factions": "陣営を 2 つ以上用意してください。",
     "combat.bench.startRound": "戦闘ラウンド開始",
     "combat.bench.step": "ステップ",
     "combat.bench.resetRound": "ラウンドリセット",
@@ -500,9 +544,9 @@ const chrome = {
     "combat.bench.err.need_decider": "AI 操作ユニットを選んでください。",
     "combat.bench.err.need_target": "ターゲットが 1 体以上必要です。",
     "combat.bench.difficultyLabel": "NPC 難易度",
-    "combat.bench.difficulty.newstupid": "新米 / 愚鈍",
-    "combat.bench.difficulty.novice": "初級",
-    "combat.bench.difficulty.trained": "訓練済み",
+    "combat.bench.difficulty.newstupid": "簡単",
+    "combat.bench.difficulty.novice": "普通",
+    "combat.bench.difficulty.trained": "困難",
     "combat.bench.difficulty.expert": "エキスパート",
     "combat.bench.difficulty.professional": "プロ",
     "combat.bench.intentsTitle": "ラウンドプラン",
@@ -526,6 +570,8 @@ const chrome = {
     "list.groupPrompt": "グループ名",
     "list.groupSave": "グループを保存",
     "list.groupDropHint": "ここにドロップ",
+    "characterSheets.list.heroLine1": "キャラクター",
+    "characterSheets.list.heroLine2": "デザイナー",
     "sheet.basics": "基本",
     "sheet.attributes": "能力",
     "sheet.inventory": "所持品",
@@ -721,10 +767,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   });
   useEffect(() => {
     applyLang(locale);
+    syncLocaleCookie(locale);
   }, [locale]);
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);
     window.localStorage.setItem(LOCALE_KEY, next);
+    syncLocaleCookie(next);
   }, []);
   const t = useCallback(
     (key: string, params?: Record<string, unknown>) =>

@@ -13,9 +13,10 @@ import {
   targetCoverHitDifficultyAdd,
 } from "./localization.ts";
 import { rangeBandDifficulty } from "./range-difficulty.ts";
+import { hasLineOfSight } from "../combat-ai/visibility.ts";
 
 /** Map cover benefit radius for units not using enter_cover (m). */
-export const MAP_COVER_BENEFIT_RADIUS_M = 3;
+export const MAP_COVER_BENEFIT_RADIUS_M = 1;
 
 const EPS = 1e-9;
 
@@ -43,7 +44,7 @@ export function enteredCoverBlocksRangedShot(input: {
   return rayCoverHitT(input.shooter, input.target, cover) !== null;
 }
 
-/** Permanent map cover on LOF when the defender is within 3m and did not enter cover. */
+/** Permanent map cover on LOF when the defender is within 1m and did not enter cover. */
 export function mapCoverBandOnLineOfEffect(input: {
   shooter: Vec2;
   target: Vec2;
@@ -58,7 +59,7 @@ export function mapCoverBandOnLineOfEffect(input: {
   let bestAdd = 0;
   for (const hit of hits) {
     const barrier = input.barriers.find((b) => b.id === hit.barrierId);
-    const band = barrier?.coverHeightBand;
+    const band = barrier?.coverHeightBand ?? (barrier?.blocksVision ? "full" : undefined);
     if (!band || band === "none") continue;
     if (!barrier || !isWithinMapCoverBenefitRadius(input.target, barrier, radius)) continue;
     const add = coverHeightHitDifficultyAdd(band);
@@ -108,7 +109,9 @@ export function rangedAttackDifficultyForTarget(input: {
   const dist = Math.hypot(input.target.x - input.shooter.x, input.target.y - input.shooter.y);
   const range = rangeBandDifficulty(dist, input.weaponRangeM);
 
-  let effectiveLocalization = input.localization;
+  let effectiveLocalization = input.localization === "full" && !hasLineOfSight(
+    input.shooter, input.target, input.barriers.filter(b => b.blocksVision),
+  ) ? "exact" : input.localization;
   let localization = localizationHitDifficultyAdd(effectiveLocalization);
   let cover = 0;
 

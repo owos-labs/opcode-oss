@@ -189,7 +189,8 @@
     },
     "saves": {
       "stun": "Stun save",
-      "death": "Death save"
+      "death": "Death save",
+      "vs": "vs {value}"
     },
     "units": {
       "meters": " m"
@@ -209,7 +210,9 @@
       "emptyTitle": "No character sheets yet",
       "emptyDescription": "Create your first character sheet to take a character into the story.",
       "noSearchResults": "No sheets match this search",
-      "searchEmptyHint": "Try another term, or clear the search and filters."
+      "searchEmptyHint": "Try another term, or clear the search and filters.",
+      "heroLine1": "Character",
+      "heroLine2": "Designer"
     },
     "view": {
       "status": "Viewing",
@@ -293,7 +296,13 @@
       "leg_left": "Left leg",
       "leg_right": "Right leg",
       "simpleHint": "One HP pool; stun at ¼ max, death at 0; nat 10 = headshot (×2).",
-      "normalHint": "HP per body part with destroy/separate, stun track, and death saves."
+      "normalHint": "HP per body part with destroy/separate, stun track, and death saves.",
+      "vitalsToolbar": "Stun & saves",
+      "stunGauge": "Stun track",
+      "stunPenalty": "Stun penalty −{value}",
+      "unconscious": "Unconscious",
+      "deathSaveActive": "Death saves",
+      "dead": "Dead"
     },
     "skillGroups": {
       "general": {

@@ -28,6 +28,7 @@ import {
 import { useEffect, useRef, type ReactNode } from "react";
 
 import { useSheetApp } from "@/app/components/sheet-app";
+import { Card } from "@/app/components/card";
 import { useT } from "@/lib/character-sheets/i18n";
 import { imageFileFromDataTransfer, opfsImageSrc, parseOpfsImageSrc } from "@/lib/character-sheets/images";
 
@@ -149,7 +150,7 @@ export function MarkdownEditor({
         {icon ? <span className="text-foreground/50">{icon}</span> : null}
         {label}
       </span>
-      <div className="overflow-hidden rounded-lg border border-border1 bg-content3 shadow1">
+      <Card radius="md" padding="none" className="overflow-hidden">
         <div className="flex flex-wrap items-center gap-0.5 border-b border-border1 p-1" role="toolbar" aria-label={label}>
           <Tool label={t("editor.bold")} active={editor?.isActive("bold")} onClick={() => editor?.chain().focus().toggleBold().run()}>
             <Bold className="size-4" />
@@ -197,7 +198,7 @@ export function MarkdownEditor({
           />
         </div>
         <EditorContent editor={editor} className="px-4 py-3" />
-      </div>
+      </Card>
     </div>
   );
 }

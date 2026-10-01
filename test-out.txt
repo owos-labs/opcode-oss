@@ -1,0 +1,1068 @@
+﻿
+> opcode-tools@0.1.0 test D:\awesome-project\opcode
+> node --experimental-strip-types --import ./scripts/register-ts.mjs --test **/*.test.ts
+
+(node:44716) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44716) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44716) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/compliance-errors.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö listCareerComplianceErrors keeps distinct inventory paths (21.1698ms)
+Γ£ö formatComplianceErrorLine includes item and field context (0.9461ms)
+(node:40576) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40576) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40576) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/i18n.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö zh locale mirrors en keys for attributes glossaries (30.4534ms)
+Γ£ö zh locale resolves attributes skill copy from Opcode CN glossary (1.0619ms)
+Γ£ö en locale still resolves attributes keys (0.1581ms)
+Γ£ö zh locale resolves inventory save label (5.3006ms)
+(node:40668) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40668) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40668) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/images.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö opfs image src roundtrips (1.6067ms)
+Γ£ö firstImageFile picks the first image (0.889ms)
+(node:37060) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37060) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37060) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/inventory-export-md.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö inventoryExportMarkdown lists weapon attachments and armor protection (4.9264ms)
+Γ£ö applyEditorState keeps inventory wire on export snapshot (149.3004ms)
+(node:35116) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35116) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35116) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/item-preset-dto.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö stripBaseModelFromDesc removes parenthetical base model lines (1.4633ms)
+Γ£ö normalizeItemPresetDto stores Chinese desc as locale map (1.687ms)
+Γ£ö normalizeItemPresetDto drops base_model without copying into desc (0.4283ms)
+(node:30640) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30640) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30640) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/item-presets.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö item preset catalog exposes every scaffold category (155.9176ms)
+Γ£ö placeholder ranged weapons keep per-model rate of fire (11.4887ms)
+Γ£ö placeholder ammo rounds keep listed caliber, damage, and penetration (4.6719ms)
+Γ£ö ammo presets group by caliber and other categories stay flat (7.4705ms)
+Γ£ö item preset catalog filters by keyword (14.734ms)
+Γ£ö item preset catalog reports counts for every category (15.3503ms)
+Γ£ö item preset catalog exposes metadata and single item lookup (91.8113ms)
+(node:17876) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17876) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17876) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/locale-text.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö normalizeLocaleText maps plain strings to zh or en buckets (2.8724ms)
+Γ£ö resolveLocaleText prefers active locale then falls back (0.7454ms)
+Γ£ö localizePresetUserFacingFields skips name but localizes description and effect (0.7167ms)
+(node:44996) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44996) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44996) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/model.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö moveContainerItem inserts before the target bag item (2.6026ms)
+Γ£ö moveContainerItem with no destination unassigns the item (0.3253ms)
+Γ£ö effectiveCarryKilograms adds container allowance on top of the stat maximum (0.2951ms)
+Γ£ö carriedKilograms adds weapon weight times count and the container's own weight (2.6251ms)
+Γ£ö groupItems keeps the source bag and stores the configured carry weight (0.4073ms)
+Γ£ö placeContainerItem keeps a bag that just emptied (0.2078ms)
+Γ£ö dissolveContainer removes the bag (1.1117ms)
+Γ£ö duplicateInventoryItem copies the draft beside the original (0.9163ms)
+Γ£ö reorderContainerItem swaps within a bag and no-ops at the edge (0.3536ms)
+Γ£ö sheetListLabel prefers name, then handle, then id prefix (74.8717ms)
+Γ£ö local sheets keep a normalized group for library organization (6.5872ms)
+Γ£ö parseImportedSheet reads JSON and markdown description (1.3022ms)
+Γ£ö duplicateSheet gets a new id and drops career mode (1.2783ms)
+Γ£ö readContainers / writeContainers roundtrip item ids (0.6742ms)
+Γ£ö applyEditorState writes character_id from the form (3.6641ms)
+Γ£ö toMarkdown includes metadata and inventory facts (55.0629ms)
+Γ£ö careerCompliance flags an over-budget skill spend (0.5732ms)
+(node:42172) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42172) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42172) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/opcode-health-vitals.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö opcodeStunSaveDifficulty is 10 + stun gauge (3.0429ms)
+Γ£ö opcodeDeathSaveDifficulty floors at 10 after reduction (0.2924ms)
+Γ£ö applyOpcodeVitalsAfterDamage fills stun gauge and marks unconscious at max (0.246ms)
+Γ£ö applyOpcodeVitalsAfterDamage head lethal marks dead (0.4799ms)
+Γ£ö opcodePlacementIncapacitated respects vitals flags (0.3295ms)
+(node:21068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21068) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/opcodeInventory.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö normalizeOpcodeAmmoDamageKind falls back to ball (2.0093ms)
+Γ£ö inventoryListFacts shows count and the fields that kind actually has (5.3093ms)
+Γ£ö item weight roundtrips on non-weapons and stays on the weapon block for weapons (1.6003ms)
+Γ£ö groupInventoryByKind keeps list order and skips empty kinds (0.4058ms)
+Γ£ö inventoryMoveBefore steps inside the visible group (0.9247ms)
+Γ£ö fillMagazine loads until the magazine or the stack runs out (3.1847ms)
+Γ£ö roundsForPresetLoad tops up a new or empty stack to the free slots (0.4192ms)
+Γ£ö setWeaponMagazine seats a matching magazine and rejects a different caliber (1.1242ms)
+Γ£ö installWeaponModification replaces the same slot and lists the name (1.0066ms)
+Γ£ö melee damage is the rd dice payload on the weapon (2.2213ms)
+Γ£ö attachment effects write the mod or enable_slot payload (1.756ms)
+Γ£ö calibers are written with an ascii x (0.2778ms)
+Γ£ö inventoryItemFromQuery only selects an item that exists (0.1717ms)
+(node:20032) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20032) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20032) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/opcodeSheet.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö opcodeSpecializationNameTaken ignores case and surrounding space (35.5895ms)
+(node:39720) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39720) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39720) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/sheet-catalog.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö mergeSheetsById prefers later groups and dedupes by id (64.5465ms)
+Γ£ö mergeSheetsById sorts by updated_at desc (0.965ms)
+(node:28320) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28320) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28320) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/character-sheets/sheetSaveState.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö reconcileSaveStateAfterAutosaveOff maps saving to unsaved when dirty (1.2111ms)
+Γ£ö reconcileSaveStateAfterAutosaveOff leaves saved when clean (0.259ms)
+(node:45116) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45116) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45116) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/action-feasibility.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö actionFeasibilityIndex is row-major round ├ù kind ├ù tile ├ù target (1.5734ms)
+Γ£ö iterateLegalActions only yields set bits (6.3731ms)
+(node:23424) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23424) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23424) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/actor.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö character actors raycast uses the exact position point (2.4266ms)
+(node:45024) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45024) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45024) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/armor-penetration.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö penetrationExpectation compares ammo penetration to armor rating (6.4636ms)
+Γ£ö armorRatingForPart reads protection map (0.3084ms)
+Γ£ö maxArmorRating is conservative when hit part is unknown (0.1968ms)
+Γ£ö novice tier enables armor penetration expectation (0.2748ms)
+Γ£ö newstupid ignores armor penetration planning (0.167ms)
+(node:36744) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36744) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36744) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/combat-ai.worker.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö executeWorkerDecideRequest reads detached buffers and returns a plan (4.9132ms)
+Γ£ö executeWorkerDecideRequest rejects wrong buffer length (1.0457ms)
+(node:39552) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39552) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39552) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/combat-policy.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö newstupid novice trained cannot fire at fuzzy loc (1.2773ms)
+Γ£ö professional treats fuzzy as fireable when canPenCover or grenade (0.2266ms)
+Γ£ö expert exact plus penCover counts as line of effect (Q15) (0.2107ms)
+Γ£ö action caps: trained 2, expert 3, professional initiative-bound when hit-EV positive (0.2156ms)
+Γ£ö unlocated ambush grants an extra first-round standard; located path does not (0.2248ms)
+Γ£ö professional LUK: two rerolls spend 2 points; newstupid never rerolls (0.2575ms)
+Γ£ö hit-EV uses heads for trained and below, dice EV for expert+ (0.2039ms)
+Γ£ö expert fuzzy throw/suppress is a 0.25 RNG gate (0.1623ms)
+Γ£ö fire-mode throw-back aim conceal tables follow difficulty text (0.6008ms)
+Γ£ö P3 modules do not import deleted simulation search or lethalityFocus (3.0597ms)
+(node:18248) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18248) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18248) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/cover-concealment-view.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö coverToggleCost distinguishes half-body vs full-body emplacements (3.8123ms)
+Γ£ö localizationFromSight maps LOS and boundary to D10 levels (0.3357ms)
+Γ£ö buildEmplacementTargetVis runs only after observer uses the emplacement (0.5374ms)
+Γ£ö full-body emplacement blocks full localization without LOS (0.4172ms)
+(node:41552) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41552) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41552) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/cover.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö totalCoverThicknessOnRay stacks segments on the same line (1.9211ms)
+Γ£ö novice treats any cover as a hard block regardless of penetration (1.3395ms)
+Γ£ö trained blocks when penetration is below stacked thickness (0.2558ms)
+Γ£ö trained allows damage when penetration meets thickness (0.5525ms)
+Γ£ö trained allows located shot through cover without enough penetration (0.1798ms)
+Γ£ö walls block before cover thickness is considered (0.2641ms)
+(node:39984) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39984) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39984) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/decide.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö decideRoundPlan returns snapshot metadata and one action for newstupid (4.6592ms)
+(node:42688) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42688) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42688) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/difficulty.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö NPC AI wall clock budget leaves glue time under 5s (3.0539ms)
+Γ£ö newstupid is single move xor standard without cover (0.2509ms)
+Γ£ö novice is dual action with cover and no action economy (0.1537ms)
+Γ£ö trained fills up to two initiative rounds with economy and inserts (0.1637ms)
+Γ£ö novice ignores cover thickness and located shot through cover (0.1322ms)
+Γ£ö expert and professional keep action-economy caps without lethality search fields (0.2228ms)
+Γ£ö all five difficulty ids are defined (0.1793ms)
+Γ£ö difficulty labels use τ«Çσìò / µÖ«ΘÇÜ / σ¢░ΘÜ╛ (0.1529ms)
+(node:24932) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24932) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24932) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/geometry.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö orderedBarrierHits returns hits sorted by t along the ray (11.1057ms)
+Γ£ö visionBlockingSegments keeps only blocksVision barriers (0.6754ms)
+Γ£ö rayCoverHitT returns interior hit t on a crossing segment (0.3108ms)
+Γ£ö localTacticalStances prices cells by walked path, not Euclidean through walls (43.228ms)
+Γ£ö localTacticalStances spreads candidates across the walk budget (0.6398ms)
+(node:7632) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7632) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7632) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/planning.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö mulberry32 is deterministic for a fixed seed (2.7021ms)
+Γ£ö applySurrenderGate removes surrender when disabled (1.3712ms)
+Γ£ö prepareOptionsForSearch yields legal scored cells from tensor (0.5935ms)
+Γ£ö located path marks fire as conditional timing, not an extra round (0.7046ms)
+Γ£ö fire utility is not scaled by a lethality multiplier (0.3043ms)
+Γ£ö a known movement track does not prevent moving out from behind a wall to fire (2.17ms)
+(node:40376) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40376) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40376) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/search.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö selectMoveXorStandard picks higher utility between move and standard (1.4356ms)
+Γ£ö selectDualMoveAndStandard pairs a move with a shot at that landing (1.7701ms)
+Γ£ö searchRoundPlan for newstupid uses move xor standard (0.5888ms)
+Γ£ö trained greedy same-round move happens before fire (0.303ms)
+Γ£ö trained greedy pick prefers round-0 before higher rounds (0.4503ms)
+Γ£ö searchRoundPlan for novice uses dual selection (61.272ms)
+Γ£ö newstupid search never emits both move and a standard (3.0334ms)
+Γ£ö trained search emits at most 2 standards; expert at most 3 (1.4485ms)
+Γ£ö search never fires from an unselected landing, including simple bots (0.3598ms)
+(node:37992) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37992) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37992) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/visibility.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö segmentsIntersect detects crossing walls (2.8925ms)
+Γ£ö hasLineOfSight is clear when no walls (0.4765ms)
+Γ£ö hasLineOfSight is blocked by a wall between observer and target (0.2503ms)
+Γ£ö visibleTargetIds returns only unobstructed targets (0.9902ms)
+Γ£ö computeInformationBoundary and filterIdsByBoundary share one id list (0.421ms)
+(node:38040) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38040) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38040) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat-ai/walk-path.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö walkPathMeters is straight-line when LOS is clear (3.7615ms)
+Γ£ö walkPathMeters cannot cross a long wall inside a short budget (5.8943ms)
+Γ£ö walkPathMeters goes around a short wall and costs more than Euclidean (0.9141ms)
+Γ£ö walkPathMeters can walk along a wall without treating it as a crossing (0.1546ms)
+Γ£ö expandWalkCosts does not step onto a wall to slip through (19.6039ms)
+Γ£ö expandVisibilityWalk goes around a short wall via inset corners (1.0959ms)
+Γ£ö walkPathMeters cannot leave or enter a sealed box (5.7551ms)
+Γ£ö a cover candidate on a wall edge cannot become a landing or a bridge into the wall (5.2855ms)
+Γ£ö stepAlongWalk stays inside a sealed box when the dest is outside (1.0801ms)
+Γ£ö walkWalls map frame seals a pocket at the bound corner (6.3427ms)
+Γ£ö stepAlongWalk outside a sealed box does not step inside (0.5936ms)
+Γ£ö bakeWalkWalls merges overlapping collinear walls into one (0.3478ms)
+Γ£ö bakeWalkWalls keeps a gap and parallel offset walls (0.2099ms)
+Γ£ö unionWalkRings drops internal edges of overlapping rects (0.9318ms)
+Γ£ö unionWalkRings keeps nested inner walls out of the outline (0.3945ms)
+Γ£ö walkStepPositions lands on the walked path around a wall, not the Euclidean chord (1.1377ms)
+Γ£ö walk samples next to a wall are reachable within their reported cost (0.485ms)
+Γ£ö long detours use a complete route and make progress over multiple turns (1.9323ms)
+Γ£ö leaving a deep U-shaped pocket can initially move away from the destination (1.3204ms)
+Γ£ö unreachable destinations report no route and do not invent an approach path (2.0295ms)
+Γ£ö cached geometry keeps route results independent of query budgets and map changes (1.5081ms)
+Γ£ö walk-wall reuse respects changed map boundaries (53.7947ms)
+(node:45968) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45968) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45968) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/actions/suppressive-action.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö suppression expectation includes reflex saves and never invents kill probabilities (15.9858ms)
+Γ£ö suppression shares ammo between targets and respects the remaining round quota (12.537ms)
+(node:23976) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23976) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23976) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/actor-step-action-hint.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö formatActorStepActionHint lists the slot as move and standard lines (3.6149ms)
+Γ£ö formatActorStepActionHint starts the next slot from the earlier move (0.585ms)
+Γ£ö formatActorStepActionHint explains a hold when the slot has no move (0.2379ms)
+Γ£ö actorHintSlot prefers the active turn, else the next unfinished slot (0.4628ms)
+(node:7112) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7112) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7112) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/armor-penetration-damage.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö armorAdjustedDamageDice quarters dice on under-penetration (2.0052ms)
+Γ£ö armorAdjustedDamageDice reduces dice on over-penetration with half floor (2.2455ms)
+Γ£ö applyUnderPenetrationDamageFloor enforces minimum 1 on under-pen (0.3826ms)
+(node:37552) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37552) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37552) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/attack-expectation.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö moving into vision scores the known contact without mutating or following hidden intel (8.8751ms)
+Γ£ö standard expectation counts attack faces, damage expression, critical and action penalties (1.0643ms)
+Γ£ö automatic fire expectation enumerates the execution hit rule rather than assuming two hits (0.4141ms)
+Γ£ö fire at a stale exact location cannot follow an unseen target (49.8271ms)
+(node:43168) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43168) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43168) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/ballistic.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö resolveBallisticToTarget stops when penetration below AR (8.3605ms)
+Γ£ö resolveBallisticToTarget penetrates and reduces expected dice (0.3778ms)
+Γ£ö combatBallisticHits ignores concealment and collapses crate edges to one layer (0.6646ms)
+(node:44616) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44616) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44616) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/bench-health-damage.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö opcodeHitPartFromD10 matches Opcode σüÑσ║╖τ│╗τ╗ƒ d10 Φí¿ (1.861ms)
+Γ£ö applyDamageToBenchPlacement simple mode doubles on natural 10 (49.6394ms)
+Γ£ö applyDamageToBenchPlacement normal mode subtracts from hit part (5.4979ms)
+Γ£ö applyDamageToBenchPlacement simple zero hp starts death saves and fills stun (20.5689ms)
+Γ£ö applyDamageToBenchPlacement head destroyed neutralizes total (0.533ms)
+Γ£ö initBenchPlacementHealth loads per-part pools for normal sheets (2.2049ms)
+Γ£ö rollOpcodeD10 covers 1..10 (9.4997ms)
+(node:9852) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9852) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9852) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/bench-intel.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö seedBenchLosIntel does not write full loc through a wall (4.5606ms)
+Γ£ö seedBenchLosIntel writes full loc both ways on open LOS (0.5782ms)
+Γ£ö seedBenchLosIntel without a map writes nothing (0.211ms)
+Γ£ö applyBenchActionIntel writes firearm sound through a wall (4.4389ms)
+Γ£ö formatBenchIntelGainLine names the sense channel (0.4555ms)
+Γ£ö applyBenchActionIntel writes A-range track on a professional hearer (0.9325ms)
+Γ£ö viewLocFromProjected never reports none (0.1787ms)
+Γ£ö vision uses SENS times ten and an unseen move keeps the last observed position (2.4878ms)
+Γ£ö a teammate retaining vision prevents faction intel from decaying (57.5051ms)
+Γ£ö a moving observer senses a stationary enemy through a wall and keeps sensing it next round (2.8852ms)
+(node:41632) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41632) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41632) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/build-planning-payload.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö exact localization may fire; approximate cannot (53.0332ms)
+Γ£ö payload reads intel store loc, not a full snapshot cheat (6.8401ms)
+Γ£ö holding on an open map has zero movement utility (8.1847ms)
+Γ£ö newstupid novice trained cannot legalize fuzzy standard_fire (11.0012ms)
+Γ£ö professional can legalize fuzzy fire when canPenCover or grenade (16.3549ms)
+Γ£ö expert exact plus penCover is treated as line of effect (8.9352ms)
+Γ£ö action-cap payload: trained at most 2 standards, expert at most 3 (10.7258ms)
+Γ£ö unlocated ambush adds an extra standard slot; located path is conditional instead (15.5216ms)
+Γ£ö trained/expert/newstupid payload+search honor standard-action caps (45.6887ms)
+Γ£ö located path may intercept from here or move and fire immediately (10.1711ms)
+Γ£ö a losing bot finds nearby cover omitted by radial sampling and shoots only from its landing (7.5624ms)
+Γ£ö planning prefers an affordable useful shot count and never combines a sprint with fire (7.805ms)
+Γ£ö a threatened expert enters nearby cover and does not fire through its own concealment (7.1588ms)
+Γ£ö an outmatched expert retreats from five known attackers instead of trading shots (43.789ms)
+Γ£ö an advancing bot prefers usable firing cover over an exposed point-blank shot (16.1208ms)
+Γ£ö disengaged bots hold safe positions and reconsider when the fight improves (65.9838ms)
+Γ£ö a flank fallback advances to the firing corner instead of one metre from the enemy (1.8325ms)
+Γ£ö a safe expert does not advance to cover that exposes it to stronger return fire (8.9174ms)
+Γ£ö an open approach still closes an unusable range without targeting the enemy's feet (2.671ms)
+(node:37228) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37228) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37228) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/character-sheet-snapshot.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö armorByPartFromCharacterSheet reads inventory armor protection per part (17.496ms)
+Γ£ö expectedDamageDiceFromDiceExpr reads leading count (19.5336ms)
+Γ£ö estimateInitiativePool is expected Nd10 + REF (0.3235ms)
+Γ£ö test-chr sheet yields M4 combat snapshot (8.6811ms)
+Γ£ö combatSnapshotFromCharacterSheet attaches intel and factionId (22.0229ms)
+Γ£ö planning payload builds from character-derived snapshot (67.6749ms)
+Γ£ö combatAmmoFromLoadedWeapon reads chambered ammo damage expression (0.9047ms)
+(node:8796) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8796) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8796) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-action-budget.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö buildCombatBenchActionBudgetView chains move legs and initiative by round (3.7229ms)
+Γ£ö action budget skips extra moves in same round and over mov cap (0.475ms)
+(node:43068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43068) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-action-log-compact.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö compactPlanActionLine shortens move and fire intents (12.2123ms)
+Γ£ö compactActionLogDetailLine keeps stay reasons intact (1.1777ms)
+Γ£ö compactActionLogDetailLine keeps attack-choice reason lines intact (0.5064ms)
+Γ£ö compactActionLogDetailLine keeps intel gain lines intact (0.2226ms)
+Γ£ö compactActionLogDetailLine keeps a vision line intact (0.1624ms)
+Γ£ö compactFireLines keep the attack check breakdown (0.24ms)
+Γ£ö compactFireLines shorten attack and damage (0.2108ms)
+Γ£ö compactActionLogDetailLines drops redundant plan fire when outcome present (16.3454ms)
+Γ£ö compactActionLogStepSummary uses turn slot not full label (0.3974ms)
+(node:42584) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42584) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42584) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-action-log-display.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö actionLogDetailKind treats ΘÇëµï⌐ lines as reason (1.8304ms)
+Γ£ö expandReadableActionLogLines keeps difficulty on the target name (12.4588ms)
+Γ£ö expandReadableActionLogLines stacks fire check, range parts, and result (0.5219ms)
+Γ£ö expandReadableActionLogLines splits damage amount from armor notes (0.2308ms)
+(node:44304) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44304) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44304) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-action-log.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö initiativeDiceRolls exposes d10 faces and total (6.9597ms)
+Γ£ö buildCombatBenchActionLog lists initiative then steps (2.8866ms)
+Γ£ö buildCombatBenchActionLog shows suppress ammo spent and remaining (1.1972ms)
+(node:42864) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42864) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42864) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-controls.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö benchStartAllowed only before fight starts (1.5931ms)
+Γ£ö benchStepAllowed while fight is active (0.2842ms)
+Γ£ö benchStepAtRoundBoundary when turn index reached sequence end (0.2012ms)
+Γ£ö benchFightActive (39.8084ms)
+Γ£ö benchCanEditRoster when no active fight (3.941ms)
+(node:33212) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33212) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33212) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-debug-export.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö buildCombatBenchRoundDebugJson includes turn and unit summaries (4.6136ms)
+(node:28788) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28788) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28788) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-fire-damage.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö resolveBenchStandardFire skips damage on failed attack roll (27.7608ms)
+Γ£ö resolveBenchStandardFire writes the ranged check breakdown (5.354ms)
+Γ£ö resolveBenchStandardFire still damages through concealment-only cover (5.1534ms)
+Γ£ö resolveBenchStandardFire auto walk-your-fire is X-1 hits from one roll (0.5544ms)
+Γ£ö resolveBenchStandardFire applies walk-your-fire to the attack check (17.1035ms)
+Γ£ö resolveBenchStandardFire rolls damage after hit (1.037ms)
+Γ£ö resolveBenchStandardFire applies under-penetration quarter dice (0.573ms)
+Γ£ö resolveBenchStandardFire normal mode uses hit location armor (1.413ms)
+Γ£ö resolveBenchSuppressiveFire uses agility save and hit-count die (21.9467ms)
+Γ£ö resolveBenchSuppressiveFire damages only when agility save fails (1.3011ms)
+Γ£ö resolveBenchSuppressiveFire hit count is min of 1d(remaining ammo) and success count (5.1533ms)
+Γ£ö resolveBenchSuppressiveFire damage rolls apply armor at hit part (5.2578ms)
+(node:41664) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41664) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41664) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-health.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö formatBenchHealthShort and destroyed parts (1.9991ms)
+Γ£ö benchHealthFromSheet reads normal mode parts from test-chr (2.6514ms)
+(node:43920) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43920) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43920) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-initiative.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö rollInitiativeOrder is deterministic and sorts by roll (3.4926ms)
+Γ£ö buildCombatTurnSequence walks rolled order each initiative segment (0.4187ms)
+Γ£ö extra initiative d10s unlock at REF 8, 10, and 15 (0.4478ms)
+Γ£ö rollInitiativeDice is Nd10 + REF + bonus (0.2767ms)
+Γ£ö rollInitiativeValue uses d10 spread (0.2838ms)
+Γ£ö rollInitiativeOrder sorts by roll and stores the pool as that total (0.2983ms)
+Γ£ö initiativePoolFromSheet uses expected Nd10 + REF for test-chr (2.0864ms)
+(node:43000) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43000) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43000) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-map-graphics.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö buildCombatBenchSenseRings uses SENS for A, SENS*10 for V, SENS/2 for S (14.494ms)
+Γ£ö convexHullMeters keeps the outer square (0.856ms)
+Γ£ö buildCombatBenchNavOverlay draws rooms and walk-clear patrol edges (37.7186ms)
+Γ£ö buildCombatBenchPatrolPaths skips short routes and keeps the current index (1.0799ms)
+Γ£ö buildCombatBenchPlanMoveLegs and fire legs follow the planned tile/target (4.7463ms)
+Γ£ö buildSquadLeaderPlacementIds elects one leader on multi-member teams only (1.3875ms)
+Γ£ö niceMapScaleMeters picks a readable tick for the map width (0.6028ms)
+Γ£ö buildCombatBenchCoverMarks prefers entered cover over nearby map cover (1.3249ms)
+Γ£ö buildCombatBenchLocMarks uses the selected observer snapshot (0.4539ms)
+Γ£ö buildCombatBenchFsmHints labels hunt patrol vs combat (0.6988ms)
+Γ£ö markerDifficultyLabel and svgArrowHeadPoints are readable overlay helpers (0.3369ms)
+Γ£ö buildCombatBenchMoveDebugHints explains a hold (0.8984ms)
+Γ£ö buildCombatBenchWalkPreviews samples gait landings on the walked polyline (2.7792ms)
+(node:45740) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45740) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45740) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-map-overlay.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö raySegmentHitT finds wall along +x ray (20.1629ms)
+Γ£ö visibilityPolygonMeters is shorter through a blocking wall (5.0183ms)
+Γ£ö buildCombatBenchMapOverlay movement disk matches mov budget radius (32.2106ms)
+Γ£ö buildCombatBenchMapOverlay movement disk stops at a long wall (7.1375ms)
+Γ£ö pointWithinMovBudget uses walked path around walls (3.2426ms)
+Γ£ö buildCombatBenchEffectLines draws mutual LOS between different teams inside V (1.3106ms)
+Γ£ö buildCombatBenchEffectLines skips a wall-blocked pair (0.4969ms)
+Γ£ö buildCombatBenchUnitVisions clips the polygon at a wall (0.9287ms)
+(node:4688) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4688) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4688) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-outcome.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö evaluateBenchCombatOutcome ends when hostile team neutralized (6.5882ms)
+Γ£ö placementIsNeutralized uses vitals not raw hp alone (0.3049ms)
+Γ£ö evaluateBenchCombatOutcome keeps custom team names fighting (0.2587ms)
+Γ£ö evaluateBenchCombatOutcome ends when only one custom team remains (0.619ms)
+Γ£ö evaluateBenchCombatOutcome keeps a solo bot in play (1.7759ms)
+Γ£ö null hp counts as still fighting (0.3181ms)
+(node:40064) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40064) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40064) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-placements.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö nextDefaultTeam fills hostile then friendly then numbered teams (5.1846ms)
+Γ£ö normalizeTeamId rejects blank names (0.2789ms)
+Γ£ö teamColorIndex keeps hostile/friendly stable and hashes others (0.2479ms)
+Γ£ö benchStartValidation allows a single bot (0.1925ms)
+Γ£ö benchStartValidation requires two factions (0.208ms)
+(node:35260) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35260) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35260) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-step-log.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö groupStepLogByCombatRound buckets by combatRound (2.1092ms)
+(node:32180) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:32180) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:32180) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-top-options.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö topScoredOptionRows returns highest utility first (3.1322ms)
+(node:41916) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41916) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41916) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-unit-bar.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö turnStepsForPlacement keeps flat indices for highlighting (1.9442ms)
+Γ£ö mergeBenchUnitBarRows dedupes duplicate order entries (0.5573ms)
+Γ£ö mergeBenchUnitBarRows follows initiative order then extras (0.2438ms)
+(node:9448) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9448) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9448) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench-unit-status.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö benchUnitStatusViews includes weapon and health from sheet (17.8059ms)
+(node:39104) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39104) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39104) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-bench.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö svg percent Γåö meter roundtrip stays in bounds (16.3669ms)
+Γ£ö bench validation requires a decider and allows a solo bot (0.5402ms)
+Γ£ö buildBenchSnapshot uses character sheet weapon stats (46.1921ms)
+Γ£ö bench feeds live health and permitted attack stats into planning, preserving action count across slots (69.5745ms)
+Γ£ö stepCombatBenchSession advances move and updates position (28.1954ms)
+Γ£ö stepping past turn sequence advances combat round instead of ending combat (20.9045ms)
+Γ£ö startCombatBenchSession uses the initiative roll as the action pool (20.0606ms)
+Γ£ö startCombatBenchSession does not end a solo bot hunt (31.0282ms)
+Γ£ö startCombatBenchSession does not end when custom teams are both alive (1.9246ms)
+Γ£ö applyPlanStepToSnapshot decrements ammo on fire (1.3439ms)
+Γ£ö applyPlanStepToSnapshot does not spend more suppress rounds than the magazine (0.3343ms)
+Γ£ö describePlanStep includes kind and timing (0.3153ms)
+Γ£ö planIntentRows lists one row per plan action (0.247ms)
+Γ£ö buildBenchSnapshot does not seed full loc without a map (50.39ms)
+Γ£ö startCombatBenchSession shares passive intel through a wall without full vision (19.0534ms)
+Γ£ö startCombatBenchSession seeds full loc on open LOS and combat-decides (78.0026ms)
+Γ£ö describePlanStep does not treat suppress tile as an aim point (0.7338ms)
+Γ£ö hunt from a map corner steps toward a room instead of staying put (633.0503ms)
+Γ£û connected-walls car pursuit does not send the outnumbered professional back into the attackers (130.783ms)
+Γ£û connected-walls two hard bots resume combat across rounds instead of staying behind cover forever (30.0689ms)
+Γ£û connected-walls expert and hard bot resume combat across rounds instead of staying behind cover forever (51.0014ms)
+Γ£û connected-walls northwest expert breaks contact with five visible southwest attackers (163.8643ms)
+Γ£ö policy rolls vary by actor and round and remain reproducible (153.2816ms)
+Γ£ö connected-walls bakes covering walls and a hunt step stays local (176.4892ms)
+Γ£ö connected-walls SE pocket is not a yellow room and cannot walk out (1943.2832ms)
+Γ£ö bot in connected-walls SE pocket stays inside while the other patrols (1204.4191ms)
+(node:41432) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41432) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41432) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-map-svg-display.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö prepareCombatMapSvgForDisplay injects barrier and concealment styles (1.5069ms)
+(node:44048) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44048) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44048) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-plan-intent.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö planGroupedByInitiativeRound groups actions by round (5.5433ms)
+Γ£ö feasibilityRoundForSlot maps late turn slots onto replanned tensor rounds (0.5094ms)
+Γ£ö planStayReason tolerates turn slot past replanned initiative rounds (0.9452ms)
+Γ£ö formatPlanMoveDebug and planStayReason explain a hold (0.6936ms)
+Γ£ö zero damage at every stance is not described as the best firing position (3.3121ms)
+(node:38948) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38948) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38948) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-target-health.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö combatHealthFieldsFromBench exposes normal parts for expectations (2.3926ms)
+(node:42860) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42860) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42860) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/combat-test-scene.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö COMBAT_BENCH_MAPS lists sample and connected-walls (1.9589ms)
+Γ£ö sample map without yellow rooms has no rooms (13.024ms)
+Γ£ö connected-walls yellow rooms compile at vehicle-width scale (289.9765ms)
+Γ£ö placeholder document names the selected map (1.3353ms)
+Γ£ö placeholder document compiles sample-map SVG (1.021ms)
+Γ£ö actor marker maps tactical meters into viewBox percentages (0.688ms)
+(node:38940) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38940) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38940) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/cover-height.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö coverHeightBandFromFraction matches map.impl.py table (1.0886ms)
+Γ£ö coverHeightHitDifficultyAdd follows 1.7 cover table where defined (0.5185ms)
+(node:42312) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42312) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42312) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/damage-roll.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö parseOpcodeDamageExpr reads dice and flat modifier (2.9055ms)
+Γ£ö rollOpcodeDamageExpr is deterministic with injected rng (2.1477ms)
+Γ£ö rollOpcodeDamageExpr respects maxDice after barrier loss (0.3872ms)
+(node:43332) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43332) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43332) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/fire-mode.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö autoHitsFromRoll closed-form matches 20 vs 15 accuracy ΓêÆ2 (1.51ms)
+Γ£ö walk-your-fire drops 3ΓåÆ2ΓåÆ1 by standard action (2.0051ms)
+Γ£ö sustained auto into a new round still uses walk-your-fire on extra rounds (1.5238ms)
+Γ£ö ROF fields cap auto per action and per round (0.2425ms)
+Γ£ö planStandardFire uses sheet mode/rof/mag: semi spends 1, auto dumps ROF/60 (0.3491ms)
+Γ£ö burst is one roll then rounds damage, semi is one of each (2.3643ms)
+Γ£ö applyPlanStepToSnapshot spends planned auto rounds from ROF (10.6454ms)
+(node:37144) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37144) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37144) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/initiative.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö initiative costs follow 3/6/9 increments (1.2748ms)
+Γ£ö unified malus escalates with action count (0.2962ms)
+(node:4268) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4268) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4268) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/integration.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö fixture map compiles barriers and vision walls (2.2505ms)
+Γ£ö buildPlanningPayload marks suppressive and throw when loadout allows (111.1401ms)
+Γ£ö full pipeline fixture ΓåÆ plan ΓåÆ recheck (16.0887ms)
+Γ£ö exact localization scenario may include direct fire (9.4441ms)
+(node:42848) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42848) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42848) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/localization.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö fresh heard movement arms professional decay without unfreezing a conditional wait (2.3298ms)
+Γ£ö exact may direct-fire; approximate cannot (0.5114ms)
+Γ£ö walls cap localization at exact (0.3064ms)
+Γ£ö fuzzy report uses a sticky 2.5m offset that follows true position (0.5555ms)
+Γ£ö faction members share the same intel record (0.3902ms)
+Γ£ö first full loc grants mutual approximate to both factions (0.8128ms)
+Γ£ö sound range halves every 100 AR or 20 SSP (1.0438ms)
+Γ£ö awareness check outcome upgrades loc on a heard sound (0.3384ms)
+Γ£ö decay freezes during wait then applies N/M after (1.7237ms)
+Γ£ö combatant floor stays approximate after fuzzy decay (0.5636ms)
+Γ£ö newstupid at exact does not see HP; professional does (0.4183ms)
+Γ£ö SENS splits A / open V / S from REF+WIL (0.1986ms)
+Γ£ö A-range movement and S-touch write loc per difficulty (0.5367ms)
+Γ£ö one-wall A-range firearm loc clears after the shooter moves (0.4346ms)
+(node:9756) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9756) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9756) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/map-adapter/compile-opcode-map.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö rectangleSegments produces four edges (1.7568ms)
+Γ£ö compileOpcodeMap reads opcode-map-alley.json (10.1101ms)
+Γ£ö explicit segments override size proxy (0.5014ms)
+(node:42316) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42316) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42316) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/map-adapter/compile-svg-map.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö parseSvgMapShapes finds barrier, concealment, and bounding_box (12.1342ms)
+Γ£ö compileSvgToBarriers skips bounding_box and sets cover bands (5.442ms)
+Γ£ö cover-height half and concealment do not enclose rooms (179.9443ms)
+Γ£ö yellow fill and type=room become authored rooms, not barriers (1.7916ms)
+Γ£ö concealment vehicles block walk but not room enclosure (27.9717ms)
+Γ£ö compileOpcodeMap accepts SVG string in base.objects (2.3542ms)
+(node:38068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38068) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/movement.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö round move budget is 1x MOV (1.0284ms)
+Γ£ö stepToward returns the destination when it is inside the budget (3.1574ms)
+Γ£ö stepToward clips to budget along the line (5.7222ms)
+(node:45728) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45728) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45728) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/non-combat-fsm.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö with a leader, other same-faction units are slaves (3.2059ms)
+Γ£ö command occupies the slot and beats patrol; recon arrival and search-complete return to patrol (1.1405ms)
+Γ£ö search completes only when all rooms are marked searched (0.9528ms)
+Γ£ö disobey clears the slot; next tick with no new command is patrol (0.3782ms)
+Γ£ö investigate empty lastKnownPosition with no new intel returns to patrol (0.8487ms)
+Γ£ö no exact/full hostiles means not inCombat; exact/full does not invent combat actions (1.4644ms)
+Γ£ö patrol clears a room when the interior is visible, without standing on the centroid (1.3052ms)
+Γ£ö patrol does not bounce back into a room already visible from the corridor (0.3893ms)
+Γ£ö patrol-end path asks for room rebuild via shouldRebuildRooms (0.3438ms)
+Γ£ö trained may chase remaining approximate; novice does not auto-investigate (0.5263ms)
+Γ£ö non-combat gait never exceeds 1x MOV (0.2726ms)
+Γ£ö professional off-combat gait is walk; store one-wall intel can interrupt patrol (0.3837ms)
+(node:42300) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42300) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42300) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/opcode-ammo-damage.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö damageDiceExprFromDamageRecord reads dice and expression (1.86ms)
+Γ£ö damageDiceExprFromAmmoDraft reads ballDamage when damage kind omitted (2.9657ms)
+Γ£ö damageDiceExprFromAmmoDraft uses active damage kind branch (0.3082ms)
+Γ£ö setAmmoDamageDice writes ball dice and clears expression (1.2254ms)
+Γ£ö setAmmoDamageDice writes buck and explosive branches (0.3565ms)
+Γ£ö setDamageDiceOnRecord keeps melee expression editable as dice (0.2354ms)
+(node:19492) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19492) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19492) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/opcode-part-health.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö applyOpcodeNormalDamage head destroy marks dead (2.3425ms)
+Γ£ö applyOpcodeNormalDamage overflow severs limb (0.6469ms)
+Γ£ö applyOpcodeNormalDamage explosive splits across all parts (0.3711ms)
+Γ£ö destroyed limb splashes damage to neighbors (0.96ms)
+Γ£ö expectedNormalHitOnPart weights head kill (0.3701ms)
+Γ£ö expectedExplosiveNormalDamage applies share to each part (0.2593ms)
+(node:44180) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44180) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44180) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/patrol.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö canSeeRoomInterior is true from the doorway, not only the centroid (6.2382ms)
+Γ£ö shouldRebuildRooms is true only at encounter start and patrol end (0.3262ms)
+Γ£ö hunt professional route visits every room centroid (23.7305ms)
+Γ£ö hunt wipe helper: zero hostiles remaining completes the mission (0.1841ms)
+Γ£ö hunt trained route emits opposite then random then opposite (6.8224ms)
+Γ£ö hunt expert route visits a corner then the nearest next corner (3.448ms)
+(node:41296) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41296) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41296) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/ranged-attack-cover.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö entered cover blocks shots across the emplacement on the line of effect (1.4351ms)
+Γ£ö map cover band applies only within one meter and unlabelled walls provide full cover (1.1234ms)
+Γ£ö rangedAttackDifficultyForTarget adds map cover height when in benefit radius (1.4579ms)
+(node:36828) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36828) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36828) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/ranged-attack-roll.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö rangedAttackDifficultyBreakdown splits range localization cover (1.8325ms)
+Γ£ö d10HitChance is the share of faces that meet the difficulty (0.4341ms)
+Γ£ö rangedAttackDifficulty uses range band and exact localization (0.3899ms)
+Γ£ö formatRangedAttackCheckFormula lists spec skill stat and sourced modifiers (0.4623ms)
+Γ£ö rangedAttackCheckTerms skips zero parts and names malus sources (1.7427ms)
+Γ£ö rollRangedAttackCheck rolls d10 then adds bonus (0.354ms)
+(node:37096) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37096) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37096) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/ranged-shooter-bonus.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö weaponSpecializationMatches links rifle wire to Assault Rifles preset (2.9542ms)
+Γ£ö rangedShooterAttackParts adds specialization roll bonus (2.1774ms)
+(node:41564) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41564) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41564) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/recheck.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö recheck passes for unchanged snapshot (50.632ms)
+Γ£ö barrierVersion bump fails version recheck (12.6358ms)
+Γ£ö sustainedFire token bump fails version recheck (7.5453ms)
+(node:43992) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43992) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43992) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/rooms.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö open 3-wall U-shape is a room (10.732ms)
+Γ£ö two adjacent rooms list doorway overlap cells on both room ids (26.2661ms)
+Γ£ö a compact cover box alone is not a room (0.774ms)
+Γ£ö cover furniture inside a U-pocket does not add a second room (2.2304ms)
+Γ£ö detectRooms uses authored yellow rooms and skips pocket flood (0.5349ms)
+(node:42636) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42636) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42636) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/standard-action-malus.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö rangedAttackActionMalus stacks unified and consecutive fire penalties (1.3439ms)
+Γ£ö semi-auto with only one planned attack ignores unified and consecutive malus (1.0991ms)
+Γ£ö priorStandardFireRoundsThisRound ignores suppressive_fire (0.3446ms)
+Γ£ö priorStandardFireCount counts only earlier slots (0.2809ms)
+Γ£ö declaredStandardActionsForRound caps by affordable initiative slots (0.2639ms)
+(node:44780) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44780) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44780) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/suppressive-fire-resolution.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö suppressiveHitDieSides is remaining unassigned ammo (1.7345ms)
+Γ£ö suppressiveMarginHits is attack total minus hit difficulty (0.2699ms)
+Γ£ö resolveSuppressiveHitCount is min of 1d(remaining) and success count (0.333ms)
+Γ£ö rollAgilitySaveAgainstSuppress uses REF and athletics (0.3011ms)
+(node:16488) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16488) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16488) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/combat/weapon-range-bands.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö weaponRangeBandRadii is empty without a positive range (8.2562ms)
+Γ£ö weaponRangeBandRadii uses 2.5 m point-blank and 0.5/1/2├ù weapon range (0.3698ms)
+(node:45404) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45404) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45404) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/modal-shortcuts.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö modalShortcutAction maps Escape to cancel (1.139ms)
+Γ£ö modalShortcutAction maps Enter to confirm when allowed (0.2419ms)
+Γ£ö modalShortcutAction ignores Enter in fields when enterFromInputs is false (1.4714ms)
+(node:6428) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6428) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6428) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///D:/awesome-project/opcode/lib/motion.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to D:\awesome-project\opcode\package.json.
+Γ£ö sidebarMotionKey keeps the character-sheet sidebar mounted (0.9619ms)
+Γ£ö sidebarMotionKey remounts other apps (0.1416ms)
+Γ£ö characterSheetId reads the selected sheet from the path (0.3492ms)
+Γ£ö character sidebar stays on the sheet sections (0.7448ms)
+Γ£ö character editor replaces the list filters with inner nav (0.2091ms)
+Γä╣ tests 442
+Γä╣ suites 0
+Γä╣ pass 438
+Γä╣ fail 4
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 13473.7816
+
+Γ£û failing tests:
+
+test at lib\combat\combat-bench.test.ts:474:1
+Γ£û connected-walls car pursuit does not send the outnumbered professional back into the attackers (130.783ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'snapshot')
+      at TestContext.<anonymous> (file:///D:/awesome-project/opcode/lib/combat/combat-bench.test.ts:484:48)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1062:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:752:18)
+      at Test.postRun (node:internal/test_runner/test:1191:19)
+      at Test.run (node:internal/test_runner/test:1119:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:752:7)
+
+test at lib\combat\combat-bench.test.ts:517:3
+Γ£û connected-walls two hard bots resume combat across rounds instead of staying behind cover forever (30.0689ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'snapshot')
+      at TestContext.<anonymous> (file:///D:/awesome-project/opcode/lib/combat/combat-bench.test.ts:535:72)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1062:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:752:18)
+      at Test.postRun (node:internal/test_runner/test:1191:19)
+      at Test.run (node:internal/test_runner/test:1119:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:752:7)
+
+test at lib\combat\combat-bench.test.ts:517:3
+Γ£û connected-walls expert and hard bot resume combat across rounds instead of staying behind cover forever (51.0014ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'snapshot')
+      at TestContext.<anonymous> (file:///D:/awesome-project/opcode/lib/combat/combat-bench.test.ts:535:72)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1062:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:752:18)
+      at Test.postRun (node:internal/test_runner/test:1191:19)
+      at Test.run (node:internal/test_runner/test:1119:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:752:7)
+
+test at lib\combat\combat-bench.test.ts:556:1
+Γ£û connected-walls northwest expert breaks contact with five visible southwest attackers (163.8643ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'snapshot')
+      at TestContext.<anonymous> (file:///D:/awesome-project/opcode/lib/combat/combat-bench.test.ts:565:54)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1062:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:752:18)
+      at Test.postRun (node:internal/test_runner/test:1191:19)
+      at Test.run (node:internal/test_runner/test:1119:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:752:7)
+ΓÇëELIFECYCLEΓÇë Test failed. See above for more details.

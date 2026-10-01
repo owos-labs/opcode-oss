@@ -10,12 +10,14 @@ export default function CombatTestPage() {
 
   return (
     <AppShell sidebar={<CombatSidebar />}>
-      <section className="flex h-full min-h-0 flex-col gap-4 overflow-hidden p-2 sm:p-4">
+      <section className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden p-2 sm:p-4">
         <header className="shrink-0">
           <h1 className="text-2xl font-black sm:text-3xl">{t("combat.test.title")}</h1>
           <p className="mt-1 max-w-3xl text-sm text-foreground/60">{t("combat.bench.lead")}</p>
         </header>
-        <CombatBenchWorkbench />
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-subtle">
+          <CombatBenchWorkbench />
+        </div>
       </section>
     </AppShell>
   );

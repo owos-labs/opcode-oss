@@ -12,15 +12,14 @@ export function rollAgilitySaveAgainstSuppress(input: {
   return { d10, total, success: total >= input.attackTotal };
 }
 
-/** Hit-count die: floor(ammo fired this suppress / targets in zone at start). */
-export function suppressiveHitDieSides(ammoFiredThisSuppress: number, targetsInZone: number): number {
-  const count = Math.max(1, targetsInZone);
-  return Math.max(1, Math.floor(ammoFiredThisSuppress / count));
+/** 1d sides: ammo spent this suppress minus rounds already assigned to other targets. */
+export function suppressiveHitDieSides(ammoRemainingUnassigned: number): number {
+  return Math.max(0, Math.floor(ammoRemainingUnassigned));
 }
 
-/** Shooter total minus this target's hit difficulty (胜出数, floored at 0). */
+/** Shooter total minus this target's hit difficulty (成功数, floored at 0). */
 export function suppressiveMarginHits(attackTotal: number, hitDifficulty: number): number {
-  return Math.max(0, attackTotal - hitDifficulty);
+  return Math.max(0, Math.floor(attackTotal - hitDifficulty));
 }
 
 export function rollUniformPositiveInt(sides: number, rng: () => number): number {
@@ -28,32 +27,18 @@ export function rollUniformPositiveInt(sides: number, rng: () => number): number
   return 1 + Math.floor(rng() * s);
 }
 
-export function suppressiveHitDieForTarget(input: {
-  ammoFiredThisSuppress: number;
-  initialTargetsInZone: number;
-  /** Rounds fired this suppress not yet assigned to a target's hit count. */
-  burstUnassigned: number;
-  enteredAfterStart: boolean;
-}): number {
-  if (input.enteredAfterStart) {
-    return Math.max(1, input.burstUnassigned);
-  }
-  return suppressiveHitDieSides(input.ammoFiredThisSuppress, input.initialTargetsInZone);
-}
-
+/** min(1d(remaining ammo), 成功数), capped by remaining ammo. */
 export function resolveSuppressiveHitCount(input: {
-  dieSides: number;
-  marginHits: number;
-  burstUnassigned: number;
+  ammoRemainingUnassigned: number;
+  successCount: number;
   rng: () => number;
-}): { dieRoll: number; hits: number } {
-  if (input.burstUnassigned <= 0) {
-    return { dieRoll: 0, hits: 0 };
+}): { dieSides: number; dieRoll: number; hits: number } {
+  const dieSides = suppressiveHitDieSides(input.ammoRemainingUnassigned);
+  if (dieSides <= 0) {
+    return { dieSides: 0, dieRoll: 0, hits: 0 };
   }
-  const dieRoll = rollUniformPositiveInt(input.dieSides, input.rng);
-  if (input.marginHits <= 0) {
-    return { dieRoll, hits: 0 };
-  }
-  const hits = Math.min(Math.max(dieRoll, input.marginHits), input.burstUnassigned);
-  return { dieRoll, hits };
+  const dieRoll = rollUniformPositiveInt(dieSides, input.rng);
+  const success = Math.max(0, Math.floor(input.successCount));
+  const hits = Math.min(dieSides, Math.min(dieRoll, success));
+  return { dieSides, dieRoll, hits };
 }

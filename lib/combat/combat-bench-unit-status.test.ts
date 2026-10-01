@@ -31,4 +31,7 @@ test("benchUnitStatusViews includes weapon and health from sheet", () => {
   assert.ok(views[0]!.weaponName);
   assert.ok(views[0]!.weapon);
   assert.ok(views[0]!.health);
+  assert.equal(views[0]!.hearingA, 20);
+  assert.equal(views[0]!.openVisionV, 200);
+  assert.equal(views[0]!.passiveS, 10);
 });

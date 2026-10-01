@@ -20,13 +20,11 @@ function minimalSession(overrides: Partial<CombatBenchSession> = {}): CombatBenc
     randomSeed: 1,
     plansByPlacementId: {},
     topOptionsByPlacementId: {},
-    declaredStandardActionsByPlacementId: {},
     healthByPlacementId: {},
-    stepLog: [],
     combatEnded: false,
     endReason: null,
-    factionVision: { observationsByPlacementId: {}, lastSeenByEnemyId: {} },
-    lastCompletedSlotByPlacementId: {},
+    intel: { mission: "hunt", records: new Map() },
+    fsmByPlacementId: {},
     ...overrides,
   } as CombatBenchSession;
 }

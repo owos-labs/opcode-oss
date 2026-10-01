@@ -1,3 +1,4 @@
+import type { CoverHeightBand } from "../../combat-ai/cover-concealment-view.ts";
 import type { Vec2 } from "../../combat-ai/visibility.ts";
 
 export type MapSegmentDto = {
@@ -9,6 +10,8 @@ export type MapSegmentDto = {
   maxSsp: number;
   currentSsp: number;
   thicknessCm?: number;
+  /** From SVG cover-height. Half/leg/2/3 are cover, not room walls. */
+  coverHeightBand?: CoverHeightBand;
 };
 
 export type MapEmplacementDto = {

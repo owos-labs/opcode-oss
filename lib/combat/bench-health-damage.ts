@@ -1,7 +1,36 @@
 import type { OpcodeHealthPart } from "../character-sheets/characterSheet.types.ts";
 import { OPCODE_HEALTH_PARTS } from "../character-sheets/characterSheet.types.ts";
+import {
+  applyOpcodeVitalsAfterDamage,
+  EMPTY_OPCODE_VITALS,
+  type OpcodeVitalsState,
+} from "../character-sheets/opcode-health-vitals.ts";
 import type { BenchPlacementHealthState } from "./combat-bench-outcome.ts";
 import { BENCH_HEALTH_PART_LABELS } from "./combat-bench-health.ts";
+import {
+  applyOpcodeNormalDamage,
+  benchPartsFromOpcodeParts,
+  opcodePartsFromBenchParts,
+  totalCurrentFromOpcodeParts,
+  type OpcodeSaveStats,
+} from "./opcode-part-health.ts";
+
+function benchMaxHp(state: BenchPlacementHealthState): number {
+  if (state.max !== null && state.max > 0) return state.max;
+  if (state.parts) {
+    let total = 0;
+    for (const key of OPCODE_HEALTH_PARTS) total += state.parts[key].max;
+    return total;
+  }
+  return 0;
+}
+
+function mergeVitals(
+  state: BenchPlacementHealthState,
+  next: OpcodeVitalsState,
+): BenchPlacementHealthState {
+  return { ...state, vitals: next };
+}
 
 export function rollOpcodeD10(rng: () => number): number {
   return 1 + Math.floor(rng() * 10);
@@ -23,20 +52,13 @@ export function benchHealthMode(
   return state?.mode === "normal" ? "normal" : "simple";
 }
 
-function sumPartCurrents(
-  parts: Record<OpcodeHealthPart, { current: number; max: number }>,
-): number {
-  let total = 0;
-  for (const key of OPCODE_HEALTH_PARTS) total += parts[key].current;
-  return total;
-}
-
 export type ApplyBenchDamageResult = {
   state: BenchPlacementHealthState;
   hitPart: OpcodeHealthPart | null;
   effectiveDamage: number;
   simpleCrit: boolean;
   headLethal: boolean;
+  events?: readonly import("./opcode-part-health.ts").OpcodePartDamageEvent[];
 };
 
 export function applyDamageToBenchPlacement(
@@ -47,6 +69,9 @@ export function applyDamageToBenchPlacement(
     hitPart?: OpcodeHealthPart;
     /** simple 模式：攻击骰自然 10 → ×2 伤害。 */
     attackNatural10?: boolean;
+    explosive?: boolean;
+    saves?: OpcodeSaveStats;
+    rng?: () => number;
   },
 ): ApplyBenchDamageResult {
   const damageIn = Math.max(0, Math.floor(input.damage));
@@ -65,9 +90,15 @@ export function applyDamageToBenchPlacement(
   if (mode === "simple") {
     const simpleCrit = input.attackNatural10 === true;
     const effectiveDamage = simpleCrit ? damageIn * 2 : damageIn;
-    const current = Math.max(0, state.current - effectiveDamage);
+    const current = Math.max(0, (state.current ?? 0) - effectiveDamage);
+    const maxHp = benchMaxHp(state);
+    const vitals = applyOpcodeVitalsAfterDamage(state.vitals ?? EMPTY_OPCODE_VITALS, {
+      damage: effectiveDamage,
+      maxHp,
+      simplePoolZero: current <= 0,
+    });
     return {
-      state: { ...state, mode: "simple", current },
+      state: mergeVitals({ ...state, mode: "simple", current }, vitals),
       hitPart: null,
       effectiveDamage,
       simpleCrit,
@@ -88,26 +119,35 @@ export function applyDamageToBenchPlacement(
   }
 
   const hitPart = input.hitPart ?? "torso";
-  const row = parts[hitPart];
-  const nextPart = Math.max(0, row.current - damageIn);
-  const nextParts = {
-    ...parts,
-    [hitPart]: { ...row, current: nextPart },
-  };
-  const headLethal = hitPart === "head" && nextPart === 0;
-  const current = headLethal ? 0 : sumPartCurrents(nextParts);
+  const maxHp = benchMaxHp(state);
+  const normal = applyOpcodeNormalDamage({
+    parts: opcodePartsFromBenchParts(parts),
+    vitals: state.vitals ?? EMPTY_OPCODE_VITALS,
+    maxHp,
+    damage: damageIn,
+    hitPart,
+    explosive: input.explosive === true,
+    saves: input.saves,
+    rng: input.rng,
+  });
+  const nextParts = benchPartsFromOpcodeParts(normal.parts);
+  const current = totalCurrentFromOpcodeParts(normal.parts, normal.headLethal);
 
   return {
-    state: {
-      ...state,
-      mode: "normal",
-      parts: nextParts,
-      current,
-    },
+    state: mergeVitals(
+      {
+        ...state,
+        mode: "normal",
+        parts: nextParts,
+        current,
+      },
+      normal.vitals,
+    ),
     hitPart,
-    effectiveDamage: damageIn,
+    effectiveDamage: normal.totalPartDamage,
     simpleCrit: false,
-    headLethal,
+    headLethal: normal.headLethal,
+    events: normal.events,
   };
 }
 

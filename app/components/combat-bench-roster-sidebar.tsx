@@ -78,6 +78,12 @@ export function CombatBenchRosterSidebar({
                       </dd>
                     </div>
                   ) : null}
+                  <div className="flex justify-between gap-2">
+                    <dt className="text-foreground/45">感知</dt>
+                    <dd>
+                      A {view.hearingA} · V {view.openVisionV} · S {view.passiveS} m
+                    </dd>
+                  </div>
                   {view.suppressionActive ? (
                     <div className="text-amber-600 dark:text-amber-400">压制中</div>
                   ) : null}

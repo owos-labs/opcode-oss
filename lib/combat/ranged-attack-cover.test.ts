@@ -50,7 +50,7 @@ test("entered cover blocks shots across the emplacement on the line of effect", 
   );
 });
 
-test("map cover band applies when defender is within 3m and not entered", () => {
+test("map cover band applies only within one meter and unlabelled walls provide full cover", () => {
   const band = mapCoverBandOnLineOfEffect({
     shooter: { x: 0, y: 0 },
     target: { x: 6, y: 0 },
@@ -62,11 +62,12 @@ test("map cover band applies when defender is within 3m and not entered", () => 
 
   const far = mapCoverBandOnLineOfEffect({
     shooter: { x: 0, y: 0 },
-    target: { x: 20, y: 0 },
+    target: { x: 6.01, y: 0 },
     targetEnteredCoverId: null,
     barriers: [bag],
   });
   assert.equal(far, undefined);
+  assert.equal(mapCoverBandOnLineOfEffect({ shooter: { x: 0, y: 0 }, target: { x: 6, y: 0 }, targetEnteredCoverId: null, barriers: [{ ...bag, coverHeightBand: undefined, blocksVision: true }] }), "full");
 });
 
 test("rangedAttackDifficultyForTarget adds map cover height when in benefit radius", () => {

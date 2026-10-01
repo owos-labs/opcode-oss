@@ -1,6 +1,13 @@
 import { findOpcodeSpecializationPreset, OPCODE_SKILL_DEFINITIONS } from './opcodeSkillDefinitions'
 import type { CharacterSheet, CreateCharacterSheetDto, OpcodeDerivedStats, OpcodeHealthMode, OpcodeHealthPart, OpcodeHealthTotals, OpcodeSheetForm, OpcodeSheetSummary, OpcodeSkillPointMode, OpcodeSkillRow, OpcodeStatKey, UpdateCharacterSheetDto } from './characterSheet.types'
 import {
+  buildFreshOpcodeStatusVitals,
+  clampOpcodeVitalsFields,
+  opcodeDeathSaveDifficulty,
+  opcodeStunSaveDifficulty,
+  readOpcodeVitalsFromStatusHealth,
+} from './opcode-health-vitals'
+import {
   OPCODE_DEFAULT_STAT,
   OPCODE_HEALTH_PARTS,
   OPCODE_RULE_BOOK,
@@ -15,9 +22,9 @@ const HEALTH_PART_RATIOS: Record<OpcodeHealthPart, number> = {
   head: 0.1,
   torso: 0.3,
   hand_primary: 0.1,
-  hand_secondary: 0.2,
-  leg_left: 0.15,
-  leg_right: 0.15,
+  hand_secondary: 0.1,
+  leg_left: 0.2,
+  leg_right: 0.2,
 }
 
 const EMPTY_SKILLS = { base: {}, extra: {} }
@@ -315,7 +322,7 @@ export function formatOpcodeStatBonusLine(
 
 export function calculateOpcodeDerived(baseStats: Record<OpcodeStatKey, number>): OpcodeDerivedStats {
   return {
-    mov: baseStats.bod + baseStats.ref + 2,
+    mov: Math.round(baseStats.ref * 1.75 + baseStats.bod * 1.25),
     sensA: baseStats.ref + baseStats.wil * 2,
     sensV: baseStats.ref + baseStats.wil * 10,
     sensS: baseStats.ref + baseStats.wil + 2,
@@ -481,6 +488,14 @@ export function readOpcodeSheetSummary(
     healthMode,
     maxHealth: 0,
     currentHealth: null,
+    stunGauge: null,
+    stunGaugeMax: 0,
+    stunSaveDifficulty: 10,
+    deathSaveDifficulty: 10,
+    stunPenalty: 0,
+    vitalsUnconscious: false,
+    vitalsDeathSave: false,
+    vitalsDead: false,
     parts: [],
     skills,
   }
@@ -509,6 +524,19 @@ export function readOpcodeSheetSummary(
     summary.maxHealth = readSafeInt(health.max) ?? maxTotal
     summary.currentHealth = hasCurrent ? currentTotal : null
   }
+
+  const vitals = readOpcodeVitalsFromStatusHealth(statusHealth)
+  summary.stunGaugeMax = summary.maxHealth
+  summary.stunGauge = summary.maxHealth > 0 ? vitals.stunGauge : null
+  summary.stunPenalty = vitals.stunPenalty
+  summary.stunSaveDifficulty = opcodeStunSaveDifficulty(vitals.stunGauge)
+  summary.deathSaveDifficulty = opcodeDeathSaveDifficulty(
+    vitals.damageTaken,
+    vitals.deathSaveDifficultyReduction,
+  )
+  summary.vitalsUnconscious = vitals.unconscious
+  summary.vitalsDeathSave = vitals.deathSave
+  summary.vitalsDead = vitals.dead
 
   return summary
 }
@@ -652,10 +680,12 @@ function buildHealthStats(health: OpcodeHealthTotals): Record<string, unknown> {
 }
 
 function buildFreshStatusHealth(health: OpcodeHealthTotals): Record<string, unknown> {
+  const vitals = buildFreshOpcodeStatusVitals()
   if (health.mode === 'simple') {
     return {
       mode: 'simple',
       simple: { base: health.max, mod: 0 },
+      ...vitals,
     }
   }
 
@@ -666,6 +696,7 @@ function buildFreshStatusHealth(health: OpcodeHealthTotals): Record<string, unkn
   return {
     mode: 'normal',
     normal,
+    ...vitals,
   }
 }
 
@@ -675,12 +706,12 @@ function clampStatusHealth(
 ): Record<string, unknown> {
   if (health.mode === 'simple') {
     const current = readPairEffective(originalHealth.simple)
-    return {
+    return clampOpcodeVitalsFields({
       ...originalHealth,
       mode: 'simple',
       simple: { base: clampInt(current ?? health.max, 0, health.max), mod: 0 },
       normal: undefined,
-    }
+    }, health.max)
   }
 
   const originalNormal = asRecord(originalHealth.normal)
@@ -691,12 +722,12 @@ function clampStatusHealth(
     normal[part] = { base: clampInt(current ?? max, 0, max), mod: 0 }
   }
 
-  return {
+  return clampOpcodeVitalsFields({
     ...originalHealth,
     mode: 'normal',
     normal,
     simple: undefined,
-  }
+  }, health.max)
 }
 
 function requireBaseStats(form: OpcodeSheetForm): Record<OpcodeStatKey, number> {

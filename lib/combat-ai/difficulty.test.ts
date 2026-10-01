@@ -2,18 +2,13 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import {
-  DELAYED_CONDITIONAL_GATE,
-  EXPERT_LETHALITY_FOCUS_PROB,
   NPC_AI_DEADLINE_MS,
   NPC_AI_WALL_MS,
+  NPC_DIFFICULTY_LABELS,
   NPC_DIFFICULTY_PROFILES,
-  SUPPRESSIVE_FIRE_GATE,
-  delayedConditionalGatePasses,
-  effectiveUnifiedActionPenalty,
+  formatUnitDifficultyName,
   getNpcDifficultyProfile,
   isExpertTierCore,
-  lethalityFocusActive,
-  suppressiveFireGatePasses,
 } from "./difficulty.ts";
 
 test("NPC AI wall clock budget leaves glue time under 5s", () => {
@@ -45,8 +40,6 @@ test("trained fills up to two initiative rounds with economy and inserts", () =>
   assert.equal(p.considersActionEconomy, true);
   assert.equal(p.maxInitiativeRounds, 2);
   assert.equal(p.allowsInsertedActions, true);
-  assert.equal(p.nextRoundPlanning, "none");
-  assert.equal(p.lethalityFocus, "none");
   assert.equal(p.considersCoverThickness, true);
   assert.equal(p.allowsLocatedShotThroughCover, true);
 });
@@ -57,28 +50,13 @@ test("novice ignores cover thickness and located shot through cover", () => {
   assert.equal(p.allowsLocatedShotThroughCover, false);
 });
 
-test("expert uses probabilistic lethality and coarse next-round planning", () => {
+test("expert and professional keep action-economy caps without lethality search fields", () => {
   const p = getNpcDifficultyProfile("expert");
   assert.ok(isExpertTierCore(p));
-  assert.equal(p.lethalityFocus, "probabilistic");
-  assert.equal(p.nextRoundPlanning, "coarse");
-  assert.equal(p.unifiedActionPenaltyFactor, 1);
-  assert.equal(lethalityFocusActive(p, 0), true);
-  assert.equal(lethalityFocusActive(p, 1), false);
-  assert.equal(
-    lethalityFocusActive(p, EXPERT_LETHALITY_FOCUS_PROB - 0.001),
-    true,
-  );
-});
-
-test("professional prioritizes lethality with expected next round and lower unified penalties", () => {
+  assert.equal(p.maxInitiativeRounds, "all");
   const pro = getNpcDifficultyProfile("professional");
   assert.ok(isExpertTierCore(pro));
-  assert.equal(pro.lethalityFocus, "prioritized");
-  assert.equal(pro.nextRoundPlanning, "expected");
-  assert.ok(pro.unifiedActionPenaltyFactor < 1);
-  assert.equal(lethalityFocusActive(pro, 0), true);
-  assert.equal(effectiveUnifiedActionPenalty(pro, 10), 10 * pro.unifiedActionPenaltyFactor);
+  assert.equal(pro.maxInitiativeRounds, "all");
 });
 
 test("all five difficulty ids are defined", () => {
@@ -87,13 +65,9 @@ test("all five difficulty ids are defined", () => {
   for (const id of ids) assert.equal(NPC_DIFFICULTY_PROFILES[id].id, id);
 });
 
-test("suppressive and delayed gates match tier tables", () => {
-  assert.equal(SUPPRESSIVE_FIRE_GATE.trained, 0.1);
-  assert.equal(SUPPRESSIVE_FIRE_GATE.professional, 1);
-  assert.equal(DELAYED_CONDITIONAL_GATE.professional, 0.5);
-  const trained = getNpcDifficultyProfile("trained");
-  assert.equal(suppressiveFireGatePasses(trained, 0), true);
-  assert.equal(suppressiveFireGatePasses(trained, 0.99), false);
-  assert.equal(delayedConditionalGatePasses(trained, 0), true);
-  assert.equal(delayedConditionalGatePasses(getNpcDifficultyProfile("newstupid"), 0), false);
+test("difficulty labels use 简单 / 普通 / 困难", () => {
+  assert.equal(NPC_DIFFICULTY_LABELS.newstupid, "简单");
+  assert.equal(NPC_DIFFICULTY_LABELS.novice, "普通");
+  assert.equal(NPC_DIFFICULTY_LABELS.trained, "困难");
+  assert.equal(formatUnitDifficultyName("Bot", "trained"), "Bot（困难）");
 });

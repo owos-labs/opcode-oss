@@ -46,6 +46,21 @@ test("formatActorStepActionHint starts the next slot from the earlier move", () 
   );
 });
 
+test("formatActorStepActionHint explains a hold when the slot has no move", () => {
+  assert.deepEqual(
+    formatActorStepActionHint({
+      origin: { x: 0, y: 0 },
+      slot: 0,
+      stancePositions: [{ x: 0, y: 0 }],
+      targetIds: [null, "bot"],
+      targetLabel: () => "Bot",
+      stayReason: "可走站位的开火/掩体分不超过这里",
+      actions: [{ round: 0, kind: actionKindIndex("standard_fire"), tile: 0, target: 1 }],
+    }),
+    ["不移动：可走站位的开火/掩体分不超过这里", "动作1：标准（攻击: Bot）"],
+  );
+});
+
 test("actorHintSlot prefers the active turn, else the next unfinished slot", () => {
   const actions = [{ round: 0 }, { round: 1 }];
   assert.equal(

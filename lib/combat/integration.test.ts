@@ -19,10 +19,11 @@ test("fixture map compiles barriers and vision walls", () => {
 });
 
 test("buildPlanningPayload marks suppressive and throw when loadout allows", () => {
-  const payload = buildPlanningPayload(
-    defaultCombatSnapshot(),
-    compileCombatMap(loadSimpleMapFixture()),
-  );
+  const compiled = compileCombatMap(loadSimpleMapFixture());
+  const payload = buildPlanningPayload(defaultCombatSnapshot(), {
+    ...compiled,
+    barriers: [],
+  });
   assert.ok(suppressiveFireLegal(defaultCombatSnapshot()));
   const suppress = actionKindIndex("suppressive_fire");
   const throwKind = actionKindIndex("throw");
@@ -60,7 +61,7 @@ test("full pipeline fixture → plan → recheck", () => {
   assert.equal(report.plan.snapshotVersion, 1);
 });
 
-test("exact localization scenario may emit conditional fire timing", () => {
+test("exact localization scenario may include direct fire", () => {
   const report = runCombatCheck({
     snapshot: exactLocalizationSnapshot(),
     map: loadSimpleMapFixture(),
@@ -68,4 +69,7 @@ test("exact localization scenario may emit conditional fire timing", () => {
   });
   assert.equal(report.recheckOk, true);
   assert.ok(report.plan.actions.length >= 1);
+  const fireKind = actionKindIndex("standard_fire");
+  const fire = report.plan.actions.find((a) => a.kind === fireKind);
+  if (fire) assert.equal(fire.timing, "immediate");
 });

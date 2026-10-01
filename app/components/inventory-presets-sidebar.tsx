@@ -14,6 +14,7 @@ import {
   type ItemPresetCategory,
   type ItemPresetCategoryCounts,
 } from "@/lib/character-sheets/item-presets.types";
+import { Card } from "@/app/components/card";
 import { ModalShortcutFooter } from "@/app/components/ui";
 import { useT } from "@/lib/character-sheets/i18n";
 import { resolveLocaleText } from "@/lib/character-sheets/locale-text";
@@ -85,17 +86,21 @@ export function InventoryPresetsSidebar({ onAdd }: { onAdd: (preset: ItemPreset)
 
   if (!open) {
     return (
-      <aside className="flex w-11 shrink-0 flex-col items-center rounded-lg border border-border1 bg-content2 p-1 shadow1">
+      <Card as="aside" tone="secondary" radius="md" padding="sm" className="w-11 shrink-0 items-center !gap-0 !p-1">
         <Button variant="ghost" aria-label={t("inventory.presets.open")} className="size-9 min-w-9 p-0" onPress={() => setOpen(true)}>
           <PanelRightOpen className="size-4" />
         </Button>
-      </aside>
+      </Card>
     );
   }
 
   return (
-    <aside
-      className="flex min-h-0 w-full shrink-0 flex-col rounded-lg border border-border1 bg-content2 shadow1 lg:w-72"
+    <Card
+      as="aside"
+      tone="secondary"
+      radius="md"
+      padding="none"
+      className="min-h-0 w-full shrink-0 lg:w-72"
       onDragOver={(event) => event.preventDefault()}
       onDrop={handleDrop}
     >
@@ -184,7 +189,7 @@ export function InventoryPresetsSidebar({ onAdd }: { onAdd: (preset: ItemPreset)
               <p className="text-sm leading-6 text-foreground/75">
                 {selected ? resolveLocaleText(selected.data.desc, locale) || t("inventory.presets.descriptionEmpty") : t("inventory.presets.descriptionEmpty")}
               </p>
-              <pre className="max-h-48 overflow-auto rounded-lg bg-content2 p-3 text-xs text-foreground/70">{selected ? JSON.stringify(selected.data, null, 2) : ""}</pre>
+              <Card as="pre" tone="secondary" radius="md" padding="sm" spotlight={false} className="max-h-48 overflow-auto text-xs text-foreground/70">{selected ? JSON.stringify(selected.data, null, 2) : ""}</Card>
               <ModalShortcutFooter
                 cancelLabel={t("common.close")}
                 onCancel={() => setSelected(null)}
@@ -199,7 +204,7 @@ export function InventoryPresetsSidebar({ onAdd }: { onAdd: (preset: ItemPreset)
           </Modal.Container>
         </Modal.Backdrop>
       </Modal>
-    </aside>
+    </Card>
   );
 }
 

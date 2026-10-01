@@ -1,17 +1,28 @@
 import type { BallisticBarrier } from "../../combat-ai/geometry.ts";
 import type { CoverEmplacement } from "../../combat-ai/cover-concealment-view.ts";
-import type { WallSegment } from "../../combat-ai/visibility.ts";
+import { bakeWalkWalls, walkWalls } from "../../combat-ai/walk-path.ts";
+import type { Vec2, WallSegment } from "../../combat-ai/visibility.ts";
 import type { MapSolveBounds } from "./compile-svg-map.ts";
 import type { CombatMapDto } from "./types.ts";
 
 export type CompiledCombatMap = {
   mapId: string;
   walls: WallSegment[];
+  /** Cover outlines that block walk (vehicles, columns). Vision still uses `walls`. */
+  navWalls?: WallSegment[];
   barriers: BallisticBarrier[];
   emplacements: CoverEmplacement[];
   /** AI stance sampling clip (from SVG type=bounding_box). */
   solveBounds?: MapSolveBounds | null;
+  /** Yellow / type=room rects from the SVG parser. */
+  authoredRooms?: { id: string; centroid: Vec2; cells: Vec2[] }[];
+  /** Meters per SVG user unit used when this map was compiled. */
+  metersPerUnit?: number;
 };
+
+export function combatMapWalkWalls(map: CompiledCombatMap): WallSegment[] {
+  return walkWalls(map.navWalls ?? map.walls, map.solveBounds);
+}
 
 export function compileCombatMap(dto: CombatMapDto): CompiledCombatMap {
   const barriers: BallisticBarrier[] = dto.segments.map(seg => ({
@@ -22,9 +33,10 @@ export function compileCombatMap(dto: CombatMapDto): CompiledCombatMap {
     maxSsp: seg.maxSsp,
     currentSsp: seg.currentSsp,
     blocksVision: seg.blocksVision !== false,
+    coverHeightBand: seg.coverHeightBand,
   }));
 
-  const walls = barriers.filter(b => b.blocksVision).map(b => ({ a: b.a, b: b.b }));
+  const walls = bakeWalkWalls(barriers.filter(b => b.blocksVision).map(b => ({ a: b.a, b: b.b })));
 
   const emplacements: CoverEmplacement[] = (dto.emplacements ?? []).map(e => ({
     id: e.id,

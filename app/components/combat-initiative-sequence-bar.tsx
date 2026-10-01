@@ -61,7 +61,7 @@ function WeaponHoverPanel({ view }: { view: CombatBenchUnitStatusView }) {
             <span className="text-foreground/45">穿深</span>
             <span>{view.ammo.penetration}</span>
             <span className="text-foreground/45">伤害骰</span>
-            <span>{view.ammo.damageDiceExpr || "—"}</span>
+            <span>{view.ammo.expectedDamageDice}d</span>
           </>
         ) : null}
       </div>
@@ -154,7 +154,10 @@ function UnitInitiativeCard({
                 先攻 {initiative.roll}
                 <span className="text-foreground/45">
                   {" "}
-                  · [{initiative.d10Faces.join("+")}] + REF {initiative.ref}
+                  ·{" "}
+                  {initiative.d10Faces && initiative.d10Faces.length > 0
+                    ? `[${initiative.d10Faces.join("+")}] + REF ${initiative.ref}`
+                    : `REF ${initiative.ref}`}
                   {initiative.initiativeBonus ? ` + ${initiative.initiativeBonus}` : ""}
                 </span>
               </p>
@@ -213,6 +216,18 @@ function UnitInitiativeCard({
                     ? `${(view.metersMovedThisRound ?? 0).toFixed(1)}/${view.mov} m`
                     : "—"}
                 </dd>
+              </div>
+              <div>
+                <dt className="text-foreground/40">听 A</dt>
+                <dd>{view.hearingA} m</dd>
+              </div>
+              <div>
+                <dt className="text-foreground/40">视 V</dt>
+                <dd>{view.openVisionV} m</dd>
+              </div>
+              <div>
+                <dt className="text-foreground/40">触 S</dt>
+                <dd>{view.passiveS} m</dd>
               </div>
             </dl>
             {health?.mode === "normal" && health.parts.length > 0 ? (
@@ -399,7 +414,7 @@ export function CombatInitiativeSequenceBar({
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-foreground/50">
             单位 · 先攻 · 行动段
           </p>
-          <ul className="flex flex-wrap gap-2">
+          <ul className="flex max-h-[min(42vh,22rem)] flex-wrap content-start gap-2 overflow-y-auto overscroll-contain pr-1 scrollbar-subtle">
             {unitRows.map((row) => (
               <UnitInitiativeCard
                 key={row.view.placementId}
@@ -460,7 +475,7 @@ export function CombatInitiativeSequenceBar({
             </Link>
           </div>
         ) : (
-          <ul className="flex flex-wrap gap-2">
+          <ul className="flex max-h-28 flex-wrap content-start gap-2 overflow-y-auto overscroll-contain scrollbar-subtle">
             {catalog.map((sheet) => {
               const selected = pendingSheetId === sheet.id;
               return (

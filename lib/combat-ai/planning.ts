@@ -6,14 +6,9 @@ import {
   type ActionFeasibilityTensor,
   iterateLegalActions,
 } from "./action-feasibility.ts";
+import { maxStandardActionsThisRound } from "./combat-policy.ts";
 import type { NpcDifficultyProfile } from "./difficulty.ts";
-import {
-  delayedConditionalGatePasses,
-  getNpcDifficultyProfile,
-  lethalityFocusActive,
-  suppressiveFireGatePasses,
-  type NpcDifficultyId,
-} from "./difficulty.ts";
+import { getNpcDifficultyProfile, type NpcDifficultyId } from "./difficulty.ts";
 
 export type ActionTiming = "immediate" | "delayed" | "conditional";
 
@@ -34,12 +29,8 @@ export type PlanningBundle = {
   allowNpcSurrender: boolean;
   surrenderThreshold: number;
   deadlineMs: number;
-};
-
-export type BehaviorGateDraws = {
-  lethality: number;
-  suppressive: number;
-  timing: number;
+  maxStandardActions: number;
+  locatedPathConditional: boolean;
 };
 
 /** Deterministic PRNG for one decide() run (mulberry32). */
@@ -53,29 +44,8 @@ export function mulberry32(seed: number): () => number {
   };
 }
 
-export function drawBehaviorGates(seed: number): BehaviorGateDraws {
-  const next = mulberry32(seed);
-  return { lethality: next(), suppressive: next(), timing: next() };
-}
-
-function isStandardActionKind(kind: number): boolean {
-  const id = ACTION_KINDS[kind];
-  return (
-    id === "standard_fire" ||
-    id === "suppressive_fire" ||
-    id === "standard_reload" ||
-    id === "standard_aim" ||
-    id === "insert"
-  );
-}
-
-export function buildScoredOptions(
-  bundle: PlanningBundle,
-  draws: BehaviorGateDraws,
-): ScoredActionOption[] {
-  const { feasibility, utility, profile } = bundle;
-  const lethality = lethalityFocusActive(profile, draws.lethality);
-  const lethalityWeight = lethality ? 1.35 : 1;
+export function buildScoredOptions(bundle: PlanningBundle): ScoredActionOption[] {
+  const { feasibility, utility } = bundle;
   const options: ScoredActionOption[] = [];
 
   for (const cell of iterateLegalActions(feasibility)) {
@@ -89,48 +59,21 @@ export function buildScoredOptions(
     const base = utility[i] ?? 0;
     const kindId = ACTION_KINDS[cell.kind];
     if (kindId === undefined) continue;
-
-    let u = base;
-    if (kindId === "standard_fire" || kindId === "suppressive_fire") {
-      u *= lethalityWeight;
-    }
+    const pathConditional =
+      bundle.locatedPathConditional &&
+      cell.tile === 0 &&
+      (kindId === "standard_fire" || kindId === "suppressive_fire" || kindId === "throw");
 
     options.push({
       ...cell,
       kindId,
-      utility: u,
-      utilityUpperBound: u,
-      timing: "immediate",
+      utility: base,
+      utilityUpperBound: base,
+      timing: pathConditional ? "conditional" : "immediate",
     });
   }
 
   return options;
-}
-
-export function applySuppressionGate(
-  profile: NpcDifficultyProfile,
-  options: readonly ScoredActionOption[],
-  random01: number,
-): ScoredActionOption[] {
-  const suppressIdx = actionKindIndex("suppressive_fire");
-  let bestSuppress: ScoredActionOption | null = null;
-  let bestOther: ScoredActionOption | null = null;
-
-  for (const opt of options) {
-    if (opt.kind === suppressIdx) {
-      if (!bestSuppress || opt.utility > bestSuppress.utility) bestSuppress = opt;
-    } else if (!bestOther || opt.utility > bestOther.utility) {
-      bestOther = opt;
-    }
-  }
-
-  if (!bestSuppress) return [...options];
-  const suppressIsTop =
-    !bestOther || bestSuppress.utility >= bestOther.utility;
-  if (suppressIsTop && !suppressiveFireGatePasses(profile, random01)) {
-    return options.filter(o => o.kind !== suppressIdx);
-  }
-  return [...options];
 }
 
 export function applySurrenderGate(
@@ -155,36 +98,6 @@ export function applySurrenderGate(
   });
 }
 
-/** Attach delayed/conditional timing when optimal; gate once per decide(). */
-export function applyTimingGate(
-  profile: NpcDifficultyProfile,
-  options: ScoredActionOption[],
-  random01: number,
-): ScoredActionOption[] {
-  if (!delayedConditionalGatePasses(profile, random01)) {
-    return options.map(o => ({ ...o, timing: "immediate" as const }));
-  }
-
-  let bestImmediate: ScoredActionOption | null = null;
-  for (const opt of options) {
-    if (opt.timing !== "immediate") continue;
-    if (!bestImmediate || opt.utility > bestImmediate.utility) bestImmediate = opt;
-  }
-  if (!bestImmediate) return options;
-
-  const delayedBoost = 0.08;
-  return options.map(opt => {
-    if (opt !== bestImmediate) return opt;
-    if (opt.utility + delayedBoost <= bestImmediate!.utility) return opt;
-    return {
-      ...opt,
-      timing: "delayed" as const,
-      utility: opt.utility + delayedBoost,
-      utilityUpperBound: opt.utility + delayedBoost,
-    };
-  });
-}
-
 export function createPlanningBundle(input: {
   profileId: NpcDifficultyId;
   feasibility: ActionFeasibilityTensor;
@@ -194,6 +107,8 @@ export function createPlanningBundle(input: {
   allowNpcSurrender?: boolean;
   surrenderThreshold?: number;
   deadlineMs?: number;
+  maxStandardActions?: number;
+  locatedPathConditional?: boolean;
 }): PlanningBundle {
   return {
     profile: getNpcDifficultyProfile(input.profileId),
@@ -204,14 +119,18 @@ export function createPlanningBundle(input: {
     allowNpcSurrender: input.allowNpcSurrender ?? false,
     surrenderThreshold: input.surrenderThreshold ?? -Infinity,
     deadlineMs: input.deadlineMs ?? 4800,
+    maxStandardActions:
+      input.maxStandardActions ??
+      maxStandardActionsThisRound({
+        difficulty: input.profileId,
+        hitEvPositive: true,
+        extraAmbushStandard: false,
+        initiativeBound: Number.POSITIVE_INFINITY,
+      }),
+    locatedPathConditional: input.locatedPathConditional ?? false,
   };
 }
 
 export function prepareOptionsForSearch(bundle: PlanningBundle): ScoredActionOption[] {
-  const draws = drawBehaviorGates(bundle.randomSeed);
-  let options = buildScoredOptions(bundle, draws);
-  options = applySurrenderGate(bundle, options);
-  options = applySuppressionGate(bundle.profile, options, draws.suppressive);
-  options = applyTimingGate(bundle.profile, options, draws.timing);
-  return options;
+  return applySurrenderGate(bundle, buildScoredOptions(bundle));
 }

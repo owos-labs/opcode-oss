@@ -29,7 +29,7 @@ character_sheet_dto = {
             "extra": {},  # since we don't have any extensions, but users should be allowed to edit this freely
         },
         "derivated": {
-            "mov": {"base": 27, "mod": 0},  # bod+ref+2, ref includes status.stats.ref.mod
+            "mov": {"base": 27, "mod": 0},  # bod+ref, ref includes status.stats.ref.mod
             "sens": {
                 "a": {"base": 35, "mod": 0},  # ref+wil*2
                 "v": {"base": 115, "mod": 0},  # ref+wil*10

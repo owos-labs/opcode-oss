@@ -3,7 +3,6 @@ import { readOpcodeSheetSummary } from "../character-sheets/opcodeSheet.ts";
 import { mulberry32 } from "../combat-ai/planning.ts";
 import type { NpcDifficultyId } from "../combat-ai/difficulty.ts";
 import type { RoundPlan } from "../combat-ai/decide.ts";
-import { estimateInitiativePool } from "./character-sheet-snapshot.ts";
 import type { CombatMapPlacement } from "./combat-bench-placements.ts";
 
 export type InitiativeRollEntry = {
@@ -13,9 +12,11 @@ export type InitiativeRollEntry = {
   initiativePool: number;
   profileId: NpcDifficultyId;
   isDecider: boolean;
-  /** REF + 1d6 bench roll for turn order. */
+  /** Nd10 + REF + bonuses, high to low. */
   roll: number;
   ref: number;
+  initiativeBonus: number;
+  d10Faces: readonly number[];
 };
 
 export type CombatTurnStep = {
@@ -31,15 +32,20 @@ export type InitiativeQueueEntry = InitiativeRollEntry;
 /** @deprecated use CombatTurnStep */
 export type InitiativeTimelineStep = CombatTurnStep & { kind?: never };
 
+export function initiativeBonusFromSheet(sheet: CharacterSheet | undefined): number {
+  if (!sheet) return 0;
+  const ref = (sheet.stats as { stats?: { ref?: { mod?: unknown } } } | undefined)?.stats?.ref;
+  const mod = Number(ref?.mod);
+  return Number.isFinite(mod) ? mod : 0;
+}
+
+export function expectedInitiativeTotal(ref: number, initiativeBonus = 0): number {
+  return Math.round(5.5 * initiativeD10Count(ref + initiativeBonus)) + ref + initiativeBonus;
+}
+
 export function initiativePoolFromSheet(sheet: CharacterSheet | undefined): number {
   if (!sheet) return 0;
-  const summary = readOpcodeSheetSummary(sheet.stats, sheet.status);
-  const marksmanship = summary.skills.find((s) => s.name === "marksmanship")?.value ?? 0;
-  return estimateInitiativePool({
-    ref: summary.baseStats.ref,
-    wil: summary.baseStats.wil,
-    marksmanship,
-  });
+  return expectedInitiativeTotal(refFromSheet(sheet), initiativeBonusFromSheet(sheet));
 }
 
 export function refFromSheet(sheet: CharacterSheet | undefined): number {
@@ -47,10 +53,42 @@ export function refFromSheet(sheet: CharacterSheet | undefined): number {
   return readOpcodeSheetSummary(sheet.stats, sheet.status).baseStats.ref;
 }
 
-/** ponytail: FSM owns exact initiative order; bench uses REF + 1d6 with seeded rng. */
-export function rollInitiativeValue(rng: () => number, ref: number): number {
-  const d6 = 1 + Math.floor(rng() * 6);
-  return ref + d6;
+export function athleticsFromSheet(sheet: CharacterSheet | undefined): number {
+  if (!sheet) return 0;
+  const summary = readOpcodeSheetSummary(sheet.stats, sheet.status);
+  return summary.skills.find((s) => s.name === "athelete")?.value ?? 0;
+}
+
+export function extraInitiativeD10Count(ref: number): number {
+  let extra = 0;
+  if (ref >= 8) extra++;
+  if (ref >= 10) extra++;
+  if (ref >= 15) extra++;
+  return extra;
+}
+
+export function initiativeD10Count(ref: number): number {
+  return 1 + extraInitiativeD10Count(ref);
+}
+
+export function formatInitiativeRollFormula(ref: number, initiativeBonus = 0): string {
+  const parts = [`${initiativeD10Count(ref + initiativeBonus)}d10`, `REF ${ref}`];
+  if (initiativeBonus) parts.push(String(initiativeBonus));
+  return parts.join(" + ");
+}
+
+export function rollInitiativeDice(
+  rng: () => number,
+  ref: number,
+  initiativeBonus = 0,
+): { faces: number[]; total: number } {
+  const faces = Array.from({ length: initiativeD10Count(ref + initiativeBonus) }, () => 1 + Math.floor(rng() * 10));
+  const total = faces.reduce((sum, face) => sum + face, 0) + ref + initiativeBonus;
+  return { faces, total };
+}
+
+export function rollInitiativeValue(rng: () => number, ref: number, initiativeBonus = 0): number {
+  return rollInitiativeDice(rng, ref, initiativeBonus).total;
 }
 
 export function placementProfileId(p: CombatMapPlacement): NpcDifficultyId {
@@ -67,15 +105,19 @@ export function rollInitiativeOrder(input: {
   const entries = input.placements.map((p) => {
     const sheet = input.sheetById.get(p.sheetId);
     const ref = refFromSheet(sheet);
+    const initiativeBonus = initiativeBonusFromSheet(sheet);
+    const rolled = rollInitiativeDice(rng, ref, initiativeBonus);
     return {
       placementId: p.id,
       label: p.label,
       team: p.team,
-      initiativePool: initiativePoolFromSheet(sheet),
+      initiativePool: rolled.total,
       profileId: placementProfileId(p),
       isDecider: p.id === input.deciderPlacementId,
       ref,
-      roll: rollInitiativeValue(rng, ref),
+      initiativeBonus,
+      d10Faces: rolled.faces,
+      roll: rolled.total,
     };
   });
   return entries.sort(

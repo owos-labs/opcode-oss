@@ -25,16 +25,16 @@ export type CombatBenchActionLogEntry = {
 export function initiativeDiceRolls(order: readonly InitiativeRollEntry[]): BenchDiceRollRecord[] {
   return order.map((entry) => ({
     subjectLabel: entry.label,
-    formula: formatInitiativeRollFormula(entry.ref, entry.initiativeBonus),
-    dieFaces: [...entry.d10Faces],
-    modifier: entry.ref + entry.initiativeBonus,
+    formula: formatInitiativeRollFormula(entry.ref, entry.initiativeBonus ?? 0),
+    dieFaces: [...(entry.d10Faces ?? [])],
+    modifier: entry.ref + (entry.initiativeBonus ?? 0),
     total: entry.roll,
   }));
 }
 
 function initiativeDetailLine(entry: InitiativeRollEntry): string {
-  const dice = entry.d10Faces.join("+");
-  const mod = entry.ref + entry.initiativeBonus;
+  const dice = (entry.d10Faces ?? []).join("+");
+  const mod = entry.ref + (entry.initiativeBonus ?? 0);
   return mod > 0 ? `${entry.label} ${dice}+${mod}=${entry.roll}` : `${entry.label} ${dice}=${entry.roll}`;
 }
 

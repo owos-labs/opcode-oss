@@ -26,6 +26,17 @@ export type BenchHealthView = {
   parts: BenchHealthPartRow[];
 };
 
+export function formatBenchHealthShort(health: BenchHealthView | null): string {
+  if (!health) return "—";
+  const cur = health.simpleCurrent ?? "—";
+  const max = health.simpleMax ?? "—";
+  return `${cur}/${max}`;
+}
+
+export function benchHealthPartIsDestroyed(row: BenchHealthPartRow): boolean {
+  return row.max > 0 && row.current !== null && row.current <= 0;
+}
+
 export function benchHealthFromSheet(
   sheet: CharacterSheet | undefined,
   placementLabel: string,

@@ -1,12 +1,11 @@
 "use client";
 
-import type { ReactNode } from "react";
-
 import type { CombatBenchActionLogEntry } from "@/lib/combat/combat-bench-action-log";
 import {
   actionLogDetailBody,
   actionLogDetailKind,
   actionLogDetailKindLabel,
+  expandReadableActionLogLines,
 } from "@/lib/combat/combat-bench-action-log-display";
 
 const KIND_CHIP_CLASS: Record<string, string> = {
@@ -42,6 +41,10 @@ function InitiativeRollList({
 function DetailLineRow({ line }: { line: string }) {
   const kind = actionLogDetailKind(line);
   const chip = KIND_CHIP_CLASS[kind] ?? KIND_CHIP_CLASS.other;
+  const rows =
+    kind === "fire" || kind === "damage" || kind === "suppress"
+      ? expandReadableActionLogLines(line)
+      : [actionLogDetailBody(line, kind)];
   return (
     <li className="flex items-start gap-2 text-[11px] leading-snug text-foreground/80">
       <span
@@ -49,33 +52,38 @@ function DetailLineRow({ line }: { line: string }) {
       >
         {actionLogDetailKindLabel(kind)}
       </span>
-      <span className="min-w-0 flex-1 break-words">{actionLogDetailBody(line, kind)}</span>
+      <span className="min-w-0 flex-1 break-words">
+        {rows.map((row) => (
+          <span key={row} className="block">
+            {row}
+          </span>
+        ))}
+      </span>
     </li>
   );
 }
 
 export function CombatBenchActionLogSidebar({
   entries,
-  controls,
   stepProgress,
   busy,
 }: {
   entries: readonly CombatBenchActionLogEntry[];
-  controls: ReactNode;
   stepProgress: string | null;
   busy: boolean;
 }) {
   return (
     <aside className="flex min-h-0 min-w-0 w-full flex-1 flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-content3 p-4 shadow-sm lg:w-full">
-      <div className="shrink-0 flex flex-col gap-2 border-b border-foreground/10 pb-3">
-        {controls}
-        {stepProgress ? (
-          <p className="text-center font-mono text-[10px] text-foreground/45">{stepProgress}</p>
-        ) : null}
-        {busy ? (
-          <p className="text-center text-[10px] text-foreground/45">解算中…</p>
-        ) : null}
-      </div>
+      {stepProgress || busy ? (
+        <div className="shrink-0 flex flex-col gap-2 border-b border-foreground/10 pb-3">
+          {stepProgress ? (
+            <p className="text-center font-mono text-[10px] text-foreground/45">{stepProgress}</p>
+          ) : null}
+          {busy ? (
+            <p className="text-center text-[10px] text-foreground/45">解算中…</p>
+          ) : null}
+        </div>
+      ) : null}
       <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pt-3">
         <p className="shrink-0 text-xs font-semibold uppercase tracking-wide text-foreground/50">
           行动日志

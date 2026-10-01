@@ -15,9 +15,9 @@ const ARMOR_KIND_SHORT: Record<string, string> = {
   欠穿: "欠穿",
 };
 
-function shortPlanTargetRef(tgt: string): string {
-  if (/^[0-9a-f-]{8,}$/i.test(tgt)) return `@${tgt.slice(-4)}`;
-  return `@${tgt}`;
+function planTargetNote(tgt: string): string {
+  const name = /^[0-9a-f-]{8,}$/i.test(tgt) ? tgt.slice(-4) : tgt;
+  return ` · ${name}`;
 }
 
 function attackRangeNote(range: string, loc: string, cover: string): string {
@@ -32,6 +32,20 @@ export function compactActionLogDetailLine(line: string): string {
   const plan = line.match(
     /^R(\d+) (\w+)(→ \(([\d.]+), ([\d.]+)\) m)?( @ (.+?))? · (\w+)$/,
   );
+  const stay = line.match(/^R(\d+) 不移动(?:：(.+))? · (\w+)$/);
+  if (stay) {
+    const t = stay[3] === "immediate" ? "即时" : stay[3];
+    return stay[2] ? `不移动：${stay[2].trim()} · ${t}` : `不移动 · ${t}`;
+  }
+  const moveDebug = line.match(
+    /^R(\d+) 移动 ([\d.]+)m → \(([\d.]+), ([\d.]+)\)(?: @ (.+?))? · (\w+)$/,
+  );
+  if (moveDebug) {
+    const t = moveDebug[6] === "immediate" ? "即时" : moveDebug[6];
+    const at = moveDebug[5] ? planTargetNote(moveDebug[5].trim()) : "";
+    return `移动 ${moveDebug[2]}m → (${Math.round(Number(moveDebug[3]))}, ${Math.round(Number(moveDebug[4]))})${at} · ${t}`;
+  }
+
   if (plan) {
     const kind = plan[2] ?? "";
     const x = plan[4];
@@ -41,13 +55,13 @@ export function compactActionLogDetailLine(line: string): string {
     const kindShort = PLAN_KIND_SHORT[kind] ?? kind;
     const pos =
       x && y ? `→(${Math.round(Number(x))},${Math.round(Number(y))})` : "";
-    const at = tgt ? shortPlanTargetRef(tgt.trim()) : "";
+    const at = tgt ? planTargetNote(tgt.trim()) : "";
     const t = timing === "immediate" ? "即时" : timing;
     if (kindShort === "移" && x && y) {
-      return `移动 (${Math.round(Number(x))}, ${Math.round(Number(y))}) · ${t}`;
+      return `移动 (${Math.round(Number(x))}, ${Math.round(Number(y))})${at} · ${t}`;
     }
     if (kindShort === "进掩" && x && y) {
-      return `进掩 (${Math.round(Number(x))}, ${Math.round(Number(y))}) · ${t}`;
+      return `进掩 (${Math.round(Number(x))}, ${Math.round(Number(y))})${at} · ${t}`;
     }
     if (kindShort === "出掩") {
       return `出掩 · ${t}`;
@@ -59,7 +73,7 @@ export function compactActionLogDetailLine(line: string): string {
   }
 
   const attackFormula = line.match(
-    /^对 (.+?) 射击检定：(1d10\[\d+\].*?)=(-?\d+) vs 难度(\d+)(?:\(距(\d+)\+位(\d+)\+掩(\d+)\))? → (命中|未中)/,
+    /^对 (.+?) 射击检定：(1d10\[\d+\].*?)=(-?\d+) vs 难度(\d+)(?:\(距(\d+)\+位(\d+)\+掩(\d+)\))? → (命中|未中)(?: · (.+))?$/,
   );
   if (attackFormula) {
     const hit = attackFormula[8] === "命中" ? "命中" : "未中";
@@ -67,16 +81,18 @@ export function compactActionLogDetailLine(line: string): string {
       attackFormula[5] != null
         ? attackRangeNote(attackFormula[5], attackFormula[6] ?? "0", attackFormula[7] ?? "0")
         : "";
-    return `射击 ${attackFormula[1]} · ${attackFormula[2]}=${attackFormula[3]} vs ${attackFormula[4]}${extra} · ${hit}`;
+    const mode = attackFormula[9] ? ` · ${attackFormula[9]}` : "";
+    return `射击 ${attackFormula[1]} · ${attackFormula[2]}=${attackFormula[3]} vs ${attackFormula[4]}${extra} · ${hit}${mode}`;
   }
 
   const attack = line.match(
-    /^对 (.+?) 射击检定：\[(\d+)\]\+(-?\d+)=(\d+) vs 难度(\d+)\(距(\d+)\+位(\d+)\+掩(\d+)\) → (命中|未中)/,
+    /^对 (.+?) 射击检定：\[(\d+)\]\+(-?\d+)=(\d+) vs 难度(\d+)\(距(\d+)\+位(\d+)\+掩(\d+)\) → (命中|未中)(?: · (.+))?$/,
   );
   if (attack) {
     const hit = attack[9] === "命中" ? "命中" : "未中";
     const extra = attackRangeNote(attack[6], attack[7], attack[8]);
-    return `射击 ${attack[1]} · ${attack[4]} vs ${attack[5]}${extra} · ${hit}`;
+    const mode = attack[10] ? ` · ${attack[10]}` : "";
+    return `射击 ${attack[1]} · ${attack[4]} vs ${attack[5]}${extra} · ${hit}${mode}`;
   }
 
   const attackLegacy = line.match(
@@ -134,15 +150,17 @@ export function compactActionLogDetailLine(line: string): string {
   }
 
   const suppressHits = line.match(
-    /^(.+?) 压制次数：max\(1d(\d+)\[(\d+)\], 胜出(\d+)\) → (\d+)次/,
+    /^(.+?) 压制次数：min\(1d(\d+)\[(\d+)\], (?:成功|胜出)(\d+)\) → (\d+)次/,
   );
   if (suppressHits) {
-    return `压制 ${suppressHits[1]} · 1d${suppressHits[2]}[${suppressHits[3]}] 胜出${suppressHits[4]} → ${suppressHits[5]}次`;
+    return `压制 ${suppressHits[1]} · min(1d${suppressHits[2]}[${suppressHits[3]}], 成功${suppressHits[4]}) → ${suppressHits[5]}次`;
   }
 
-  const suppressZero = line.match(/^(.+?) 压制次数：max\(1d(\d+)\[(\d+)\], 胜出(\d+)\).+→ 0次（(.+)）/);
+  const suppressZero = line.match(
+    /^(.+?) 压制次数：min\(1d(\d+)\[(\d+)\], (?:成功|胜出)(\d+)\).+→ 0次(?:（(.+)）)?/,
+  );
   if (suppressZero) {
-    return `压制 ${suppressZero[1]} · 0次 · ${suppressZero[5]}`;
+    return `压制 ${suppressZero[1]} · 0次${suppressZero[5] ? ` · ${suppressZero[5]}` : ""}`;
   }
 
   const suppressDmg = line.match(/^(.+?) 伤害 (\d+)(?: 剩(\d+))?/);
@@ -156,7 +174,15 @@ export function compactActionLogDetailLine(line: string): string {
     return `伤害 0 · ${suppressDmgBlocked[1]} · ${suppressDmgBlocked[2]}`;
   }
 
-  if (line.startsWith("视野 ") || line.startsWith("队长 ")) return line;
+  if (
+    line.startsWith("情报 ") ||
+    line.startsWith("视野 ") ||
+    line.startsWith("队长 ") ||
+    line.startsWith("选择 ") ||
+    line.startsWith("不移动")
+  ) {
+    return line;
+  }
 
   if (line.startsWith("进入第 ") && line.includes("战斗轮")) {
     const m = line.match(/^进入第 (\d+) 战斗轮/);

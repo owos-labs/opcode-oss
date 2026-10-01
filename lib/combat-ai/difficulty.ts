@@ -2,9 +2,6 @@
 export const NPC_AI_WALL_MS = 5000;
 export const NPC_AI_DEADLINE_MS = 4800;
 
-/** Chance a single Expert decide() run weights lethal outcomes (otherwise default utility). */
-export const EXPERT_LETHALITY_FOCUS_PROB = 0.4;
-
 export type NpcDifficultyId =
   | "newstupid"
   | "novice"
@@ -22,24 +19,22 @@ export const NPC_DIFFICULTY_IDS: readonly NpcDifficultyId[] = [
 
 /** Bench UI labels (not i18n). */
 export const NPC_DIFFICULTY_LABELS: Record<NpcDifficultyId, string> = {
-  newstupid: "新手/愚钝",
-  novice: "入门",
-  trained: "训练有素",
+  newstupid: "简单",
+  novice: "普通",
+  trained: "困难",
   expert: "专家",
   professional: "职业",
 };
+
+export function formatUnitDifficultyName(label: string, difficulty: NpcDifficultyId): string {
+  return `${label}（${NPC_DIFFICULTY_LABELS[difficulty]}）`;
+}
 
 /** Per-turn action shape before full combat state exists in the repo. */
 export type NpcActionShape =
   | "move_xor_standard"
   | "dual_free"
   | "action_economy";
-
-/** When eval favors downing / kill lines. */
-export type LethalityFocus = "none" | "probabilistic" | "prioritized";
-
-/** How far search projects the following turn. */
-export type NextRoundPlanning = "none" | "coarse" | "expected";
 
 export type NpcDifficultyProfile = {
   id: NpcDifficultyId;
@@ -57,13 +52,6 @@ export type NpcDifficultyProfile = {
   /** Trained caps at 2; Expert/Professional use every remaining initiative round. */
   maxInitiativeRounds: 0 | 2 | "all";
   allowsInsertedActions: boolean;
-  lethalityFocus: LethalityFocus;
-  nextRoundPlanning: NextRoundPlanning;
-  /**
-   * Scales unified-action combo penalties inside AI planning (1 = rules-as-written).
-   * Professional plans abuse routes with a lower effective malus.
-   */
-  unifiedActionPenaltyFactor: number;
 };
 
 export const NPC_DIFFICULTY_PROFILES: Record<NpcDifficultyId, NpcDifficultyProfile> = {
@@ -78,9 +66,6 @@ export const NPC_DIFFICULTY_PROFILES: Record<NpcDifficultyId, NpcDifficultyProfi
     considersActionEconomy: false,
     maxInitiativeRounds: 0,
     allowsInsertedActions: false,
-    lethalityFocus: "none",
-    nextRoundPlanning: "none",
-    unifiedActionPenaltyFactor: 1,
   },
   novice: {
     id: "novice",
@@ -93,9 +78,6 @@ export const NPC_DIFFICULTY_PROFILES: Record<NpcDifficultyId, NpcDifficultyProfi
     considersActionEconomy: false,
     maxInitiativeRounds: 0,
     allowsInsertedActions: false,
-    lethalityFocus: "none",
-    nextRoundPlanning: "none",
-    unifiedActionPenaltyFactor: 1,
   },
   trained: {
     id: "trained",
@@ -108,9 +90,6 @@ export const NPC_DIFFICULTY_PROFILES: Record<NpcDifficultyId, NpcDifficultyProfi
     considersActionEconomy: true,
     maxInitiativeRounds: 2,
     allowsInsertedActions: true,
-    lethalityFocus: "none",
-    nextRoundPlanning: "none",
-    unifiedActionPenaltyFactor: 1,
   },
   expert: {
     id: "expert",
@@ -123,9 +102,6 @@ export const NPC_DIFFICULTY_PROFILES: Record<NpcDifficultyId, NpcDifficultyProfi
     considersActionEconomy: true,
     maxInitiativeRounds: "all",
     allowsInsertedActions: true,
-    lethalityFocus: "probabilistic",
-    nextRoundPlanning: "coarse",
-    unifiedActionPenaltyFactor: 1,
   },
   professional: {
     id: "professional",
@@ -138,9 +114,6 @@ export const NPC_DIFFICULTY_PROFILES: Record<NpcDifficultyId, NpcDifficultyProfi
     considersActionEconomy: true,
     maxInitiativeRounds: "all",
     allowsInsertedActions: true,
-    lethalityFocus: "prioritized",
-    nextRoundPlanning: "expected",
-    unifiedActionPenaltyFactor: 0.55,
   },
 };
 
@@ -156,60 +129,4 @@ export function isExpertTierCore(profile: NpcDifficultyProfile): boolean {
     profile.maxInitiativeRounds === "all" &&
     profile.allowsInsertedActions
   );
-}
-
-/** Whether this decide() run should apply lethal-weighted utility. */
-export function lethalityFocusActive(
-  profile: NpcDifficultyProfile,
-  random01: number,
-): boolean {
-  if (profile.lethalityFocus === "none") return false;
-  if (profile.lethalityFocus === "prioritized") return true;
-  return random01 < EXPERT_LETHALITY_FOCUS_PROB;
-}
-
-/** Effective malus when scoring unified-action combos in search. */
-export function effectiveUnifiedActionPenalty(
-  profile: NpcDifficultyProfile,
-  rulesPenalty: number,
-): number {
-  return rulesPenalty * profile.unifiedActionPenaltyFactor;
-}
-
-/** When suppressive_fire is the top utility option, execute it with this probability. */
-export const SUPPRESSIVE_FIRE_GATE: Record<NpcDifficultyId, number> = {
-  newstupid: 0,
-  novice: 0,
-  trained: 0.1,
-  expert: 0.3,
-  professional: 1,
-};
-
-/** When delayed/conditional timing is optimal, use it with this probability (calibration TBD). */
-export const DELAYED_CONDITIONAL_GATE: Record<NpcDifficultyId, number> = {
-  newstupid: 0,
-  novice: 0.05,
-  trained: 0.15,
-  expert: 0.3,
-  professional: 0.5,
-};
-
-export function suppressiveFireGatePasses(
-  profile: NpcDifficultyProfile,
-  random01: number,
-): boolean {
-  const gate = SUPPRESSIVE_FIRE_GATE[profile.id];
-  if (gate >= 1) return true;
-  if (gate <= 0) return false;
-  return random01 < gate;
-}
-
-export function delayedConditionalGatePasses(
-  profile: NpcDifficultyProfile,
-  random01: number,
-): boolean {
-  const gate = DELAYED_CONDITIONAL_GATE[profile.id];
-  if (gate >= 1) return true;
-  if (gate <= 0) return false;
-  return random01 < gate;
 }

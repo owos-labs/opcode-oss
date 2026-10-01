@@ -38,3 +38,32 @@ export function rollOpcodeDamageExpr(
   const total = dieFaces.reduce((sum, face) => sum + face, 0) + flatModifier;
   return { dieFaces, flatModifier, total: Math.max(0, total) };
 }
+
+const meanCache = new Map<string, number>();
+
+/** Exact dice mean, including flat modifiers and the damage floor. */
+export function expectedOpcodeDamage(expr: string, maxDice = Infinity, floor = 0): number {
+  const key = `${expr}|${maxDice}|${floor}`;
+  const cached = meanCache.get(key);
+  if (cached !== undefined) return cached;
+  const { groups, flatModifier } = parseOpcodeDamageExpr(expr);
+  let distribution = [1];
+  let budget = maxDice;
+  for (const group of groups) {
+    const count = Math.min(group.count, Math.max(0, budget));
+    budget -= count;
+    for (let i = 0; i < count; i++) {
+      const next = new Array<number>(distribution.length + group.sides).fill(0);
+      for (let sum = 0; sum < distribution.length; sum++) {
+        for (let face = 1; face <= group.sides; face++) {
+          next[sum + face] += distribution[sum]! / group.sides;
+        }
+      }
+      distribution = next;
+    }
+  }
+  const mean = distribution.reduce((sum, p, damage) => sum + p * Math.max(floor, damage + flatModifier), 0);
+  if (meanCache.size >= 256) meanCache.clear();
+  meanCache.set(key, mean);
+  return mean;
+}

@@ -1,5 +1,6 @@
 import type { BallisticBarrier } from "../../combat-ai/geometry.ts";
 import type { CoverEmplacement } from "../../combat-ai/cover-concealment-view.ts";
+import { bakeWalkWalls, unionWalkRings } from "../../combat-ai/walk-path.ts";
 import type { Vec2, WallSegment } from "../../combat-ai/visibility.ts";
 import type { CompiledCombatMap } from "./compile.ts";
 import type { MapSolveBounds } from "./compile-svg-map.ts";
@@ -9,6 +10,7 @@ import type {
   OpcodeMapObject,
   OpcodeMapCompileResult,
 } from "./opcode-map.types.ts";
+import { combatRoomsFromRings } from "../rooms.ts";
 import { compileSvgMapGeometry } from "./compile-svg-map.ts";
 import type { MapSegmentDto } from "./types.ts";
 
@@ -105,20 +107,17 @@ function normalizeActor(id: string, a: OpcodeMapActorRuntime) {
   };
 }
 
-function legacySegmentsFromObjects(objects: Record<string, OpcodeMapObject>): MapSegmentDto[] {
-  const segments: MapSegmentDto[] = [];
-  for (const [objectId, obj] of Object.entries(objects)) {
-    segments.push(...segmentsForObject(objectId, obj));
-  }
-  return segments;
-}
-
 /** Compile docs/map.impl.py document → combat geometry. */
 export function compileOpcodeMap(doc: OpcodeMapDocument): CompiledCombatMap & OpcodeMapCompileResult {
   const emplacements: CoverEmplacement[] = [];
 
   let barriers: BallisticBarrier[];
   let solveBounds: MapSolveBounds | null = null;
+  let authoredRooms: { id: string; centroid: { x: number; y: number }; cells: { x: number; y: number }[] }[] = [];
+  let metersPerUnit: number | undefined;
+  let visionRings: Vec2[][] = [];
+  let walkRings: Vec2[][] = [];
+  const looseWalls: WallSegment[] = [];
 
   const objects = doc.base.objects;
   if (typeof objects === "string") {
@@ -129,16 +128,45 @@ export function compileOpcodeMap(doc: OpcodeMapDocument): CompiledCombatMap & Op
     );
     barriers = geom.barriers;
     solveBounds = geom.solveBounds;
+    authoredRooms = combatRoomsFromRings(geom.roomRings);
+    metersPerUnit = geom.metersPerUnit;
+    visionRings = geom.visionRings;
+    walkRings = geom.walkRings;
   } else {
-    barriers = legacySegmentsFromObjects(objects).map(seg => ({
-      id: seg.id,
-      a: seg.a,
-      b: seg.b,
-      armorRating: seg.armorRating,
-      maxSsp: seg.maxSsp,
-      currentSsp: seg.currentSsp,
-      blocksVision: seg.blocksVision !== false,
-    }));
+    barriers = [];
+    for (const [objectId, obj] of Object.entries(objects)) {
+      if (obj.segments?.length) {
+        const segs = segmentsForObject(objectId, obj);
+        for (const seg of segs) {
+          barriers.push({
+            id: seg.id,
+            a: seg.a,
+            b: seg.b,
+            armorRating: seg.armorRating,
+            maxSsp: seg.maxSsp,
+            currentSsp: seg.currentSsp,
+            blocksVision: seg.blocksVision !== false,
+          });
+          if (seg.blocksVision !== false) looseWalls.push({ a: seg.a, b: seg.b });
+        }
+        continue;
+      }
+      const segs = segmentsForObject(objectId, obj);
+      for (const seg of segs) {
+        barriers.push({
+          id: seg.id,
+          a: seg.a,
+          b: seg.b,
+          armorRating: seg.armorRating,
+          maxSsp: seg.maxSsp,
+          currentSsp: seg.currentSsp,
+          blocksVision: seg.blocksVision !== false,
+        });
+      }
+      if (objectBlocksVision(obj) && segs.length >= 3) {
+        visionRings.push(segs.map((s) => s.a));
+      }
+    }
   }
 
   const emp = doc.base.emplacements ?? {};
@@ -150,9 +178,15 @@ export function compileOpcodeMap(doc: OpcodeMapDocument): CompiledCombatMap & Op
     });
   }
 
-  const walls: WallSegment[] = barriers
-    .filter(b => b.blocksVision)
-    .map(b => ({ a: b.a, b: b.b }));
+  const walls: WallSegment[] = bakeWalkWalls([
+    ...unionWalkRings(visionRings),
+    ...looseWalls,
+  ]);
+  const navSource = walkRings.length > 0 ? walkRings : visionRings;
+  const navWalls: WallSegment[] = bakeWalkWalls([
+    ...unionWalkRings(navSource),
+    ...looseWalls,
+  ]);
 
   const actors: OpcodeMapCompileResult["actors"] = {};
   for (const [id, a] of Object.entries(doc.runtime?.actors ?? {})) {
@@ -162,9 +196,12 @@ export function compileOpcodeMap(doc: OpcodeMapDocument): CompiledCombatMap & Op
   return {
     mapId: doc.name,
     walls,
+    navWalls,
     barriers,
     emplacements,
     solveBounds,
+    authoredRooms: authoredRooms.length > 0 ? authoredRooms : undefined,
+    metersPerUnit,
     actors,
   };
 }

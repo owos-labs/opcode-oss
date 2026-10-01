@@ -1,4 +1,9 @@
-import type { OrderedBarrierHit } from "../combat-ai/geometry.ts";
+import {
+  orderedBarrierHits,
+  type BallisticBarrier,
+  type OrderedBarrierHit,
+} from "../combat-ai/geometry.ts";
+import type { Vec2 } from "../combat-ai/visibility.ts";
 
 export type BallisticResolution = {
   reachesTarget: boolean;
@@ -6,6 +11,33 @@ export type BallisticResolution = {
   expectedDamageDice: number;
   sspDeductionByBarrierId: Readonly<Record<string, number>>;
 };
+
+function ballisticObjectId(barrierId: string): string {
+  return barrierId.replace(/-e\d+$/, "");
+}
+
+/**
+ * Vision-blocking walls only, one layer per object.
+ * Concealment / cover edges are hit-difficulty, not extra dice sinks.
+ */
+export function combatBallisticHits(
+  observer: Vec2,
+  target: Vec2,
+  barriers: readonly BallisticBarrier[],
+): OrderedBarrierHit[] {
+  const raw = orderedBarrierHits(
+    observer,
+    target,
+    barriers.filter((b) => b.blocksVision),
+  );
+  const nearest = new Map<string, OrderedBarrierHit>();
+  for (const hit of raw) {
+    const id = ballisticObjectId(hit.barrierId);
+    const prev = nearest.get(id);
+    if (!prev || hit.t < prev.t) nearest.set(id, { ...hit, barrierId: id });
+  }
+  return [...nearest.values()].sort((a, b) => a.t - b.t);
+}
 
 /**
  * Ordered AR resolution (MVP): pen vs AR per hit, -1 expected damage die per penetrated layer.

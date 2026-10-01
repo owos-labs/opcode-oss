@@ -16,6 +16,8 @@ export type DecideInput = {
   surrenderThreshold?: number;
   startedAtMs?: number;
   deadlineMs?: number;
+  maxStandardActions?: number;
+  locatedPathConditional?: boolean;
 };
 
 export type RoundPlan = {
@@ -37,6 +39,8 @@ export function decideRoundPlan(input: DecideInput): RoundPlan {
     allowNpcSurrender: input.allowNpcSurrender,
     surrenderThreshold: input.surrenderThreshold,
     deadlineMs: input.deadlineMs ?? NPC_AI_DEADLINE_MS,
+    maxStandardActions: input.maxStandardActions,
+    locatedPathConditional: input.locatedPathConditional,
   });
 
   return decideFromBundle(bundle, input.startedAtMs ?? Date.now());
@@ -52,6 +56,7 @@ export function decideFromBundle(
     options,
     startedAtMs,
     bundle.deadlineMs,
+    bundle.maxStandardActions,
   );
 
   return {

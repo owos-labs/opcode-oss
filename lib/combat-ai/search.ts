@@ -1,5 +1,6 @@
-import { actionKindIndex, ACTION_KINDS } from "./action-feasibility.ts";
+import { actionKindIndex, ACTION_KINDS, isStandardActionKindId } from "./action-feasibility.ts";
 import type { NpcDifficultyProfile } from "./difficulty.ts";
+import { maxStandardActionsThisRound } from "./combat-policy.ts";
 import type { ScoredActionOption } from "./planning.ts";
 
 export type ActionIntent = {
@@ -19,15 +20,16 @@ export type SearchResult = {
 
 const MOVE_KIND = () => actionKindIndex("move");
 
-function isStandardActionKindIndex(kind: number): boolean {
+/** Fire/suppress may still be worth doing at U=0; reload/aim need strictly positive utility. */
+function standardActionUsable(action: ScoredActionOption): boolean {
+  if (!Number.isFinite(action.utility) || action.utility < 0) return false;
+  if (action.kindId === "standard_fire" || action.kindId === "suppressive_fire") return action.utility >= 0;
+  return action.utility > 0;
+}
+
+export function isStandardActionKindIndex(kind: number): boolean {
   const id = ACTION_KINDS[kind];
-  return (
-    id === "standard_fire" ||
-    id === "suppressive_fire" ||
-    id === "standard_reload" ||
-    id === "standard_aim" ||
-    id === "insert"
-  );
+  return id !== undefined && isStandardActionKindId(id);
 }
 
 function toIntent(opt: ScoredActionOption): ActionIntent {
@@ -42,7 +44,7 @@ function toIntent(opt: ScoredActionOption): ActionIntent {
 
 /** Newstupid: best move XOR best standard on round 0. */
 export function selectMoveXorStandard(options: readonly ScoredActionOption[]): ActionIntent[] {
-  const round0 = options.filter(o => o.round === 0);
+  const round0 = options.filter(o => o.round === 0 && Number.isFinite(o.utility));
   const moveKind = MOVE_KIND();
   let bestMove: ScoredActionOption | null = null;
   let bestStandard: ScoredActionOption | null = null;
@@ -50,7 +52,7 @@ export function selectMoveXorStandard(options: readonly ScoredActionOption[]): A
   for (const opt of round0) {
     if (opt.kind === moveKind) {
       if (!bestMove || opt.utility > bestMove.utility) bestMove = opt;
-    } else if (isStandardActionKindIndex(opt.kind)) {
+    } else if (opt.tile === 0 && isStandardActionKindIndex(opt.kind) && standardActionUsable(opt)) {
       if (!bestStandard || opt.utility > bestStandard.utility) bestStandard = opt;
     }
   }
@@ -58,71 +60,54 @@ export function selectMoveXorStandard(options: readonly ScoredActionOption[]): A
   if (!bestMove && !bestStandard) return [];
   if (!bestMove) return [toIntent(bestStandard!)];
   if (!bestStandard) return [toIntent(bestMove)];
-  return bestMove.utility >= bestStandard.utility
-    ? [toIntent(bestMove)]
-    : [toIntent(bestStandard)];
+  if (bestMove.utility > bestStandard!.utility) return [toIntent(bestMove)];
+  if (bestStandard && bestStandard.utility >= bestMove!.utility) return [toIntent(bestStandard)];
+  return [toIntent(bestMove!)];
 }
 
-/** Novice: best move + best standard on round 0 when both exist. */
-export function selectDualMoveAndStandard(
-  options: readonly ScoredActionOption[],
-): ActionIntent[] {
-  const round0 = options.filter(o => o.round === 0);
-  const moveKind = MOVE_KIND();
-  let bestMove: ScoredActionOption | null = null;
-  let bestStandard: ScoredActionOption | null = null;
+/** Score complete alternatives at one landing, including the option to stay. */
+export function selectDualMoveAndStandard(options: readonly ScoredActionOption[]): ActionIntent[] {
+  return greedyCappedStandards(options.filter(o => o.round === 0), 1);
+}
 
-  for (const opt of round0) {
-    if (opt.kind === moveKind) {
-      if (!bestMove || opt.utility > bestMove.utility) bestMove = opt;
-    } else if (isStandardActionKindIndex(opt.kind)) {
-      if (!bestStandard || opt.utility > bestStandard.utility) bestStandard = opt;
+export function greedyCappedStandards(options: readonly ScoredActionOption[], maxStandards: number): ActionIntent[] {
+  const legal = options.filter(o => Number.isFinite(o.utility));
+  const moves = legal.filter(o => o.round === 0 && o.kind === MOVE_KIND());
+  const standards = legal.filter(o => isStandardActionKindIndex(o.kind))
+    .sort((a, b) => a.round - b.round || b.utility - a.utility);
+  let best: ScoredActionOption[] = [], bestScore = -Infinity;
+  const holdAllowed = moves.length === 0 || moves.some(m => m.tile === 0);
+  for (const move of [...moves, ...(holdAllowed ? [undefined] : [])]) {
+    const picked: ScoredActionOption[] = move ? [move] : [];
+    const coverAction = legal.find(o => o.round === 0 && o.tile === (move?.tile ?? 0) && (o.kindId === "enter_cover" || o.kindId === "leave_cover"));
+    if (coverAction) picked.push(coverAction);
+    const rounds = new Set<number>();
+    for (const action of standards) {
+      if (rounds.size >= maxStandards || coverAction?.kindId === "enter_cover") break;
+      if (action.tile !== (move?.tile ?? 0) || rounds.has(action.round) || !standardActionUsable(action)) continue;
+      if (action.kindId === "suppressive_fire" || action.timing !== "immediate") continue;
+      picked.push(action);
+      rounds.add(action.round);
+    }
+    const score = picked.reduce((sum, o) => sum + o.utility, 0);
+    if (score > bestScore) { best = picked; bestScore = score; }
+  }
+  if (maxStandards > 0) {
+    for (const action of standards) {
+      if (action.round !== 0 || action.tile !== 0) continue;
+      if (action.kindId !== "suppressive_fire" && action.timing === "immediate") continue;
+      if (standardActionUsable(action) && action.utility >= bestScore) { best = [action]; bestScore = action.utility; }
     }
   }
-
-  const out: ActionIntent[] = [];
-  if (bestMove) out.push(toIntent(bestMove));
-  if (bestStandard) out.push(toIntent(bestStandard));
-  return out;
+  return best.map(toIntent);
 }
 
-function maxSearchDepth(profile: NpcDifficultyProfile): number {
-  if (profile.singleActionMoveXorStandard) return 1;
-  if (!profile.considersActionEconomy) return 2;
-  if (profile.maxInitiativeRounds === 2) return 4;
-  if (profile.maxInitiativeRounds === "all") return 6;
-  return 2;
-}
-
-/** Greedy sequence: lower initiative rounds first, then utility (static tensor; no simulation). */
+/** Greedy sequence: lower initiative rounds first, then utility. One-shot, no deepening. */
 export function greedySequence(
   options: readonly ScoredActionOption[],
   depth: number,
 ): ActionIntent[] {
-  const sorted = [...options].sort((a, b) =>
-    a.round !== b.round ? a.round - b.round : b.utility - a.utility,
-  );
-  const picked: ActionIntent[] = [];
-  let minRound = -1;
-
-  for (const opt of sorted) {
-    if (picked.length >= depth) break;
-    if (opt.round < minRound) continue;
-    if (
-      picked.some(
-        (p) =>
-          p.round === opt.round &&
-          p.kind === opt.kind &&
-          p.tile === opt.tile &&
-          p.target === opt.target,
-      )
-    ) {
-      continue;
-    }
-    picked.push(toIntent(opt));
-    minRound = opt.round;
-  }
-  return picked;
+  return greedyCappedStandards(options, depth).slice(0, depth);
 }
 
 function sequenceUtility(
@@ -143,52 +128,14 @@ function sequenceUtility(
   return total;
 }
 
-/**
- * Iterative deepening over greedy sequences; keeps last complete depth before deadline.
- */
-export function searchWithIterativeDeepening(
-  profile: NpcDifficultyProfile,
-  options: readonly ScoredActionOption[],
-  startedAtMs: number,
-  deadlineMs: number,
-): SearchResult {
-  const maxDepth = maxSearchDepth(profile);
-  let bestActions: ActionIntent[] = [];
-  let bestScore = -Infinity;
-  let completedDepth = 0;
-
-  for (let depth = 1; depth <= maxDepth; depth++) {
-    if (Date.now() - startedAtMs > deadlineMs) {
-      return {
-        actions: bestActions,
-        completedDepth,
-        totalUtility: bestScore,
-        timedOut: true,
-      };
-    }
-    const seq = greedySequence(options, depth);
-    const score = sequenceUtility(seq, options);
-    completedDepth = depth;
-    if (score > bestScore) {
-      bestScore = score;
-      bestActions = seq;
-    }
-  }
-
-  return {
-    actions: bestActions,
-    completedDepth,
-    totalUtility: bestScore,
-    timedOut: false,
-  };
-}
-
 export function searchRoundPlan(
   profile: NpcDifficultyProfile,
   options: readonly ScoredActionOption[],
-  startedAtMs: number,
-  deadlineMs: number,
+  _startedAtMs: number,
+  _deadlineMs: number,
+  maxStandardActions?: number,
 ): SearchResult {
+  if (maxStandardActions === 0) options = options.filter(o => !isStandardActionKindIndex(o.kind));
   if (profile.singleActionMoveXorStandard) {
     const actions = selectMoveXorStandard(options);
     return {
@@ -209,13 +156,19 @@ export function searchRoundPlan(
     };
   }
 
-  return searchWithIterativeDeepening(profile, options, startedAtMs, deadlineMs);
-}
-
-/** Drop options whose upper bound cannot beat current best. */
-export function pruneByUpperBound(
-  options: ScoredActionOption[],
-  bestUtility: number,
-): ScoredActionOption[] {
-  return options.filter(o => o.utilityUpperBound >= bestUtility);
+  const cap =
+    maxStandardActions ??
+    maxStandardActionsThisRound({
+      difficulty: profile.id,
+      hitEvPositive: true,
+      extraAmbushStandard: false,
+      initiativeBound: Number.POSITIVE_INFINITY,
+    });
+  const actions = greedyCappedStandards(options, cap);
+  return {
+    actions,
+    completedDepth: actions.length,
+    totalUtility: sequenceUtility(actions, options),
+    timedOut: false,
+  };
 }

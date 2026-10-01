@@ -48,6 +48,7 @@ test("buildCombatBenchActionBudgetView chains move legs and initiative by round"
   );
   assert.equal(view.moveLegs.length, 2);
   assert.ok(Math.abs(view.moveLegs[0]!.meters - 5) < 1e-6);
+  assert.ok(view.moveLegs[0]!.path.length >= 2);
   assert.equal(view.initiativePlannedSpend, 3 + 6);
   assert.equal(view.rounds.length, 2);
   assert.ok(Math.abs(view.movPlannedSpend - (5 + Math.hypot(3, 1))) < 1e-6);

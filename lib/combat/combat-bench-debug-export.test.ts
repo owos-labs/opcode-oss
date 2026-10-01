@@ -25,6 +25,8 @@ test("buildCombatBenchRoundDebugJson includes turn and unit summaries", () => {
     },
     topOptionsByPlacementId: { a: [] },
     randomSeed: 1,
+    stepLog: [{ stepIndex: 0, combatRound: 1, actorPlacementId: "a", actorPosition: { x: 1, y: 2 },
+      actionDescriptions: ["移动 1m"], diceRolls: [] }],
     combatRound: 1,
     healthByPlacementId: { a: { current: 10, max: 10 } },
     combatEnded: false,
@@ -36,6 +38,8 @@ test("buildCombatBenchRoundDebugJson includes turn and unit summaries", () => {
     placementLabelById: new Map([["a", "A"]]),
   });
   assert.equal(json.turnIndex, 1);
+  assert.equal(json.randomSeed, 1);
+  assert.deepEqual(JSON.parse(serializeCombatBenchRoundDebug(json)).stepLog, session.stepLog);
   assert.ok(json.units.a);
   assert.equal(json.units.a!.payloadSummary.legalCells, 1);
   assert.ok(serializeCombatBenchRoundDebug(json).includes('"turnIndex": 1'));

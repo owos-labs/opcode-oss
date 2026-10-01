@@ -14,4 +14,5 @@ test("prepareCombatMapSvgForDisplay injects barrier and concealment styles", () 
   assert.match(out, /combat-map-svg/);
   assert.match(out, /\[type="barrier"\]/);
   assert.match(out, /\[type="concealment"\]/);
+  assert.match(out, /\[type="room"\]/);
 });

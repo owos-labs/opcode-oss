@@ -1,6 +1,6 @@
 import { actionKindIndex } from "../combat-ai/action-feasibility.ts";
 import type { RoundPlan } from "../combat-ai/decide.ts";
-import { decideRoundPlanWithSimulation } from "./decide-with-simulation.ts";
+import { decideRoundPlan } from "../combat-ai/decide.ts";
 import { buildPlanningPayload, type PlanningPayload } from "./build-planning-payload.ts";
 import { compileCombatMap, type CompiledCombatMap } from "./map-adapter/compile.ts";
 import type { CombatMapDto } from "./map-adapter/types.ts";
@@ -39,7 +39,7 @@ export function runCombatCheck(input: CombatCheckInput): CombatCheckReport {
   let legalCellCount = 0;
   for (const x of payload.feasibility.legal) if (x === 1) legalCellCount++;
 
-  const plan = decideRoundPlanWithSimulation({
+  const plan = decideRoundPlan({
     profileId: input.snapshot.encounter.profileId,
     feasibility: payload.feasibility,
     utility: payload.utility,
@@ -48,8 +48,8 @@ export function runCombatCheck(input: CombatCheckInput): CombatCheckReport {
     allowNpcSurrender: input.snapshot.encounter.allowNpcSurrender,
     surrenderThreshold: input.snapshot.encounter.surrenderThreshold,
     startedAtMs: input.startedAtMs ?? Date.now(),
-    snapshot: input.snapshot,
-    payload,
+    maxStandardActions: payload.maxStandardActions,
+    locatedPathConditional: payload.locatedPathConditional,
   });
 
   const context = createRecheckContext(input.snapshot, compiled, plan, payload);

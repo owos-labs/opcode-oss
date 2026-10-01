@@ -14,6 +14,7 @@ import {
   estimateInitiativePool,
   selectPrimaryRangedWeapon,
 } from "./character-sheet-snapshot.ts";
+import { senseFromSheet } from "./bench-intel.ts";
 import type { CombatAmmoView, CombatSnapshot, CombatWeaponView } from "./snapshot.ts";
 
 export type CombatBenchUnitStatusView = {
@@ -37,12 +38,10 @@ export type CombatBenchUnitStatusView = {
   suppressionActive: boolean;
   sustainedFireActive: boolean;
   hasLiveSnapshot: boolean;
+  hearingA: number;
+  openVisionV: number;
+  passiveS: number;
 };
-
-function skillMarksmanship(sheet: CharacterSheet): number {
-  const summary = readOpcodeSheetSummary(sheet.stats, sheet.status);
-  return summary.skills.find((s) => s.name === "marksmanship")?.value ?? 0;
-}
 
 function snapshotForPlacement(input: {
   sheet: CharacterSheet;
@@ -58,7 +57,7 @@ function snapshotForPlacement(input: {
       .map((p) => ({
         id: p.id,
         position: { x: p.x, y: p.y },
-        localization: "full" as const,
+        localization: "approximate" as const,
         armorByPart: { torso: 0 },
         coverId: null,
       }));
@@ -86,7 +85,17 @@ export function benchUnitStatusViews(input: {
     let health = benchHealthFromSheet(sheet, placement.label);
     const runtimeHealth = input.session?.healthByPlacementId[placement.id];
     if (health && runtimeHealth && runtimeHealth.current !== null) {
-      health = { ...health, simpleCurrent: runtimeHealth.current };
+      health = {
+        ...health,
+        simpleCurrent: runtimeHealth.current,
+        parts:
+          health.mode === "normal" && runtimeHealth.parts
+            ? health.parts.map((part) => {
+                const live = runtimeHealth.parts?.[part.key];
+                return live ? { ...part, current: live.current, max: live.max } : part;
+              })
+            : health.parts,
+      };
     }
     const inventory = sheet ? readOpcodeInventory(sheet.status) : [];
     const weaponDraft = sheet ? selectPrimaryRangedWeapon(inventory) : null;
@@ -99,6 +108,7 @@ export function benchUnitStatusViews(input: {
         })
       : null;
     const hasLiveSnapshot = Boolean(input.session?.plansByPlacementId[placement.id]?.snapshot);
+    const sense = senseFromSheet(sheet);
 
     let initiativeTotal: number | null = null;
     let initiativeRemaining: number | null = null;
@@ -109,8 +119,6 @@ export function benchUnitStatusViews(input: {
       const summary = readOpcodeSheetSummary(sheet.stats, sheet.status);
       initiativeTotal = estimateInitiativePool({
         ref: summary.baseStats.ref,
-        wil: summary.baseStats.wil,
-        marksmanship: skillMarksmanship(sheet),
       });
       initiativeRemaining = initiativeTotal;
     }
@@ -138,6 +146,9 @@ export function benchUnitStatusViews(input: {
       suppressionActive: live?.suppressionActive ?? false,
       sustainedFireActive: live?.sustainedFire.active ?? false,
       hasLiveSnapshot,
+      hearingA: sense.hearingA,
+      openVisionV: sense.openVisionV,
+      passiveS: sense.passiveS,
     };
   });
 }
