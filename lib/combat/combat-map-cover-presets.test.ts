@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   COMBAT_MAP_COVER_PRESETS,
   coverPresetAttrs,
+  coverPresetSelectOptions,
   coverPresetsForKind,
   findMatchingCoverPreset,
 } from "./combat-map-cover-presets.ts";
@@ -28,4 +29,11 @@ test("findMatchingCoverPreset matches AR and SSP", () => {
 
 test("coverPresetAttrs writes string ar and ssp", () => {
   assert.deepEqual(coverPresetAttrs(COMBAT_MAP_COVER_PRESETS[0]!), { ar: "10", ssp: "15" });
+});
+
+test("coverPresetSelectOptions uses i18n for stats suffix", () => {
+  const [option] = coverPresetSelectOptions("concealment", (key, params) =>
+    params ? `${key}:${JSON.stringify(params)}` : key,
+  );
+  assert.match(option!.label, /combat\.editor\.coverPreset\.stats:/);
 });

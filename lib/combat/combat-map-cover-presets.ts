@@ -49,10 +49,10 @@ export function coverPresetAttrs(preset: CombatMapCoverPreset): Record<string, s
 
 export function coverPresetSelectOptions(
   kind: CombatMapCoverPresetKind,
-  t: (key: string) => string,
+  t: (key: string, params?: Record<string, unknown>) => string,
 ): { value: string; label: string }[] {
   return coverPresetsForKind(kind).map((preset) => ({
     value: preset.id,
-    label: `${t(`combat.editor.coverPreset.${preset.id}`)} (AR ${preset.ar}, SSP ${preset.ssp})`,
+    label: `${t(`combat.editor.coverPreset.${preset.id}`)} (${t("combat.editor.coverPreset.stats", { ar: preset.ar, ssp: preset.ssp })})`,
   }));
 }

@@ -9,5 +9,6 @@ test("COMBAT_MAP_EDITOR_HELP_ENTRIES lists unique editor help rows", () => {
   assert.ok(COMBAT_MAP_EDITOR_HELP_ENTRIES.length >= 8);
   for (const entry of COMBAT_MAP_EDITOR_HELP_ENTRIES) {
     assert.match(entry.labelKey, /^combat\.editor\.help\./);
+    if (entry.shortcutKey) assert.match(entry.shortcutKey, /^combat\.editor\.help\.shortcut\./);
   }
 });

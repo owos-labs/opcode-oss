@@ -1076,14 +1076,14 @@ function MultiSelectPropertyPanel({
             onChange={(value) => onPatchMany({ stroke: value })}
           />
           <TextField
-            label="AR"
+            label={t("combat.editor.props.ar")}
             type="number"
             value={displaySharedAttr(sharedElementAttr(elements, "ar"))}
             placeholder={sharedAttrPlaceholder(sharedElementAttr(elements, "ar")) ?? mixedLabel}
             onChange={(value) => onPatchMany({ ar: value })}
           />
           <TextField
-            label="SSP"
+            label={t("combat.editor.props.ssp")}
             type="number"
             value={displaySharedAttr(sharedElementAttr(elements, "ssp"))}
             placeholder={sharedAttrPlaceholder(sharedElementAttr(elements, "ssp")) ?? mixedLabel}
@@ -1439,7 +1439,7 @@ function PropertyPanel({
           t={t}
         />
         <TextField
-          label="AR"
+          label={t("combat.editor.props.ar")}
           type="number"
           value={selected.attrs.ar ?? ""}
           onChange={(v) => onPatch(selected.id, { ar: v })}
@@ -1450,7 +1450,7 @@ function PropertyPanel({
           onChange={(v) => onPatch(selected.id, { name: v })}
         />
         <TextField
-          label="SSP"
+          label={t("combat.editor.props.ssp")}
           type="number"
           value={selected.attrs.ssp ?? ""}
           onChange={(v) => onPatch(selected.id, { ssp: v })}
@@ -1506,7 +1506,7 @@ function PropertyPanel({
           t={t}
         />
         <TextField
-          label="AR"
+          label={t("combat.editor.props.ar")}
           type="number"
           value={selected.attrs.ar ?? ""}
           onChange={(v) => onPatch(selected.id, { ar: v })}
@@ -1523,7 +1523,7 @@ function PropertyPanel({
           options={coverHeightSelectOptions(t)}
         />
         <TextField
-          label="SSP"
+          label={t("combat.editor.props.ssp")}
           type="number"
           value={selected.attrs.ssp ?? ""}
           onChange={(v) => onPatch(selected.id, { ssp: v })}
@@ -3540,8 +3540,8 @@ export function CombatMapEditor() {
                       className="flex items-start justify-between gap-3 rounded-xl border border-border1 px-3 py-2 text-sm"
                     >
                       <span className="font-medium text-foreground/80">{t(entry.labelKey)}</span>
-                      {entry.shortcut ? (
-                        <Kbd>{entry.shortcut}</Kbd>
+                      {entry.shortcutKey ? (
+                        <Kbd>{t(entry.shortcutKey)}</Kbd>
                       ) : null}
                     </li>
                   ))}
