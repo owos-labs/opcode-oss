@@ -14,6 +14,7 @@ test("coverHeightBandFromFraction matches map.impl.py table", () => {
 });
 
 test("coverHeightHitDifficultyAdd follows 1.7 cover table where defined", () => {
+  assert.equal(coverHeightHitDifficultyAdd("third"), 2);
   assert.equal(coverHeightHitDifficultyAdd("half"), 3);
   assert.equal(coverHeightHitDifficultyAdd("full"), 5);
 });

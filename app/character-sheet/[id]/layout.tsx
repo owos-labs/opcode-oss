@@ -14,6 +14,7 @@ import { ModalShortcutFooter, Notice, download } from "@/app/components/ui";
 import { formatComplianceErrorLine, listCareerComplianceErrors } from "@/lib/character-sheets/compliance-errors";
 import { useT } from "@/lib/character-sheets/i18n";
 import { sheetListLabel } from "@/lib/character-sheets/model";
+import { characterSheetSection } from "@/lib/motion";
 
 export default function SheetWorkspace({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -71,11 +72,7 @@ export default function SheetWorkspace({ children }: { children: ReactNode }) {
       </div>
     );
   }
-  const section = pathname.includes("/inventory")
-    ? "sheet.inventory"
-    : pathname.includes("/attributes")
-      ? "sheet.attributes"
-      : "sheet.basics";
+  const section = `sheet.${characterSheetSection(pathname)}`;
   const status =
     saveState === "saving"
       ? t("sheet.saving")

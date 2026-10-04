@@ -3,7 +3,7 @@
 import { Button } from "@heroui/react";
 import { Dropdown } from "@heroui/react/dropdown";
 import { ChevronDown, Minus, Plus } from "lucide-react";
-import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ComponentProps, type ReactNode } from "react";
 
 import { modalShortcutAction } from "@/lib/modal-shortcuts";
 
@@ -33,21 +33,25 @@ export function TextField({
   error,
   value,
   onChange,
+  onBlur,
   disabled,
   placeholder,
   icon,
   type = "text",
   step,
+  list,
 }: {
   label: string;
   error?: string;
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   disabled?: boolean;
   placeholder?: string;
   icon?: ReactNode;
   type?: "text" | "number";
   step?: number;
+  list?: string;
 }) {
   return (
     <Field label={label} error={error}>
@@ -57,11 +61,13 @@ export function TextField({
           <input
             type={type}
             step={step}
+            list={list}
             value={value}
             placeholder={placeholder}
             disabled={disabled}
             aria-invalid={error ? true : undefined}
             onChange={(event) => onChange(event.target.value)}
+            onBlur={onBlur}
             className="min-h-11 w-full bg-transparent font-medium outline-none placeholder:text-foreground/40 disabled:cursor-not-allowed"
           />
         </div>
@@ -69,14 +75,96 @@ export function TextField({
         <input
           type={type}
           step={step}
+          list={list}
           value={value}
           placeholder={placeholder}
           disabled={disabled}
           aria-invalid={error ? true : undefined}
           onChange={(event) => onChange(event.target.value)}
+          onBlur={onBlur}
           className={fieldClass}
         />
       )}
+    </Field>
+  );
+}
+
+export function ColorField({
+  label,
+  error,
+  value,
+  onChange,
+  onPreview,
+  disabled,
+  fallback = "#808080",
+  placeholder,
+}: {
+  label: string;
+  error?: string;
+  value: string;
+  onChange: (value: string) => void;
+  onPreview?: (value: string) => void;
+  disabled?: boolean;
+  fallback?: string;
+  placeholder?: string;
+}) {
+  const [draft, setDraft] = useState(value);
+  useEffect(() => {
+    setDraft(value);
+  }, [value]);
+
+  const displayValue = onPreview ? draft : value;
+  const pickerValue = useMemo(() => {
+    const v = displayValue.trim();
+    if (/^#[0-9a-fA-F]{6}$/.test(v)) return v.toLowerCase();
+    if (/^#[0-9a-fA-F]{3}$/.test(v)) {
+      const r = v[1]!;
+      const g = v[2]!;
+      const b = v[3]!;
+      return `#${r}${r}${g}${g}${b}${b}`.toLowerCase();
+    }
+    return fallback;
+  }, [displayValue, fallback]);
+
+  function preview(next: string) {
+    if (onPreview) {
+      setDraft(next);
+      onPreview(next);
+      return;
+    }
+    onChange(next);
+  }
+
+  function commit(next: string) {
+    setDraft(next);
+    onChange(next);
+  }
+
+  return (
+    <Field label={label} error={error}>
+      <div className="flex min-h-11 items-center gap-2 rounded-lg border border-border1 bg-content3 px-3 shadow1 transition-colors duration-150 hover:bg-content2 focus-within:border-primary focus-within:shadow-primary">
+        <input
+          type="color"
+          value={pickerValue}
+          disabled={disabled}
+          aria-label={label}
+          onInput={(event) => preview(event.currentTarget.value)}
+          onChange={(event) => (onPreview ? commit(event.currentTarget.value) : preview(event.currentTarget.value))}
+          className="size-9 shrink-0 cursor-pointer rounded-md border border-border1 bg-transparent p-0.5 disabled:cursor-not-allowed"
+        />
+        <input
+          type="text"
+          value={displayValue}
+          placeholder={placeholder}
+          disabled={disabled}
+          aria-invalid={error ? true : undefined}
+          onChange={(event) => preview(event.target.value)}
+          onBlur={(event) => {
+            if (onPreview) commit(event.currentTarget.value);
+          }}
+          className="min-h-11 w-full bg-transparent font-medium outline-none placeholder:text-foreground/40 disabled:cursor-not-allowed"
+        />
+      </div>
     </Field>
   );
 }
@@ -107,6 +195,125 @@ export function AreaField({
         className={`${fieldClass} resize-y`}
       />
     </Field>
+  );
+}
+
+export function ComboField({
+  label,
+  error,
+  hint,
+  value,
+  onChange,
+  disabled,
+  placeholder,
+  options,
+  searchable = false,
+  allowCustom = true,
+  className,
+  "aria-label": ariaLabel,
+}: {
+  label?: string;
+  error?: string;
+  hint?: string;
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+  placeholder?: string;
+  options: { value: string; label: string }[];
+  searchable?: boolean;
+  allowCustom?: boolean;
+  className?: string;
+  "aria-label"?: string;
+}) {
+  const selected = options.find((option) => option.value === value);
+  const [focused, setFocused] = useState(false);
+  const [draft, setDraft] = useState("");
+
+  const filteredOptions = useMemo(() => {
+    if (!searchable || !draft.trim()) return options;
+    const query = draft.trim().toLowerCase();
+    return options.filter((option) =>
+      option.label.toLowerCase().includes(query)
+      || option.value.toLowerCase().includes(query),
+    );
+  }, [draft, options, searchable]);
+
+  const inputValue = searchable
+    ? (focused ? draft : (selected?.label ?? (allowCustom ? value : "")))
+    : value;
+
+  function pick(next: string) {
+    onChange(next);
+    setDraft("");
+    setFocused(false);
+  }
+
+  const control = (
+    <div
+      className={`flex min-h-11 items-stretch overflow-hidden rounded-lg border border-border1 bg-content3 shadow1 outline-none transition-colors duration-150 hover:bg-content2 focus-within:border-primary focus-within:shadow-primary disabled:cursor-not-allowed disabled:opacity-60 ${
+        error ? "border-error focus-within:shadow-error" : ""
+      }`}
+    >
+      <input
+        type="text"
+        value={inputValue}
+        placeholder={placeholder}
+        disabled={disabled}
+        aria-label={label ? undefined : ariaLabel}
+        aria-invalid={error ? true : undefined}
+        onFocus={() => {
+          setFocused(true);
+          setDraft(selected?.label ?? value);
+        }}
+        onBlur={() => {
+          setFocused(false);
+          setDraft("");
+        }}
+        onChange={(event) => {
+          const next = event.target.value;
+          if (searchable) {
+            setDraft(next);
+            if (allowCustom) onChange(next);
+            return;
+          }
+          onChange(next);
+        }}
+        className="min-w-0 flex-1 bg-transparent px-4 py-3 font-medium outline-none placeholder:text-foreground/40 disabled:cursor-not-allowed"
+      />
+      <Dropdown>
+        <Dropdown.Trigger
+          isDisabled={disabled}
+          aria-label={label ? `${label} options` : ariaLabel}
+          className="flex w-11 shrink-0 items-center justify-center border-l border-border1 bg-content2 outline-none disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <ChevronDown className="size-4 opacity-60" />
+        </Dropdown.Trigger>
+        <Dropdown.Popover>
+          <Dropdown.Menu
+            aria-label={label || ariaLabel}
+            onAction={(key) => pick(String(key) === "__none__" ? "" : String(key))}
+          >
+            {filteredOptions.map((option) => (
+              <Dropdown.Item
+                key={option.value || "__none__"}
+                id={option.value || "__none__"}
+                textValue={option.label}
+              >
+                {option.label}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
+    </div>
+  );
+  return (
+    <div className={`flex min-w-0 flex-col gap-2 ${className || ""}`}>
+      {label ? <span className="text-sm font-semibold text-foreground/70">{label}</span> : null}
+      {control}
+      {hint ? <p className="text-xs leading-5 text-foreground/60">{hint}</p> : null}
+      {error ? <span className="text-sm text-error">{error}</span> : null}
+    </div>
   );
 }
 

@@ -68,6 +68,58 @@ test("en locale still resolves attributes keys", () => {
   assert.equal(messageForLocale(tables, "en", "characterSheets.skills.title"), "Skills");
 });
 
+test("sheet section nav label covers attributes and skills", () => {
+  const tables = buildMessageTables({
+    en: { "sheet.attributes": "Attributes & Skills" },
+    zh: { "sheet.attributes": "属性和技能" },
+    ja: { "sheet.attributes": "能力と技能" },
+  });
+  assert.equal(messageForLocale(tables, "en", "sheet.attributes"), "Attributes & Skills");
+  assert.equal(messageForLocale(tables, "zh", "sheet.attributes"), "属性和技能");
+  assert.equal(messageForLocale(tables, "ja", "sheet.attributes"), "能力と技能");
+});
+
+test("zh locale resolves character sheet list empty states", () => {
+  const tables = buildMessageTables({ en: {}, zh: {}, ja: {} });
+  assert.equal(messageForLocale(tables, "zh", "characterSheets.list.noSearchResults"), "没有符合搜索条件的角色卡");
+  assert.equal(messageForLocale(tables, "zh", "characterSheets.list.emptyTitle"), "还没有角色卡");
+});
+
+test("character sheet hero links resolve per locale", () => {
+  const tables = buildMessageTables({
+    en: {},
+    zh: {},
+    ja: { "characterSheets.list.openRules": "オープンルール" },
+  });
+  assert.equal(messageForLocale(tables, "en", "characterSheets.list.github"), "GitHub");
+  assert.equal(messageForLocale(tables, "en", "characterSheets.list.openRules"), "Open rules");
+  assert.equal(messageForLocale(tables, "zh", "characterSheets.list.openRules"), "开源规则");
+  assert.equal(messageForLocale(tables, "ja", "characterSheets.list.openRules"), "オープンルール");
+});
+
+test("combat overview hero title resolves per locale", () => {
+  const tables = buildMessageTables({
+    en: {
+      "combat.overview.heroLine1": "Combat",
+      "combat.overview.heroLine2": "Tools",
+    },
+    zh: {
+      "combat.overview.heroLine1": "战斗",
+      "combat.overview.heroLine2": "工具",
+    },
+    ja: {
+      "combat.overview.heroLine1": "戦闘",
+      "combat.overview.heroLine2": "ツール",
+    },
+  });
+  assert.equal(messageForLocale(tables, "en", "combat.overview.heroLine1"), "Combat");
+  assert.equal(messageForLocale(tables, "en", "combat.overview.heroLine2"), "Tools");
+  assert.equal(messageForLocale(tables, "zh", "combat.overview.heroLine1"), "战斗");
+  assert.equal(messageForLocale(tables, "zh", "combat.overview.heroLine2"), "工具");
+  assert.equal(messageForLocale(tables, "ja", "combat.overview.heroLine1"), "戦闘");
+  assert.equal(messageForLocale(tables, "ja", "combat.overview.heroLine2"), "ツール");
+});
+
 test("character sheet hero title resolves per locale", () => {
   const tables = buildMessageTables({
     en: {},

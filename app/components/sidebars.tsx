@@ -6,6 +6,7 @@ import {
   Clover,
   Dumbbell,
   GripVertical,
+  Layers,
   Package,
   Plus,
   Search,
@@ -27,7 +28,7 @@ import { Card } from "@/app/components/card";
 import { useSheetApp } from "@/app/components/sheet-app";
 import { ModalShortcutFooter, Stepper, TextField } from "@/app/components/ui";
 import { OPCODE_STAT_KEYS, type OpcodeStatKey } from "@/lib/character-sheets/characterSheet.types";
-import { characterSidebar } from "@/lib/motion";
+import { characterSheetSection, characterSidebar } from "@/lib/motion";
 import { useT } from "@/lib/character-sheets/i18n";
 import { sheetListLabel, type OpcodeLocalSheet, type SheetMode } from "@/lib/character-sheets/model";
 
@@ -129,7 +130,7 @@ export function ListSidebar() {
           </div>
           <div className="flex shrink-0 items-center gap-1">
             <Dropdown>
-              <Button size="sm" variant="primary" aria-label={t("list.new")} className="size-9 min-w-9 p-0">
+              <Button size="sm" variant="primary" aria-label={t("list.new")} title={t("list.newHint")} className="size-9 min-w-9 p-0">
                 <Plus className="size-4" />
               </Button>
               <Dropdown.Popover>
@@ -151,7 +152,7 @@ export function ListSidebar() {
             <button
               type="button"
               aria-label={t("list.import")}
-              title={t("list.import")}
+              title={t("list.importHint")}
               className="flex size-9 items-center justify-center rounded-lg border border-border1 bg-content3 shadow1 transition-colors duration-150 hover:bg-content2 focus-visible:shadow-primary"
               onClick={() => fileRef.current?.click()}
             >
@@ -406,17 +407,14 @@ const INNER = [
   { href: "basics", key: "sheet.basics", icon: UserRound },
   { href: "attributes", key: "sheet.attributes", icon: Sparkles },
   { href: "inventory", key: "sheet.inventory", icon: Package },
+  { href: "presets", key: "sheet.presets", icon: Layers },
 ] as const;
 
 export function SheetSidebar() {
   const pathname = usePathname();
   const { t } = useT();
   const { sheet, form, patchForm } = useSheetApp();
-  const section = pathname.includes("/inventory")
-    ? "inventory"
-    : pathname.includes("/attributes")
-      ? "attributes"
-      : "basics";
+  const section = characterSheetSection(pathname);
   const layout = characterSidebar(pathname);
 
   if (layout === "list") {
@@ -479,7 +477,7 @@ export function SheetSidebar() {
       {sheet && form && section === "attributes" ? (
         <>
           <p className="px-4 pt-3 text-[11px] font-bold uppercase tracking-wide text-foreground/45">
-            {t("sheet.attributes")}
+            {t("characterSheets.sections.attributes")}
           </p>
           <nav className="flex flex-col gap-1 p-2 pb-3" aria-label={t("characterSheets.sections.attributes")}>
             {OPCODE_STAT_KEYS.map((key) => {

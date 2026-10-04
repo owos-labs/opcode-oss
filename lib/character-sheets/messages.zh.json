@@ -289,8 +289,19 @@
       "previewHint": "本页数值的实时概览。"
     },
     "list": {
+      "filterAll": "全部角色",
+      "filterLabel": "按角色筛选",
+      "loading": "正在加载角色卡…",
+      "failedTitle": "无法加载角色卡",
+      "errorDescription": "无法刷新你的角色卡。请检查网络连接后重试。",
+      "retry": "重试",
+      "emptyTitle": "还没有角色卡",
+      "noSearchResults": "没有符合搜索条件的角色卡",
+      "searchEmptyHint": "试试其他关键词，或清除搜索和筛选。",
       "heroLine1": "角色",
-      "heroLine2": "设计器"
+      "heroLine2": "设计器",
+      "github": "GitHub",
+      "openRules": "开源规则"
     }
   }
 }

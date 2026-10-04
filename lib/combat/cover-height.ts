@@ -2,13 +2,14 @@ import type { CoverHeightBand } from "../combat-ai/cover-concealment-view.ts";
 
 /**
  * SVG cover-height fraction → band (docs/map.impl.py).
- * 1 full, 0.75 two-thirds, 0.5 half, 0.2 leg.
+ * 1 full, 0.75 two-thirds, 0.5 half, ~0.333 third, 0.2 leg.
  */
 export function coverHeightBandFromFraction(fraction: number): CoverHeightBand {
   const f = fraction;
   if (f >= 0.9) return "full";
   if (f >= 0.7) return "two_thirds";
   if (f >= 0.4) return "half";
+  if (f >= 0.25) return "third";
   if (f >= 0.15) return "leg";
   return "none";
 }

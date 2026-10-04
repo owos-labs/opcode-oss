@@ -1,3 +1,4 @@
+import { readSvgMetersPerUnit } from "../combat-map-units.ts";
 import type { CoverHeightBand } from "../../combat-ai/cover-concealment-view.ts";
 import type { BallisticBarrier } from "../../combat-ai/geometry.ts";
 import type { Vec2 } from "../../combat-ai/visibility.ts";
@@ -55,6 +56,8 @@ function num(v: string | undefined, fallback: number): number {
 }
 
 function viewBoxMetersPerUnit(svg: string, widthMeters = 100): number {
+  const stored = readSvgMetersPerUnit(svg);
+  if (stored !== null) return stored;
   const m = /viewBox="[\d.]+\s+[\d.]+\s+([\d.]+)\s+[\d.]+"/i.exec(svg);
   const w = m ? Number(m[1]) : 1000;
   return widthMeters / Math.max(w, 1);
@@ -166,7 +169,7 @@ export function parseSvgMapShapes(svg: string, options?: SvgCompileOptions): Par
   for (const match of svg.matchAll(TAG_RE)) {
     const tag = match[1]!.toLowerCase() as "rect" | "path";
     const attrs = parseAttrs(match[2] ?? "");
-    const id = attrs.name || attrs.id || `${tag}-${index++}`;
+    const id = attrs.id || attrs.name || `${tag}-${index++}`;
     const meta = shapeMeta(attrs, tag);
     let ring: Vec2[] = [];
     if (tag === "rect") ring = rectRing(attrs);

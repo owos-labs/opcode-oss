@@ -9,9 +9,9 @@ import {
   type ReactNode,
 } from "react";
 
-export type CardTone = "default" | "secondary" | "shell" | "transparent" | "danger";
-export type CardRadius = "md" | "lg" | "xl" | "2xl" | "full";
-export type CardPadding = false | "none" | "sm" | "md" | "lg";
+import { cardSurfaceClass, type CardPadding, type CardRadius, type CardTone } from "./card-surface";
+
+export type { CardPadding, CardRadius, CardTone } from "./card-surface";
 
 const toneVariant: Record<CardTone, NonNullable<ComponentProps<typeof HeroCard>["variant"]>> = {
   default: "default",
@@ -21,46 +21,7 @@ const toneVariant: Record<CardTone, NonNullable<ComponentProps<typeof HeroCard>[
   danger: "default",
 };
 
-const radiusClass: Record<CardRadius, string> = {
-  md: "!rounded-lg",
-  lg: "!rounded-xl",
-  xl: "!rounded-2xl",
-  "2xl": "!rounded-3xl",
-  full: "!rounded-full",
-};
-
-const paddingClass: Record<Exclude<CardPadding, false>, string> = {
-  none: "!p-0 !gap-0",
-  sm: "!p-2 !gap-2",
-  md: "!p-4 !gap-3",
-  lg: "!p-6 !gap-4",
-};
-
-export function cardSurfaceClass({
-  tone = "default",
-  radius = "lg",
-  padding = "md",
-  spotlight = true,
-  className = "",
-}: {
-  tone?: CardTone;
-  radius?: CardRadius;
-  padding?: CardPadding;
-  spotlight?: boolean;
-  className?: string;
-}) {
-  return [
-    spotlight && "oc-card-spotlight",
-    radiusClass[radius],
-    padding === false ? "" : paddingClass[padding === "none" ? "none" : padding || "md"],
-    tone === "danger" && "!text-error",
-    "border border-border1 border-2",
-    "shadow1 text-foreground bg-content",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-}
+export { cardSurfaceClass } from "./card-surface";
 
 type CardProps<E extends ElementType = "div"> = {
   as?: E;

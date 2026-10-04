@@ -36,8 +36,8 @@ import {
   type CombatBenchMapOverlay,
   type CombatBenchUnitVision,
 } from "@/lib/combat/combat-bench-map-overlay";
+import { meterPolylineSvgPoints, metersToSvgPoint } from "@/lib/combat/combat-map-meter-svg";
 import { prepareCombatMapSvgForDisplay } from "@/lib/combat/combat-map-svg-display";
-import { combatTestActorSvgUserPoint } from "@/lib/combat/combat-test-scene";
 
 const TEAM_MARKER = [
   "bg-danger text-white",
@@ -59,15 +59,6 @@ const MAX_SCALE = 3.5;
 const PLAN_ROUND_STROKE = ["#0ea5e9", "#8b5cf6", "#f59e0b", "#f43f5e"] as const;
 const ROOM_FILL = ["#38bdf8", "#a78bfa", "#f59e0b", "#34d399", "#f472b6", "#fb7185"] as const;
 
-function metersToSvgPoint(
-  x: number,
-  y: number,
-  viewBox: NonNullable<ReturnType<typeof parseSvgViewBox>>,
-  metersPerUnit?: number,
-) {
-  return combatTestActorSvgUserPoint({ x, y }, viewBox, metersPerUnit);
-}
-
 function meterRadiusSvg(
   radiusM: number,
   viewBox: NonNullable<ReturnType<typeof parseSvgViewBox>>,
@@ -81,12 +72,7 @@ function polyPoints(
   viewBox: NonNullable<ReturnType<typeof parseSvgViewBox>>,
   metersPerUnit?: number,
 ) {
-  return points
-    .map((p) => {
-      const s = metersToSvgPoint(p.x, p.y, viewBox, metersPerUnit);
-      return `${s.x},${s.y}`;
-    })
-    .join(" ");
+  return meterPolylineSvgPoints(points, viewBox, metersPerUnit);
 }
 
 export function CombatBenchMap({

@@ -212,7 +212,9 @@
       "noSearchResults": "No sheets match this search",
       "searchEmptyHint": "Try another term, or clear the search and filters.",
       "heroLine1": "Character",
-      "heroLine2": "Designer"
+      "heroLine2": "Designer",
+      "github": "GitHub",
+      "openRules": "Open rules"
     },
     "view": {
       "status": "Viewing",
