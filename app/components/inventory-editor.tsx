@@ -256,7 +256,7 @@ export function InventoryEditor({ initialItemId }: { initialItemId?: string | nu
     const attachment = isRecord(data.attachment) ? data.attachment : {};
     const result = installWeaponModification(drafts, weaponId, {
       slot: typeof attachment.slot === "string" ? attachment.slot : "attachment",
-      name: data.name,
+      name: typeof data.name === "string" ? data.name : String(data.name ?? ""),
       description: resolveLocaleText(data.desc, locale),
       source: {
         presetId: preset.id,

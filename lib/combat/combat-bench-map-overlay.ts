@@ -138,7 +138,7 @@ export function movementReachDiskMeters(input: {
     if (!prev || r > prev.r) best[bucket] = { pos, r };
   }
   const pts = best.filter((b): b is { pos: Vec2; r: number } => b != null).map((b) => b.pos);
-  if (pts.length < 3) return nodes.map((n) => n.pos);
+  if (pts.length < 3) return nodes;
   return pts.sort(
     (a, b) =>
       Math.atan2(a.y - input.origin.y, a.x - input.origin.x) -

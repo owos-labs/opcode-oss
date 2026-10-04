@@ -2340,7 +2340,7 @@ export function CombatMapEditor() {
 
   useEffect(() => {
     if (!contextMenu) return;
-    function dismiss(event: PointerEvent) {
+    function dismiss(event: Event) {
       if ((event.target as Element | null)?.closest("[data-combat-context-menu]")) return;
       setContextMenu(null);
     }
@@ -2754,7 +2754,7 @@ export function CombatMapEditor() {
               snapped,
               minSize,
             )
-          : rectElementIsRotated(scaledEl)
+          : scaledEl && rectElementIsRotated(scaledEl)
             ? resizeCombatMapRectIgnoringRotation(
                 scaleDrag.originSvg,
                 scaleDrag.ids[0]!,

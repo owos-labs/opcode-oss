@@ -30,7 +30,8 @@ export function ballisticFireReachUtility(
   const target = plannedTarget(snapshot, view);
   const dist = Math.hypot(target.position.x - from.x, target.position.y - from.y);
   const rangeDiff = rangeBandDifficulty(dist, snapshot.weapon.rangeM);
-  const locDiff = localizationHitDifficultyAdd(target.localization);
+  const locDiff =
+    target.localization === "none" ? 0 : localizationHitDifficultyAdd(target.localization);
   const hits = orderedBarrierHits(from, target.position, map.barriers);
   const ballistic = resolveBallisticToTarget(
     snapshot.ammo.penetration,

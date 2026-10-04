@@ -24,7 +24,7 @@ export function inventoryDraftFromPreset(preset: ItemPreset, locale: Locale): Op
     presetCategory: preset.category,
     presetData: structuredClone(data),
   };
-  draft.name = data.name;
+  draft.name = typeof data.name === "string" ? data.name : String(data.name ?? "");
   draft.count = String(typeof data.count === "number" ? data.count : data.count ?? 1);
   const nestedWeight = isRecord(data.weapon) ? data.weapon.weight : isRecord(data.armor) ? data.armor.weight : undefined;
   draft.weight = presetLastNumber(data.weight ?? nestedWeight, "0");
@@ -99,7 +99,7 @@ export function inventoryDraftFromPreset(preset: ItemPreset, locale: Locale): Op
   return draft;
 }
 
-function readItemPresetKind(data: ItemPreset["data"]): OpcodeInventoryItemKind {
+function readItemPresetKind(data: Record<string, unknown>): OpcodeInventoryItemKind {
   const type = data.type;
   if (typeof type === "string" && (OPCODE_INVENTORY_TYPED_KINDS as readonly string[]).includes(type))
     return type as OpcodeInventoryItemKind;

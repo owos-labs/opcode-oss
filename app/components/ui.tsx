@@ -7,6 +7,8 @@ import { useEffect, useMemo, useState, type ComponentProps, type ReactNode } fro
 
 import { modalShortcutAction } from "@/lib/modal-shortcuts";
 
+import { Card } from "./card";
+
 export function Field({
   label,
   error,

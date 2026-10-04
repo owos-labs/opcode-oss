@@ -1201,7 +1201,7 @@ function readAmmoDraft(ammo: Record<string, unknown>, forceExplosive: boolean): 
 
   return {
     caliber: canonCaliber(typeof ammo.caliber === 'string' ? ammo.caliber : ''),
-    damage: discriminator,
+    damage: discriminator as OpcodeAmmoDamageKind,
     penetration: stringifyUnknownNumber(ammo.penetration, ''),
     projectileCount: stringifyUnknownNumber(buck.projectile_count, ''),
     ballDamage: isPlainObject(ball.damage) ? cloneRecord(ball.damage) : {},

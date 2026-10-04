@@ -70,16 +70,16 @@ export function buildTransferableDecidePayload(
 ): { legalBuffer: ArrayBuffer; utilityBuffer: ArrayBuffer; transfer: ArrayBuffer[] } {
   if (legal.buffer !== utility.buffer) {
     return {
-      legalBuffer: legal.buffer,
-      utilityBuffer: utility.buffer,
-      transfer: [legal.buffer, utility.buffer],
+      legalBuffer: legal.buffer as ArrayBuffer,
+      utilityBuffer: utility.buffer as ArrayBuffer,
+      transfer: [legal.buffer as ArrayBuffer, utility.buffer as ArrayBuffer],
     };
   }
   const tensor = createActionFeasibilityTensor(shape);
   tensor.legal.set(legal);
   return {
-    legalBuffer: tensor.legal.buffer,
-    utilityBuffer: utility.buffer,
-    transfer: [tensor.legal.buffer, utility.buffer],
+    legalBuffer: tensor.legal.buffer as ArrayBuffer,
+    utilityBuffer: utility.buffer as ArrayBuffer,
+    transfer: [tensor.legal.buffer as ArrayBuffer, utility.buffer as ArrayBuffer],
   };
 }

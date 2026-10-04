@@ -86,7 +86,7 @@ export function selectPrimaryRangedWeapon(
 
 function ammoStatsFromDraft(
   ammoDraft: OpcodeInventoryDraft | undefined,
-): Pick<CombatSnapshot["ammo"], "penetration" | "expectedDamageDice" | "damageDiceExpr"> {
+): Pick<CombatSnapshot["ammo"], "penetration" | "expectedDamageDice" | "damageDiceExpr" | "explosive"> {
   const pen = Number(ammoDraft?.ammo?.penetration);
   const diceRaw = damageDiceExprFromAmmoDraft(ammoDraft?.ammo);
   return {

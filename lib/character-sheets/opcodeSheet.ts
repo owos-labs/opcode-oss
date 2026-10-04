@@ -1,5 +1,7 @@
 import { findOpcodeSpecializationPreset, OPCODE_SKILL_DEFINITIONS } from './opcodeSkillDefinitions'
 import type { CharacterSheet, CreateCharacterSheetDto, OpcodeDerivedStats, OpcodeHealthMode, OpcodeHealthPart, OpcodeHealthTotals, OpcodeSheetForm, OpcodeSheetSummary, OpcodeSkillPointMode, OpcodeSkillRow, OpcodeStatKey, UpdateCharacterSheetDto } from './characterSheet.types'
+
+export type { OpcodeSheetSummary } from './characterSheet.types'
 import {
   buildFreshOpcodeStatusVitals,
   clampOpcodeVitalsFields,

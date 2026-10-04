@@ -386,7 +386,7 @@ export function buildPlanningPayload(
     hereFire > hereRisk + 1e-6 &&
     hitEvPositive &&
     minHostileDistM >= 5 &&
-    snapshot.attackBonus >= 20;
+    (snapshot.attackBonus ?? 0) >= 20;
   const holdingDisengage =
     snapshot.disengaging === true && outnumbered && !favorableReentry;
   if (disengaging) {
@@ -436,7 +436,7 @@ export function buildPlanningPayload(
               ? standardFirePlanOptsForView(state, map.barriers, from, bestView, distance, count)
               : undefined,
           );
-          state = { ...applyStandardFireToSnapshot(state, plan), declaredStandardActions: count };
+          state = { ...applyStandardFireToSnapshot(state, plan), declaredStandardActions: count, declaredStandardFires: count };
         }
         if (total > bestTotal + 1e-6) { bestTotal = total; bestCount = count; }
       }

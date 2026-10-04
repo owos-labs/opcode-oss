@@ -69,6 +69,10 @@ function rollD10(rng: () => number): number {
   return 1 + Math.floor(rng() * 10);
 }
 
+function boundRng(rng: () => number | undefined): () => number {
+  return () => rng() ?? Math.random();
+}
+
 function rollStunSave(
   vitals: OpcodeVitalsState,
   stats: OpcodeSaveStats,
@@ -117,7 +121,7 @@ function runDestroyEffect(
   }
   if (!stats || !rng) return vitals;
   if (part === "torso" || part === "leg_left" || part === "leg_right") {
-    const save = rollStunSave(vitals, stats, rng);
+    const save = rollStunSave(vitals, stats, boundRng(rng));
     events.push({ kind: "stun_save", part, passed: save.passed, failBy: save.failBy });
     return applyStunSaveResult(vitals, save.failBy);
   }
@@ -146,7 +150,7 @@ function runSeverEffect(
     part === "leg_right"
   ) {
     if (part === "torso" || part === "leg_left" || part === "leg_right") {
-      const death = rollDeathSave(vitals, stats, rng);
+      const death = rollDeathSave(vitals, stats, boundRng(rng));
       events.push({
         kind: "death_save",
         part,
@@ -163,7 +167,7 @@ function runSeverEffect(
       }
       return next;
     }
-    const stun = rollStunSave(vitals, stats, rng);
+    const stun = rollStunSave(vitals, stats, boundRng(rng));
     events.push({ kind: "stun_save", part, passed: stun.passed, failBy: stun.failBy });
     return applyStunSaveResult(vitals, stun.failBy);
   }
@@ -275,10 +279,10 @@ function applyDamageToPart(
   damageIn: number,
   vitals: OpcodeVitalsState,
   stats: OpcodeSaveStats | undefined,
-  rng: () => number | undefined,
+  rng: (() => number) | undefined,
   events: OpcodePartDamageEvent[],
 ): ReturnType<typeof strikePart> {
-  return strikePart(parts, part, damageIn, vitals, stats, rng, events, true);
+  return strikePart(parts, part, damageIn, vitals, stats, rng ?? (() => undefined), events, true);
 }
 
 export type ApplyOpcodeNormalDamageInput = {

@@ -2,6 +2,7 @@
 
 import { Card as HeroCard } from "@heroui/react";
 import {
+  createElement,
   useRef,
   type ComponentProps,
   type ElementType,
@@ -61,17 +62,11 @@ export function Card<E extends ElementType = "div">({
   }
 
   if (as) {
-    const Component = as;
-    return (
-      <Component
-        ref={ref}
-        className={`relative flex flex-col ${classes}`}
-        onMouseMove={handleMouseMove}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
+    return createElement(as, {
+      className: `relative flex flex-col ${classes}`,
+      onMouseMove: handleMouseMove,
+      ...props,
+    } as ComponentProps<E>, children);
   }
 
   return (

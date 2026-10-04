@@ -75,7 +75,7 @@ export function SheetHealthToolbar({ className }: { className?: string }) {
             </div>
             {career ? (
               <Stepper
-                value={stunCurrent}
+                value={String(stunCurrent)}
                 min={0}
                 max={stunMax}
                 ariaLabel={t("characterSheets.health.stunGauge")}
@@ -86,7 +86,7 @@ export function SheetHealthToolbar({ className }: { className?: string }) {
                       ...current.status,
                       health: {
                         ...(current.status.health as Record<string, unknown>),
-                        stun: { base: value, mod: 0 },
+                        stun: { base: Number(value), mod: 0 },
                       },
                     },
                   }))

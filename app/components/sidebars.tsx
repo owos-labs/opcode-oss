@@ -130,7 +130,7 @@ export function ListSidebar() {
           </div>
           <div className="flex shrink-0 items-center gap-1">
             <Dropdown>
-              <Button size="sm" variant="primary" aria-label={t("list.new")} title={t("list.newHint")} className="size-9 min-w-9 p-0">
+              <Button size="sm" variant="primary" aria-label={t("list.new")} className="size-9 min-w-9 p-0">
                 <Plus className="size-4" />
               </Button>
               <Dropdown.Popover>
