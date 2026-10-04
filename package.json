@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:railway": "bash scripts/railway-build.sh",
     "start": "next start",
+    "start:railway": "HOSTNAME=0.0.0.0 node .next/standalone/server.js",
     "lint": "eslint",
     "test": "node --experimental-strip-types --import ./scripts/register-ts.mjs --test **/*.test.ts",
     "combat:check": "node --experimental-strip-types --import ./scripts/register-ts.mjs scripts/combat-check.ts",
